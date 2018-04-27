@@ -46,11 +46,13 @@ class ProfilePage extends React.Component {
             : (
               <div>
                 <p>{gangster.first_name}</p>
-                <p>{gangster.ratinge}</p>
+                <img src={gangster.image}/>
+                <p>Raiting</p>
+                <p>{gangster.rating}</p>
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
                 <p>{gangster.hometown}</p>
-                <p>{gangster.availbility}</p>
+                <p>{gangster.availability}</p>
                 <p>{gangster.tags}</p>
                 <p>{gangster.description}</p>
                 <p>{gangster.experiance}</p>
