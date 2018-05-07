@@ -7,7 +7,7 @@ class SearchResults extends React.Component {
   }
 
   static defaultProps = {
-    hometown: 'Gdańsk'
+    hometown: 'Warszawa'
   }
 
   componentDidMount() {
