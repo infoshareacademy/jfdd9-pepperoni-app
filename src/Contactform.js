@@ -4,7 +4,7 @@ class ContactForm extends Component {
   render() {
     return (
       <div>
-        <input/>
+        <input name="email"/>
         <button>Send</button>
       </div>
     )
