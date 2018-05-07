@@ -33,7 +33,7 @@ class SearchResults extends React.Component {
             this.state.gangsters === null
               ? 'Ładuję gangusów'
               : this.state.gangsters.filter(
-                gangster => gangster.hometown === this.props.hometown
+                gangster => gangster.hometown.toLowerCase().includes(this.props.hometown.toLowerCase())
               ).map(
                 gangster =>
                   <Link to={'profile/' +  gangster.id } key={gangster.id}>
