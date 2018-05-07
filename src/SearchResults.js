@@ -20,7 +20,7 @@ class SearchResults extends React.Component {
             this.state.gangsters === null
               ? 'Ładuję gangusów'
               : this.state.gangsters.filter(
-                gangster => gangster.hometown === this.props.hometown
+                gangster => gangster.hometown.toLowerCase().includes(this.props.hometown.toLowerCase())
               ).map(
                 gangster => <p key={gangster.id}>{gangster.first_name}</p>
               )

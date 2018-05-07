@@ -15,7 +15,7 @@ class LocationSearch extends React.Component {
   handleChange = event => {
     this.setState({
       hometown: event.target.value
-    })
+    }, () => this.props.addCity(this.state.hometown))
   }
 
   render() {
