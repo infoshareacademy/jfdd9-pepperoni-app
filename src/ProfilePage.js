@@ -1,7 +1,7 @@
 import React from 'react'
+import moment from 'moment'
 
 class ProfilePage extends React.Component {
-
 
 
   state = {
@@ -36,6 +36,12 @@ class ProfilePage extends React.Component {
    } */
 
   render() {
+    const update = function() {
+      document.getElementById("datetime")
+        .innerHTML = dt.format('MMMM Do YYYY, h:mm:ss a');
+    }();
+    setInterval(update, 1000);
+    const dt = moment().format()
     const gangster = this.state.gangster
     return (
       <div>
@@ -46,7 +52,7 @@ class ProfilePage extends React.Component {
             ? 'Ładuję gangusa'
             : (
               <div>
-                <p>{}</p>
+                <p>{dt}</p>
                 <p>{gangster.first_name}</p>
                 <img src={gangster.image} alt={'face'}/>
                 <p>Raiting</p>
