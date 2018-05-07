@@ -34,6 +34,8 @@ class SearchResults extends React.Component {
               ? 'Ładuję gangusów'
               : this.state.gangsters.filter(
                 gangster => gangster.hometown.toLowerCase().includes(this.props.hometown.toLowerCase())
+              ).filter(
+                gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
               ).map(
                 gangster =>
                   <Link to={'profile/' +  gangster.id } key={gangster.id}>
