@@ -1,4 +1,17 @@
 import React from 'react'
+import StarsRating from "./StarsRating";
+import {Link} from "react-router-dom";
+
+const listStyle = {
+  fontSize: '18px',
+  display: 'inline-block',
+}
+const contenerStyle = {
+  border: '1px black solid',
+
+}
+
+
 
 class SearchResults extends React.Component {
 
@@ -22,7 +35,15 @@ class SearchResults extends React.Component {
               : this.state.gangsters.filter(
                 gangster => gangster.hometown === this.props.hometown
               ).map(
-                gangster => <p key={gangster.id}>{gangster.first_name}</p>
+                gangster =>
+                  <Link to={'profile/' +  gangster.id } key={gangster.id}>
+                  <div style={contenerStyle} >
+                    <img src={gangster.image} alt={'face'}/>
+                    <p style={listStyle}>{gangster.first_name} </p>
+                    <StarsRating rating={gangster.rating}/>
+                    <p>{gangster.tags.join(', ')}</p>
+                  </div>
+                  </Link>
               )
           }
         </div>
