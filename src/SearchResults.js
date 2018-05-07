@@ -36,14 +36,17 @@ class SearchResults extends React.Component {
                 gangster => gangster.hometown.toLowerCase().includes(this.props.hometown.toLowerCase())
               ).map(
                 gangster =>
-                  <Link to={'profile/' +  gangster.id } key={gangster.id}>
-                  <div style={contenerStyle} >
-                    <img src={gangster.image} alt={'face'}/>
-                    <p style={listStyle}>{gangster.first_name} </p>
+
+                  <div style={contenerStyle} key={gangster.id}>
+                    <Link to={'profile/' +  gangster.id } >
+                      <img src={gangster.image} alt={'face'}/>
+                      <p style={listStyle}>{gangster.first_name} </p>
+                  </Link>
                     <StarsRating rating={gangster.rating}/>
+                    <p style={listStyle}>{gangster.hometown} </p>
                     <p>{gangster.tags.join(', ')}</p>
                   </div>
-                  </Link>
+
               )
           }
         </div>
