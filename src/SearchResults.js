@@ -6,10 +6,6 @@ class SearchResults extends React.Component {
     gangsters: null
   }
 
-  static defaultProps = {
-    hometown: 'Warszawa'
-  }
-
   componentDidMount() {
     fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
       response => response.json()
@@ -18,17 +14,15 @@ class SearchResults extends React.Component {
     )
   }
   render() {
-    debugger
     return (
         <div >
-          <h2>Client 1</h2>
           {
             this.state.gangsters === null
               ? 'Ładuję gangusów'
               : this.state.gangsters.filter(
                 gangster => gangster.hometown === this.props.hometown
               ).map(
-                gangster => <p>{gangster.first_name}</p>
+                gangster => <p key={gangster.id}>{gangster.first_name}</p>
               )
           }
         </div>
