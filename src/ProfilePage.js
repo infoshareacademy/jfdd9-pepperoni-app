@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 class ProfilePage extends React.Component {
 
@@ -11,12 +12,21 @@ class ProfilePage extends React.Component {
     hometown: 'Gdańsk'
   }
 
+  tick = () => {
+    const dt = moment();
+    this.setState({currentTime: dt.format('MMMM Do YYYY, h:mm:ss ')});
+  }
+
   componentDidMount() {
     fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
       response => response.json()
     ).then(
       gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
     )
+
+
+    this.tick();
+    this.interval = setInterval(this.tick, 1000);
   }
 
   /* state = {
@@ -34,7 +44,13 @@ class ProfilePage extends React.Component {
      opinions: '',
    } */
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
+
+
     const gangster = this.state.gangster
     return (
       <div>
@@ -45,15 +61,16 @@ class ProfilePage extends React.Component {
             ? 'Ładuję gangusa'
             : (
               <div>
+                <p>{this.state.currentTime}</p>
                 <p>{gangster.first_name}</p>
-                <img src={gangster.image}/>
+                <img src={gangster.image} alt={'face'}/>
                 <p>Raiting</p>
                 <p>{gangster.rating}</p>
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
                 <p>{gangster.hometown}</p>
-                <p>{gangster.availability}</p>
-                <p>{gangster.tags}</p>
+                <p>{gangster.availability.join(', ')}</p>
+                <p>{gangster.tags.join(', ')}</p>
                 <p>{gangster.description}</p>
                 <p>{gangster.experiance}</p>
                 <p>{gangster.opinions}</p>
