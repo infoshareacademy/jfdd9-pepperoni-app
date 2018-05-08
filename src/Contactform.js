@@ -10,7 +10,7 @@ class ContactForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-        <input name="email" value="email address"/>
+        <input name="email" placeholder="email address"/>
         <button>Send</button>
         <div>
           <textarea></textarea>
