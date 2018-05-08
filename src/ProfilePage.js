@@ -12,12 +12,21 @@ class ProfilePage extends React.Component {
     hometown: 'Gdańsk'
   }
 
+  tick = () => {
+    const dt = moment();
+    this.setState({currentTime: dt.format('MMMM Do YYYY, h:mm:ss ')});
+  }
+
   componentDidMount() {
     fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
       response => response.json()
     ).then(
       gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
     )
+
+
+    this.tick();
+    this.interval = setInterval(this.tick, 1000);
   }
 
   /* state = {
@@ -35,13 +44,13 @@ class ProfilePage extends React.Component {
      opinions: '',
    } */
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   render() {
-    const update = function() {
-      document.getElementById("datetime")
-        .innerHTML = dt.format('MMMM Do YYYY, h:mm:ss a');
-    }();
-    setInterval(update, 1000);
-    const dt = moment().format()
+
+
     const gangster = this.state.gangster
     return (
       <div>
@@ -52,7 +61,7 @@ class ProfilePage extends React.Component {
             ? 'Ładuję gangusa'
             : (
               <div>
-                <p>{dt}</p>
+                <p>{this.state.currentTime}</p>
                 <p>{gangster.first_name}</p>
                 <img src={gangster.image} alt={'face'}/>
                 <p>Raiting</p>
