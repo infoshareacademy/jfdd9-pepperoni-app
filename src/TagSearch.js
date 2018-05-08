@@ -1,12 +1,13 @@
 import React from 'react'
 
-const pStyle = {
+const tagStyle = {
   display: 'inline-block',
   margin: '2px',
   padding: '5px',
   borderRadius: '5px',
-  backgroundColor: 'cyan'
+  backgroundColor: '#FFB0CB'
 };
+
 
 class TagSearch extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class TagSearch extends React.Component {
         {this.state.tags.map(tag =>
           <button
             name={tag}
-            style={pStyle}
+            style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#e2083c' : tagStyle.backgroundColor }}
             key={tag}
             onClick={(event) => this.props.selectTag(event.currentTarget.name)}>
             {tag}
