@@ -7,7 +7,8 @@ const tagStyle = {
   padding: '5px',
   borderRadius: '5px',
   border: 'none',
-  backgroundColor: '#FFB0CB'
+  backgroundColor: '#FFB0CB',
+  cursor: 'pointer'
 };
 
 const divTagStyle = {
