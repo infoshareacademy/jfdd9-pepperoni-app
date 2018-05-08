@@ -1,13 +1,21 @@
 import React from 'react'
 
 const tagStyle = {
+  width: '90px',
   display: 'inline-block',
   margin: '2px',
   padding: '5px',
   borderRadius: '5px',
+  border: 'none',
   backgroundColor: '#FFB0CB'
 };
 
+const divTagStyle = {
+  width: '70%',
+  display: 'flex',
+  justifyContent: 'space-around',
+  marginLeft: '10px'
+}
 
 class TagSearch extends React.Component {
   state = {
@@ -27,7 +35,7 @@ class TagSearch extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div style={divTagStyle}>
         {this.state.tags.map(tag =>
           <button
             name={tag}
@@ -36,7 +44,7 @@ class TagSearch extends React.Component {
             onClick={(event) => this.props.selectTag(event.currentTarget.name)}>
             {tag}
             </button>)}
-      </React.Fragment>
+      </div>
 
     )
   }
