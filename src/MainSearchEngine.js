@@ -1,11 +1,13 @@
 import React from 'react'
 import LocationSearch from "./LocationSearch";
 import SearchResults from "./SearchResults";
+import TagSearch from "./TagSearch";
 
 class MainSearchEngine extends React.Component {
 
   state = {
-    hometown: ''
+    hometown: '',
+    selectedTags: []
   }
 
   addCity = (cityName) => {
@@ -15,13 +17,20 @@ class MainSearchEngine extends React.Component {
     )
   }
 
+  selectTag = (tagName) => {
+    this.setState({
+      selectedTags: this.state.selectedTags.includes(tagName) ? this.state.selectedTags : this.state.selectedTags.concat(tagName),
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
       <h2>Search for gangsters...
       </h2>
         <LocationSearch addCity={this.addCity}/>
-        <SearchResults hometown={this.state.hometown}/>
+        <TagSearch selectTag={this.selectTag}/>
+        <SearchResults hometown={this.state.hometown} selectedTags={this.state.selectedTags}/>
       </React.Fragment>
     )
   }

@@ -12,6 +12,7 @@ const contenerStyle = {
 }
 
 
+
 class SearchResults extends React.Component {
 
   state = {
