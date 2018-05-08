@@ -48,6 +48,8 @@ class SearchResults extends React.Component {
         {
           gangsters !== null && gangsters.filter(
             gangster => gangster.hometown.toLowerCase().includes(this.props.hometown.toLowerCase())
+          ).filter(
+            gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
           ).map(
             gangster =>
 
