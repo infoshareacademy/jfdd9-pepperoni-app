@@ -1,6 +1,8 @@
 import React from 'react'
 import moment from 'moment'
 
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
 class ProfilePage extends React.Component {
 
 
@@ -48,28 +50,35 @@ class ProfilePage extends React.Component {
     clearInterval(this.interval);
   }
 
+
   render() {
-
-
     const gangster = this.state.gangster
+
+
+
+
     return (
       <div>
-        <h2>Profile
-        </h2>
+
         {
           this.state.gangster === null
             ? 'Ładuję gangusa'
             : (
               <div>
                 <p>{this.state.currentTime}</p>
-                <p>{gangster.first_name}</p>
+                <h2>{gangster.first_name}</h2>
                 <img src={gangster.image} alt={'face'}/>
                 <p>Raiting</p>
                 <p>{gangster.rating}</p>
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
                 <p>{gangster.hometown}</p>
-                <p>{gangster.availability.join(', ')}</p>
+                <p>{
+                  days.map(
+                    day => <p>{gangster.availability.includes(day) ? <strong>{day}</strong> : day}</p>
+                  )
+                }
+                </p>
                 <p>{gangster.tags.join(', ')}</p>
                 <p>{gangster.description}</p>
                 <p>{gangster.experiance}</p>
@@ -84,3 +93,34 @@ class ProfilePage extends React.Component {
 }
 
 export default ProfilePage
+
+
+
+
+
+/* day sorter function
+var data = [
+  { day: "Friday", },
+  { day: "Wednesday" },
+  { day: "Sunday" },
+  { day: "Thursday" },
+  { day: "Saturday" }
+];
+
+var sorter = {
+
+  "monday": 1,
+  "tuesday": 2,
+  "wednesday": 3,
+  "thursday": 4,
+  "friday": 5,
+  "saturday": 6,
+  "sunday": 7
+}
+
+data.sort(function sortByDay(a, b) {
+  var day1 = a.day.toLowerCase();
+  var day2 = b.day.toLowerCase();
+  return sorter[day1] > sorter[day2];
+});
+*/
