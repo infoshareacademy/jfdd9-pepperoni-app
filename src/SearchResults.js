@@ -47,7 +47,7 @@ class SearchResults extends React.Component {
         { fetching && <p>Loading gangsters...</p>}
         {
           gangsters !== null && gangsters.filter(
-            gangster => gangster.hometown.toLowerCase().includes(this.props.hometown.toLowerCase())
+            gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
           ).filter(
             gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
           ).map(
