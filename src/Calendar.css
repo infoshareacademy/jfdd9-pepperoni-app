@@ -1,39 +1,9 @@
-.calendar-container {
-    height: 250px;
-    width: 250px;
+.react-datepicker-wrapper,
+.react-datepicker__month-container {
+    color: black;
     text-shadow: none;
 }
 
-
-.booking-calendar {
-    background-color: #E2083C !important;
-
+.react-datepicker__input-container {
+    color: black;
 }
-.header {
-    background-color: #E2083C !important;
-}
-.header-content {}
-.icon-previous {}
-.icon-next {}
-.month-label {}
-
-
-.week {
-    background-color: #E2083C !important;
-}
-.names {
-    background-color: #E2083C !important;
-}
-.day-box .day {
-    background-color: #E2083C !important;
-}
-
-.day-box .day {}
-.different-month {}
-.selected {}
-.today {
-    background-color: #5ae270 !important;
-
-}
-.booked-day:before {}
-.booked-night:after {}

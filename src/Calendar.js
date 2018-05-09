@@ -1,25 +1,31 @@
-import React from 'react'
-import moment from 'moment'
-import './Calendar.css'
-import BookingCalendar from 'react-booking-calendar';
+import React from 'react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
 
+import 'react-datepicker/dist/react-datepicker.css';
+
+import './Calendar.css'
 
 class Calendar extends React.Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            startDate: moment()
+        };
+        this.handleChange = this.handleChange.bind(this);
+    }
 
+    handleChange(date) {
+        this.setState({
+            startDate: date
+        });
+    }
 
-  render() {
-
-    const bookings = this.props.availability;
-
-    const MyBookingCalendar = () => (
-      <BookingCalendar bookings={bookings} clickable={true} />
-    );
-
-    return (
-      <div className="calendar-container">{MyBookingCalendar()}</div>
-
-    )
-  }
+    render() {
+        return (
+            <DatePicker placeholderText="Click to book your gangster" />
+        );
+    }
 }
 
 export default Calendar
