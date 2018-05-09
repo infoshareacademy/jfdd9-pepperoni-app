@@ -60,9 +60,9 @@ class ProfilePage extends React.Component {
             : (
               <div>
                 <p>{this.state.currentTime}</p>
-                <h2>{gangster.first_name}</h2>
-                <img src={gangster.image} alt={'face'}/>
-                <p>Rating</p>
+                <p>{gangster.first_name}</p>
+                <img src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
+                <p>Raiting</p>
                 <p>{gangster.rating}</p>
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
