@@ -1,6 +1,8 @@
 import React from 'react'
 import moment from 'moment'
 
+import BookingCalendar from 'react-booking-calendar';
+
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 class ProfilePage extends React.Component {
@@ -53,7 +55,19 @@ class ProfilePage extends React.Component {
 
   render() {
     const gangster = this.state.gangster
+    const bookings = [
+      new Date(2016, 7, 1),
+      new Date(2016, 7, 2),
+      new Date(2016, 7, 3),
+      new Date(2016, 7, 9),
+      new Date(2016, 7, 10),
+      new Date(2016, 7, 11),
+      new Date(2016, 7, 12),
+    ];
 
+    const MyBookingCalendar = () => (
+      <BookingCalendar bookings={bookings} />
+    );
 
 
 
