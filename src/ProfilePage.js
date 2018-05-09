@@ -1,15 +1,12 @@
 import React from 'react'
 import moment from 'moment'
-
-import BookingCalendar from 'react-booking-calendar';
+import Calendar from "./Calendar";
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
 class ProfilePage extends React.Component {
-
-
   state = {
-    gangster: null
+    gangster: null,
   }
 
   static defaultProps = {
@@ -27,7 +24,6 @@ class ProfilePage extends React.Component {
     ).then(
       gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
     )
-
 
     this.tick();
     this.interval = setInterval(this.tick, 1000);
@@ -55,25 +51,9 @@ class ProfilePage extends React.Component {
 
   render() {
     const gangster = this.state.gangster
-    const bookings = [
-      new Date(2016, 7, 1),
-      new Date(2016, 7, 2),
-      new Date(2016, 7, 3),
-      new Date(2016, 7, 9),
-      new Date(2016, 7, 10),
-      new Date(2016, 7, 11),
-      new Date(2016, 7, 12),
-    ];
-
-    const MyBookingCalendar = () => (
-      <BookingCalendar bookings={bookings} />
-    );
-
-
 
     return (
       <div>
-
         {
           this.state.gangster === null
             ? 'Ładuję gangusa'
@@ -82,7 +62,7 @@ class ProfilePage extends React.Component {
                 <p>{this.state.currentTime}</p>
                 <h2>{gangster.first_name}</h2>
                 <img src={gangster.image} alt={'face'}/>
-                <p>Raiting</p>
+                <p>Rating</p>
                 <p>{gangster.rating}</p>
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
@@ -97,6 +77,7 @@ class ProfilePage extends React.Component {
                 <p>{gangster.description}</p>
                 <p>{gangster.experiance}</p>
                 <p>{gangster.opinions}</p>
+                <Calendar availability={gangster.availability}/>
               </div>
             )
         }
