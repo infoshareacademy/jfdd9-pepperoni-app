@@ -3,6 +3,7 @@ import LocationSearch from "./LocationSearch";
 import SearchResults from "./SearchResults";
 import TagSearch from "./TagSearch";
 
+
 class MainSearchEngine extends React.Component {
 
   state = {
@@ -12,24 +13,39 @@ class MainSearchEngine extends React.Component {
 
   addCity = (cityName) => {
     this.setState({
-      hometown: cityName
+      hometown: cityName,
+      selectedTags: this.state.selectedTags
       }
     )
   }
 
-  selectTag = (tagName) => {
+  unselectTag = (tagName) => {
+    const newSelectedTags = this.state.selectedTags;
+    const tagIndex = newSelectedTags.indexOf(tagName);
+    newSelectedTags.includes(tagName) ? newSelectedTags.splice(tagIndex, 1) : newSelectedTags;
     this.setState({
-      selectedTags: this.state.selectedTags.includes(tagName) ? this.state.selectedTags : this.state.selectedTags.concat(tagName),
+      hometown: this.state.hometown,
+      selectedTags: newSelectedTags
     })
+  }
+
+  selectTag = (tagName) => {
+    if (this.state.selectedTags.includes(tagName)) {
+      this.unselectTag(tagName)
+    } else {
+    this.setState({
+      hometown: this.state.hometown,
+      selectedTags: this.state.selectedTags.concat(tagName),
+    })
+    }
   }
 
   render() {
     return (
       <React.Fragment>
-      <h2>Search for gangsters...
-      </h2>
+        <h1>Find your gangster</h1>
         <LocationSearch addCity={this.addCity}/>
-        <TagSearch selectTag={this.selectTag}/>
+        <TagSearch selectTag={this.selectTag} selectedTags={this.state.selectedTags}/>
         <SearchResults hometown={this.state.hometown} selectedTags={this.state.selectedTags}/>
       </React.Fragment>
     )

@@ -1,12 +1,28 @@
 import React from 'react'
 
-const pStyle = {
+const tagStyle = {
+  width: '90px',
   display: 'inline-block',
-  margin: '2px',
+  margin: '8px',
+  minHeight: '40px',
   padding: '5px',
   borderRadius: '5px',
-  backgroundColor: 'cyan'
+  border: 'none',
+  backgroundColor: '#4b5062',
+  cursor: 'pointer',
+  outline: 'inherit',
+  fontFamily: 'Quattrocento, serif',
+  color: 'white',
+  fontWeight: 'bold'
 };
+
+const divTagStyle = {
+  width: '80%',
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginLeft: '10px',
+
+}
 
 class TagSearch extends React.Component {
   state = {
@@ -26,16 +42,16 @@ class TagSearch extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div style={divTagStyle}>
         {this.state.tags.map(tag =>
           <button
             name={tag}
-            style={pStyle}
+            style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#E2083C' : tagStyle.backgroundColor }}
             key={tag}
             onClick={(event) => this.props.selectTag(event.currentTarget.name)}>
             {tag}
             </button>)}
-      </React.Fragment>
+      </div>
 
     )
   }
