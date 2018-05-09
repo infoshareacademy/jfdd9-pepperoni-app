@@ -1,5 +1,12 @@
 import React from 'react'
 
+const formStyle = {
+  padding: '20px',
+  width: '80%',
+  border: '#383838 solid 3px',
+  borderRadius: '5px',
+  marginBottom: '10px'
+}
 
 class LocationSearch extends React.Component {
   state ={
@@ -23,7 +30,7 @@ class LocationSearch extends React.Component {
       <React.Fragment>
         <div>
           <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Enter city" name="hometown" value={this.state.hometown} onChange={this.handleChange}/>
+            <input style={formStyle} type="text" placeholder="Enter city" name="hometown" value={this.state.hometown} onChange={this.handleChange}/>
           </form>
         </div>
       </React.Fragment>

@@ -7,8 +7,11 @@ const listStyle = {
   display: 'inline-block',
 }
 const contenerStyle = {
-  border: '1px black solid',
-
+  border: 'solid 1px rgba(31, 31, 31, 0.83)',
+  borderRadius: '10px',
+  backgroundColor: 'rgba(15, 15, 15, 0.83)',
+  marginTop: '10px',
+  padding: '20px'
 }
 
 
