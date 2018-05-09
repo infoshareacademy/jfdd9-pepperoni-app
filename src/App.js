@@ -6,6 +6,7 @@ import SearchResults from "./SearchResults";
 import OrderPage from "./OrderPage";
 import ProfilePage from "./ProfilePage";
 import ThankYouPage from "./ThankYouPage";
+import NavBar from "./NavBar";
 
 
 class App extends Component {
@@ -13,8 +14,7 @@ class App extends Component {
     return (
       <Router>
         <div class="App">
-
-
+          <NavBar/>
           <Route exact path="/" component={MainSearchEngine}/>
           <Route path="/search-results" component={SearchResults}/>
           <Route path="/profile/:gangsterId" component={ProfilePage}/>

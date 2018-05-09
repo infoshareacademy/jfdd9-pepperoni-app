@@ -3,6 +3,7 @@ import LocationSearch from "./LocationSearch";
 import SearchResults from "./SearchResults";
 import TagSearch from "./TagSearch";
 
+
 class MainSearchEngine extends React.Component {
 
   state = {
@@ -42,8 +43,7 @@ class MainSearchEngine extends React.Component {
   render() {
     return (
       <React.Fragment>
-      <h2>Search for gangsters...
-      </h2>
+        <h2>Search for gangsters...</h2>
         <LocationSearch addCity={this.addCity}/>
         <TagSearch selectTag={this.selectTag} selectedTags={this.state.selectedTags}/>
         <SearchResults hometown={this.state.hometown} selectedTags={this.state.selectedTags}/>

@@ -3,18 +3,20 @@ import React from 'react'
 const tagStyle = {
   width: '90px',
   display: 'inline-block',
-  margin: '2px',
+  margin: '8px',
+  minHeight: '40px',
   padding: '5px',
   borderRadius: '5px',
   border: 'none',
-  backgroundColor: '#FFB0CB',
-  cursor: 'pointer'
+  backgroundColor: '#8388a4',
+  cursor: 'pointer',
+  outline: 'inherit',
 };
 
 const divTagStyle = {
-  width: '70%',
+  width: '80%',
   display: 'flex',
-  justifyContent: 'space-around',
+  flexWrap: 'wrap',
   marginLeft: '10px'
 }
 
@@ -40,7 +42,7 @@ class TagSearch extends React.Component {
         {this.state.tags.map(tag =>
           <button
             name={tag}
-            style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#e2083c' : tagStyle.backgroundColor }}
+            style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#ee5e68' : tagStyle.backgroundColor }}
             key={tag}
             onClick={(event) => this.props.selectTag(event.currentTarget.name)}>
             {tag}

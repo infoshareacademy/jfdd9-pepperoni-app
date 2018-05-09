@@ -2,11 +2,11 @@ import React from 'react'
 
 const formStyle = {
   padding: '20px',
-  margin: '10px',
   width: '80%',
   border: '#383838 solid 3px',
   color: 'white',
-  borderRadius: '5px'
+  borderRadius: '5px',
+  marginBottom: '10px'
 }
 
 class LocationSearch extends React.Component {

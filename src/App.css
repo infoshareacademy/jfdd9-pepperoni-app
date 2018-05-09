@@ -1,8 +1,18 @@
+body {
+  background-color: #090909;
+}
+
 .App {
   background-color: #090909;
   color: white;
   font-family: serif;
+  text-shadow:
+          -1px -1px 0 #000,
+          1px -1px 0 #000,
+          -1px 1px 0 #000,
+          1px 1px 0 #000;
   box-sizing: border-box;
+  padding: 20px;
 }
 
 h2 {
@@ -20,4 +30,11 @@ h2 {
 .App-intro {
   font-size: large;
 }
+
+.logo {
+  display: inline-block;
+  width: 200px;
+  height: auto;
+}
+
 
