@@ -43,7 +43,7 @@ class MainSearchEngine extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h2>Search for gangsters...</h2>
+        <h1>Find your gangster</h1>
         <LocationSearch addCity={this.addCity}/>
         <TagSearch selectTag={this.selectTag} selectedTags={this.state.selectedTags}/>
         <SearchResults hometown={this.state.hometown} selectedTags={this.state.selectedTags}/>
