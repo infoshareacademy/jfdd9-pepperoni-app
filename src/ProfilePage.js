@@ -41,9 +41,35 @@ const lineSeparated = {
   borderBottom: 'solid 1px rgba(31, 31, 31, 0.83)',
 }
 
-const availabilityStyle = {
-  display: 'inline',
+const divTagStyle = {
+  width: '100%',
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginLeft: '10px',
+  textAlign: 'center',
+  alignItems: 'center',
+
 }
+
+const smallTagStyle = {
+  margin: '8px',
+  minHeight: '30px',
+  width: '150px',
+  fontSize: '14px',
+  padding: '5px',
+  borderRadius: '5px',
+  border: 'none',
+  backgroundColor: '#E2083C',
+  textShadow: 'none',
+  outline: 'inherit',
+  fontFamily: 'Quattrocento, serif',
+  color: 'white',
+  fontWeight: 'bold',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+};
 
 class ProfilePage extends React.Component {
   state = {
@@ -113,6 +139,10 @@ class ProfilePage extends React.Component {
 
                 <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
 
+                <div style={divTagStyle}>
+                  {gangster.tags.map(tag => <p style={smallTagStyle}>{tag}</p>)}
+                </div>
+
                 <h3>{gangster.gender}</h3>
 
                 <h3>Email: {gangster.email}</h3>
@@ -122,7 +152,6 @@ class ProfilePage extends React.Component {
                 <h3>Availability: </h3>
                 <p style={lineSeparated}>{gangster.availability.join(', ')}</p>
 
-                <p style={lineSeparated}>{gangster.tags.join(', ')}</p>
 
                 <h2>About me</h2>
                 <p style={lineSeparated}>{gangster.description}</p>

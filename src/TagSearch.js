@@ -1,10 +1,10 @@
 import React from 'react'
 
 const tagStyle = {
-  width: '90px',
+  width: '150px',
   display: 'inline-block',
   margin: '8px',
-  minHeight: '40px',
+  minHeight: '50px',
   padding: '5px',
   borderRadius: '5px',
   border: 'none',
