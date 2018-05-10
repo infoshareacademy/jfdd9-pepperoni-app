@@ -10,7 +10,7 @@ import './Calendar.css'
 
 class Calendar extends React.Component {
     constructor (props) {
-        super(props)
+        super(props);
         this.state = {
             selectedDate: moment(),
             currentWeekDay: moment().format('dddd'),
@@ -22,18 +22,12 @@ class Calendar extends React.Component {
         this.setState({
             selectedDate: date
         });
-
-
     }
 
-
   render() {
-
-    // const availableDaysNumbers = this.props.availability.map(day => )
-
         return (
           <div>
-            <p>When do you want to get your job done?</p>
+            <h2>When do you want to get your job done?</h2>
           <DatePicker
             selected={this.state.selectedDate}
             onChange={this.handleChange}
@@ -44,7 +38,7 @@ class Calendar extends React.Component {
                 .filter(date => date.isAfter(moment().subtract(1, 'day'))))}
             placeholderText="Click to book your gangster" />
 
-            <Link to={'/order/' + this.props.gangsterId + '/' + this.state.selectedDate}><button>Book this guy</button></Link>
+            <Link to={'/order/' + this.props.gangsterId + '/' + this.state.selectedDate}><button>Book this gangster</button></Link>
 
           </div>
         );

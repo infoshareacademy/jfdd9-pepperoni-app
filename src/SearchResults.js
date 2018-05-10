@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 const listStyle = {
   fontSize: '25px',
+  width: '80%',
   display: 'inline-block',
   textDecoration: 'none',
   marginTop: '26px',
@@ -71,6 +72,11 @@ class SearchResults extends React.Component {
 
   render() {
     const {gangsters, error, fetching} = this.state
+
+    function compareRatings(a,b) {
+      return b.rating - a.rating
+    }
+
     return (
       <div>
         {error && <p>{error.message}</p>}
@@ -78,7 +84,7 @@ class SearchResults extends React.Component {
         {
           gangsters !== null && gangsters.filter(
             gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
-          ).filter(
+          ).sort(compareRatings).filter(
             gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
           ).map(
             gangster =>

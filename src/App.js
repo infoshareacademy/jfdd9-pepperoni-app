@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import MainSearchEngine from "./MainSearchEngine";
 import SearchResults from "./SearchResults";
 import OrderPage from "./OrderPage";
@@ -18,7 +18,7 @@ class App extends Component {
           <Route exact path="/" component={MainSearchEngine}/>
           <Route path="/search-results" component={SearchResults}/>
           <Route path="/profile/:gangsterId" component={ProfilePage}/>
-          <Route path="/order" component={OrderPage}/>
+          <Route path="/order/:gangsterId/:selectedDate" component={OrderPage}/>
           <Route path="/thank-you" component={ThankYouPage}/>
         </div>
       </Router>
