@@ -2,8 +2,36 @@
 .react-datepicker__month-container {
     color: black;
     text-shadow: none;
+    margin: 20px 0;
 }
 
 .react-datepicker__input-container {
     color: black;
+
+}
+
+.react-datepicker__input-container input {
+    padding: 10px;
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range {
+    background-color: #E2083C;
+}
+
+
+button {
+    width: 40%;,
+    display: inline-block;
+    margin: 8px;
+    min-height: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: #E2083C;
+    cursor: pointer;
+    outline: inherit;
+    font-size: 1.1rem;
+    font-family: Quattrocento, serif;
+    color: white;
+    font-weight: bold;
 }

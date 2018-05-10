@@ -18,7 +18,12 @@ const profileStyle = {
 const calendarStyle = {
   float: 'right',
   marginRight: '5%',
-  textAlign: 'right'
+  textAlign: 'center',
+  padding: '50px',
+  marginTop: '0',
+  border: 'solid 1px rgba(31, 31, 31, 0.83)',
+  borderRadius: '10px',
+  backgroundColor: 'rgba(15, 15, 15, 0.83)',
 }
 
 const headerStyle = {

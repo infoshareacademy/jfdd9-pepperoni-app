@@ -10,7 +10,7 @@ import './Calendar.css'
 
 class Calendar extends React.Component {
     constructor (props) {
-        super(props)
+        super(props);
         this.state = {
             selectedDate: moment(),
             currentWeekDay: moment().format('dddd'),
@@ -22,15 +22,9 @@ class Calendar extends React.Component {
         this.setState({
             selectedDate: date
         });
-
-
     }
 
-
   render() {
-
-    // const availableDaysNumbers = this.props.availability.map(day => )
-
         return (
           <div>
             <h2>When do you want to get your job done?</h2>

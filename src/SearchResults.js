@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 const listStyle = {
   fontSize: '25px',
+  width: '80%',
   display: 'inline-block',
   textDecoration: 'none',
   marginTop: '26px',
