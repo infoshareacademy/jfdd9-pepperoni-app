@@ -62,7 +62,7 @@ class ProfilePage extends React.Component {
                 <p>{this.state.currentTime}</p>
                 <p>{gangster.first_name}</p>
                 <img src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
-                <p>Raiting</p>
+                <p>Rating</p>
                 <p>{gangster.rating}</p>
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
@@ -77,7 +77,7 @@ class ProfilePage extends React.Component {
                 <p>{gangster.description}</p>
                 <p>{gangster.experiance}</p>
                 <p>{gangster.opinions}</p>
-                <Calendar availability={gangster.availability}/>
+                <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
               </div>
             )
         }
@@ -89,33 +89,3 @@ class ProfilePage extends React.Component {
 
 export default ProfilePage
 
-
-
-
-
-/* day sorter function
-var data = [
-  { day: "Friday", },
-  { day: "Wednesday" },
-  { day: "Sunday" },
-  { day: "Thursday" },
-  { day: "Saturday" }
-];
-
-var sorter = {
-
-  "monday": 1,
-  "tuesday": 2,
-  "wednesday": 3,
-  "thursday": 4,
-  "friday": 5,
-  "saturday": 6,
-  "sunday": 7
-}
-
-data.sort(function sortByDay(a, b) {
-  var day1 = a.day.toLowerCase();
-  var day2 = b.day.toLowerCase();
-  return sorter[day1] > sorter[day2];
-});
-*/
