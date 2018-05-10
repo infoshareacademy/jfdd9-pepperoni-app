@@ -3,8 +3,30 @@ import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 
 const listStyle = {
-  fontSize: '18px',
+  fontSize: '25px',
   display: 'inline-block',
+  textDecoration: 'none',
+  marginTop: '26px',
+  verticalAlign: 'top',
+  color: '#ececec',
+}
+const name = {
+  fontSize: '30px',
+  color: '#ececec',
+  textDecoration:'none',
+}
+const listStyleTown = {
+  fontSize: '25px',
+  display: 'block',
+  textDecoration: 'none',
+  marginTop: '30px',
+  verticalAlign: 'top'
+}
+const imageStyle = {
+  borderRadius: '50%',
+  margin: '10px',
+  height: '120px',
+
 }
 const contenerStyle = {
   border: 'solid 1px rgba(31, 31, 31, 0.83)',
@@ -13,7 +35,12 @@ const contenerStyle = {
   marginTop: '10px',
   padding: '20px'
 }
+const tagStyle = {
+  margin: '0px',
+  fontSize:'15px',
 
+
+}
 
 
 class SearchResults extends React.Component {
@@ -46,8 +73,8 @@ class SearchResults extends React.Component {
     const {gangsters, error, fetching} = this.state
     return (
       <div>
-        { error && <p>{error.message}</p>}
-        { fetching && <p>Loading gangsters...</p>}
+        {error && <p>{error.message}</p>}
+        {fetching && <p>Loading gangsters...</p>}
         {
           gangsters !== null && gangsters.filter(
             gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
@@ -57,13 +84,20 @@ class SearchResults extends React.Component {
             gangster =>
 
               <div style={contenerStyle} key={gangster.id}>
-                <Link to={'profile/' + gangster.id}>
-                  <img src={gangster.image} alt={'face'}/>
-                  <p style={listStyle}>{gangster.first_name} </p>
-                </Link>
-                <StarsRating rating={gangster.rating}/>
-                <p style={listStyle}>{gangster.hometown} </p>
-                <p>{gangster.tags.join(', ')}</p>
+
+                  <div>
+                    <img style={imageStyle} src={gangster.image} alt={'face'}/>
+                    <p style={listStyle}>
+                      <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
+                      </Link>
+                      <StarsRating rating={gangster.rating}/>
+                      <br/>{gangster.hometown}
+                      <br/> <span style={tagStyle}>{gangster.tags.join(', ')}</span>
+                      </p>
+
+                  </div>
+
+
               </div>
           )
         }
