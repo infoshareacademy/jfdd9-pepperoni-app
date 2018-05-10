@@ -11,7 +11,7 @@ class OrderPage extends React.Component {
       <h2>Order Page
       </h2>
         <ContactForm/>
-        <h2>{this.props.params.selectedDate}</h2>
+        <h2>{this.props.match.params.gangsterId}</h2>
       </div>
     )
   }

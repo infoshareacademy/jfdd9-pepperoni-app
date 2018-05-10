@@ -17,7 +17,7 @@ const tagStyle = {
 };
 
 const divTagStyle = {
-  width: '80%',
+  width: '100%',
   display: 'flex',
   flexWrap: 'wrap',
   marginLeft: '10px',

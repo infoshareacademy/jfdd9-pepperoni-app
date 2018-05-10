@@ -1,8 +1,35 @@
 import React from 'react'
 import moment from 'moment'
 import Calendar from "./Calendar";
+import StarsRating from "./StarsRating";
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+const profilePageStyle = {
+  width: '80%',
+  margin: '0 auto'
+}
+
+const profileStyle = {
+  display: 'flex',
+  alignItems: 'center',
+}
+
+const calendarStyle = {
+  float: 'right',
+  marginRight: '5%',
+  textAlign: 'right'
+}
+
+const headerStyle = {
+  display: 'inline-block',
+}
+
+const imageStyle = {
+    borderRadius: '50%',
+    margin: '10px',
+    height: '200px',
+}
 
 class ProfilePage extends React.Component {
   state = {
@@ -53,17 +80,24 @@ class ProfilePage extends React.Component {
     const gangster = this.state.gangster
 
     return (
-      <div>
+      <div style={profilePageStyle}>
         {
           this.state.gangster === null
             ? 'Ładuję gangusa'
             : (
               <div>
+                <div style={calendarStyle}>
+                  <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
+                </div>
                 <p>{this.state.currentTime}</p>
-                <p>{gangster.first_name}</p>
-                <img src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
-                <p>Rating</p>
-                <p>{gangster.rating}</p>
+                <div style={profileStyle}>
+                  <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
+                  <h1 style={headerStyle}>{gangster.first_name}</h1>
+                  <StarsRating rating={gangster.rating}/>
+                  {/*<img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>*/}
+                </div>
+                  <br/>
+                {/*<img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>*/}
                 <p>{gangster.gender}</p>
                 <p>{gangster.email}</p>
                 <p>{gangster.hometown}</p>
@@ -77,7 +111,7 @@ class ProfilePage extends React.Component {
                 <p>{gangster.description}</p>
                 <p>{gangster.experiance}</p>
                 <p>{gangster.opinions}</p>
-                <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
+
               </div>
             )
         }

@@ -3,6 +3,10 @@ import LocationSearch from "./LocationSearch";
 import SearchResults from "./SearchResults";
 import TagSearch from "./TagSearch";
 
+const mainSearchEngineStyle = {
+  width: '80%',
+  margin: '2px auto'
+}
 
 class MainSearchEngine extends React.Component {
 
@@ -42,12 +46,12 @@ class MainSearchEngine extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div style={mainSearchEngineStyle}>
         <h1>Find your gangster</h1>
-        <LocationSearch addCity={this.addCity}/>
-        <TagSearch selectTag={this.selectTag} selectedTags={this.state.selectedTags}/>
+          <LocationSearch addCity={this.addCity}/>
+          <TagSearch selectTag={this.selectTag} selectedTags={this.state.selectedTags}/>
         <SearchResults hometown={this.state.hometown} selectedTags={this.state.selectedTags}/>
-      </React.Fragment>
+      </div>
     )
   }
 }

@@ -33,7 +33,7 @@ class Calendar extends React.Component {
 
         return (
           <div>
-            <p>When do you want to get your job done?</p>
+            <h2>When do you want to get your job done?</h2>
           <DatePicker
             selected={this.state.selectedDate}
             onChange={this.handleChange}
