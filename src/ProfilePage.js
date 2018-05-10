@@ -36,6 +36,15 @@ const imageStyle = {
     height: '200px',
 }
 
+const lineSeparated = {
+  paddingBottom: '20px',
+  borderBottom: 'solid 1px rgba(31, 31, 31, 0.83)',
+}
+
+const availabilityStyle = {
+  display: 'inline',
+}
+
 class ProfilePage extends React.Component {
   state = {
     gangster: null,
@@ -94,28 +103,36 @@ class ProfilePage extends React.Component {
                 <div style={calendarStyle}>
                   <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
                 </div>
+
                 <p>{this.state.currentTime}</p>
+
                 <div style={profileStyle}>
-                  <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
                   <h1 style={headerStyle}>{gangster.first_name}</h1>
                   <StarsRating rating={gangster.rating}/>
-                  {/*<img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>*/}
                 </div>
-                  <br/>
-                {/*<img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>*/}
-                <p>{gangster.gender}</p>
-                <p>{gangster.email}</p>
-                <p>{gangster.hometown}</p>
-                <p>{
-                  days.map(
-                    day => <p>{gangster.availability.includes(day) ? <strong>{day}</strong> : day}</p>
-                  )
-                }
-                </p>
-                <p>{gangster.tags.join(', ')}</p>
-                <p>{gangster.description}</p>
-                <p>{gangster.experiance}</p>
-                <p>{gangster.opinions}</p>
+
+                <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
+
+                <h3>{gangster.gender}</h3>
+
+                <h3>Email: {gangster.email}</h3>
+
+                <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
+
+                <h3>Availability: </h3>
+                <p style={lineSeparated}>{gangster.availability.join(', ')}</p>
+
+                <p style={lineSeparated}>{gangster.tags.join(', ')}</p>
+
+                <h2>About me</h2>
+                <p style={lineSeparated}>{gangster.description}</p>
+
+                <h2>My experience</h2>
+                <p style={lineSeparated}>{gangster.experience}</p>
+
+                <h2>They recommend me</h2>
+                <p style={lineSeparated}>{gangster.opinions}</p>
+
 
               </div>
             )

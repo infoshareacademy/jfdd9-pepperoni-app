@@ -38,7 +38,7 @@ class Calendar extends React.Component {
                 .filter(date => date.isAfter(moment().subtract(1, 'day'))))}
             placeholderText="Click to book your gangster" />
 
-            <Link to={'/order/' + this.props.gangsterId + '/' + this.state.selectedDate}><button>Book this guy</button></Link>
+            <Link to={'/order/' + this.props.gangsterId + '/' + this.state.selectedDate}><button>Book this gangster</button></Link>
 
           </div>
         );
