@@ -82,7 +82,7 @@ class ProfilePage extends React.Component {
 
   tick = () => {
     const dt = moment();
-    this.setState({currentTime: dt.format('MMMM Do YYYY, h:mm:ss ')});
+    this.setState({currentTime: dt.format('MMMM Do YYYY')});
   }
 
   componentDidMount() {
@@ -129,8 +129,6 @@ class ProfilePage extends React.Component {
                 <div style={calendarStyle}>
                   <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
                 </div>
-
-                <p>{this.state.currentTime}</p>
 
                 <div style={profileStyle}>
                   <h1 style={headerStyle}>{gangster.first_name}</h1>
