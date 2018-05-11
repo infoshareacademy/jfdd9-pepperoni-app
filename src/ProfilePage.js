@@ -31,9 +31,9 @@ const headerStyle = {
 }
 
 const imageStyle = {
-    borderRadius: '50%',
-    margin: '10px',
-    height: '200px',
+  borderRadius: '50%',
+  margin: '10px',
+  height: '200px',
 }
 
 const lineSeparated = {
@@ -119,53 +119,69 @@ class ProfilePage extends React.Component {
   render() {
     const gangster = this.state.gangster
 
+    if (gangster === null) {
+      return <p>Ładuję gangusa</p>
+    }
+
+
+    const avail= gangster.availability.join(' ')
+    // const sorter = {
+    //   "monday": 1,
+    //   "tuesday": 2,
+    //   "wednesday": 3,
+    //   "thursday": 4,
+    //   "friday": 5,
+    //   "saturday": 6,
+    //   "sunday": 7
+    // }
+    // avail.sort(function sortByDay(a, b) {
+    //   const day1 = a.day;
+    //   const day2 = b.day;
+    //   return (sorter[day1] > sorter[day2]);
+    //   });
     return (
       <div style={profilePageStyle}>
-        {
-          this.state.gangster === null
-            ? 'Ładuję gangusa'
-            : (
-              <div>
-                <div style={calendarStyle}>
-                  <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
-                </div>
 
-                <p>{this.state.currentTime}</p>
+        <div>
+          <div style={calendarStyle}>
+            <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
+          </div>
 
-                <div style={profileStyle}>
-                  <h1 style={headerStyle}>{gangster.first_name}</h1>
-                  <StarsRating rating={gangster.rating}/>
-                </div>
+          <p>{this.state.currentTime}</p>
 
-                <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
+          <div style={profileStyle}>
+            <h1 style={headerStyle}>{gangster.first_name}</h1>
+            <StarsRating rating={gangster.rating}/>
+          </div>
 
-                <div style={divTagStyle}>
-                  {gangster.tags.map(tag => <p style={smallTagStyle}>{tag}</p>)}
-                </div>
+          <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
 
-                <h3>{gangster.gender}</h3>
+          <div style={divTagStyle}>
+            {gangster.tags.map(tag => <p style={smallTagStyle}>{tag}</p>)}
+          </div>
 
-                <h3>Email: {gangster.email}</h3>
+          <h3>{gangster.gender}</h3>
 
-                <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
+          <h3>Email: {gangster.email}</h3>
 
-                <h3>Availability: </h3>
-                <p style={lineSeparated}>{gangster.availability.join(', ')}</p>
+          <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
+
+          <h3>Availability: </h3>
+          <p style={lineSeparated}>{avail}</p>
 
 
-                <h2>About me</h2>
-                <p style={lineSeparated}>{gangster.description}</p>
+          <h2>About me</h2>
+          <p style={lineSeparated}>{gangster.description}</p>
 
-                <h2>My experience</h2>
-                <p style={lineSeparated}>{gangster.experience}</p>
+          <h2>My experience</h2>
+          <p style={lineSeparated}>{gangster.experience}</p>
 
-                <h2>They recommend me</h2>
-                <p style={lineSeparated}>{gangster.opinions}</p>
+          <h2>They recommend me</h2>
+          <p style={lineSeparated}>{gangster.opinions}</p>
 
 
-              </div>
-            )
-        }
+        </div>
+
       </div>
 
     )
