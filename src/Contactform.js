@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 const emailInputStyle = {
   width: '40%',
@@ -40,7 +41,8 @@ class ContactForm extends Component {
           <br/>
           <textarea style={inputStyle} placeholder="Type in your message"/>
           <br/>
-          <button>Send</button>
+          <Link to={'/thank-you'}><button>Send</button></Link>
+
         </form>
       </div>
     )
