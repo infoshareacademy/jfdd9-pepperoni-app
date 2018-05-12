@@ -20,7 +20,10 @@ h1 {
   padding: 20px 0;
   font-family: Quattrocento, serif;
   text-transform: uppercase;
+}
 
+h2 {
+  font-family: Quattrocento, serif;
 }
 
 .App-title {

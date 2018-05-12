@@ -2,12 +2,13 @@ import React from 'react'
 import logo from "./police.jpg"
 
 const Style = {
-  fontSize: '45px',
-  marginLeft: '100px'
+  fontSize: '1.2rem',
+  marginLeft: '100px',
   // textAlign: 'center',
 }
 const policeStyle = {
-height: '60px'
+  height: '60px',
+  margin: '0 auto'
 }
 
 class ThankYouPage extends React.Component {
@@ -27,10 +28,13 @@ class ThankYouPage extends React.Component {
   render() {
     return (
       <div style={Style}>
-      <h2 >Thank You Guys!
-      </h2>
-      <h6>Your order is successful submitted...</h6>
-        {this.state.surprise && <h6>...we are going to visit You <img style={policeStyle} className="police" src={logo} alt="Police logo"/></h6> }
+      <h1 >Thank You!
+      </h1>
+      <h2>You have successfully submitted your order...</h2>
+        {this.state.surprise &&
+        <div>
+          <h2>See you soon</h2> <img style={policeStyle} className="police" src={logo} alt="Police logo"/>
+        </div>}
       </div>
     )
   }
