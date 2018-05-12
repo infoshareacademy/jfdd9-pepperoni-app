@@ -11,6 +11,7 @@ const listStyle = {
   verticalAlign: 'top',
   color: '#ececec',
 }
+
 const name = {
   fontSize: '30px',
   color: '#ececec',
