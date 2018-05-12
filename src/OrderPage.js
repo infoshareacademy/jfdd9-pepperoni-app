@@ -1,7 +1,6 @@
 import React from 'react'
 import ContactForm from "./Contactform";
 import moment from 'moment';
-import { Link } from 'react-router-dom'
 
 const orderPageStyle = {
   width: '80%',
@@ -22,7 +21,6 @@ class OrderPage extends React.Component {
     )
   }
 
-
   handleTagChange = event => {
     this.setState({
       selectedTag: event.target.value
@@ -31,17 +29,15 @@ class OrderPage extends React.Component {
 
 
   render() {
-    var date = moment.unix((this.props.match.params.selectedDate/1000)).format("YYYY-MM-DD");
+    var date = moment.unix((this.props.match.params.selectedDate/1000)).format("DD/MM/YYYY");
   console.log(process.env)
     return (
       <div style={orderPageStyle}>
         {
           this.state.gangster === null
-          ? 'Ładuję gangusa'
+          ? 'Loading order'
           : (
             <div>
-              <img src={process.env.PUBLIC_URL + '/arrowIcon.png'} />
-              <Link to={'/profile/' + this.state.gangster.id}>Go back to gangster profile</Link>
               <h1>Your order</h1>
               <h2>Gangster: {this.state.gangster.first_name}</h2>
               <h2>Date: {date}</h2>

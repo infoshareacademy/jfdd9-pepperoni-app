@@ -26,7 +26,9 @@ class MainSearchEngine extends React.Component {
   unselectTag = (tagName) => {
     const newSelectedTags = this.state.selectedTags;
     const tagIndex = newSelectedTags.indexOf(tagName);
-    newSelectedTags.includes(tagName) ? newSelectedTags.splice(tagIndex, 1) : newSelectedTags;
+    if (newSelectedTags.includes(tagName)) {
+      newSelectedTags.splice(tagIndex, 1)
+    };
     this.setState({
       hometown: this.state.hometown,
       selectedTags: newSelectedTags

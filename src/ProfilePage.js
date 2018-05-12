@@ -3,17 +3,23 @@ import moment from 'moment'
 import Calendar from "./Calendar";
 import StarsRating from "./StarsRating";
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+// const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const profilePageStyle = {
   width: '80%',
-  margin: '0 auto'
+  margin: '0 auto',
 }
 
 const profileStyle = {
-  display: 'flex',
-  alignItems: 'center',
+  display: 'block',
+  verticalAlign: 'middle',
 }
+
+const headerStyle = {
+  margin: '10px',
+  display: 'inline-block',
+}
+
 
 const calendarStyle = {
   float: 'right',
@@ -26,8 +32,9 @@ const calendarStyle = {
   backgroundColor: 'rgba(15, 15, 15, 0.83)',
 }
 
-const headerStyle = {
-  display: 'inline-block',
+const starsStyle ={
+  display: 'inline',
+  fontSize: '32px',
 }
 
 const imageStyle = {
@@ -48,7 +55,6 @@ const divTagStyle = {
   marginLeft: '10px',
   textAlign: 'center',
   alignItems: 'center',
-
 }
 
 const smallTagStyle = {
@@ -68,7 +74,6 @@ const smallTagStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-
 };
 
 class ProfilePage extends React.Component {
@@ -132,13 +137,13 @@ class ProfilePage extends React.Component {
 
                 <div style={profileStyle}>
                   <h1 style={headerStyle}>{gangster.first_name}</h1>
-                  <StarsRating rating={gangster.rating}/>
+                  <div style={starsStyle}><StarsRating rating={gangster.rating}/></div>
                 </div>
 
                 <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
 
                 <div style={divTagStyle}>
-                  {gangster.tags.map(tag => <p style={smallTagStyle}>{tag}</p>)}
+                  {gangster.tags.map(tag => <p key={tag} style={smallTagStyle}>{tag}</p>)}
                 </div>
 
                 <h3>{gangster.gender}</h3>
