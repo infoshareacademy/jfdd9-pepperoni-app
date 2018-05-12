@@ -25,7 +25,6 @@ const inputStyle = {
   color: 'white',
   fontFamily: 'inherit',
   fontSize: '1.1rem',
-
 }
 
 const divSelectStyle = {
@@ -48,25 +47,22 @@ const selectStyle = {
   border: 'none',
 }
 
-
 class ContactForm extends Component {
 
  handleSubmit = event =>{
    event.preventDefault();
-   console.log('submit');
  };
-
 
   render() {
     return (
       <div>
         <br/>
         <div style={divSelectStyle}>
-          <label for="tagSelect">Select the job you need to get done:</label>
+          <label htmlFor="tagSelect">Select the job you need to get done:</label>
           <br/>
           <br/>
           <select id="tagSelect" style={selectStyle} onChange={this.props.handleTagChange} name="job" form="orderForm">
-            {this.props.tags.map(tag => <option value={tag}>{tag}</option>)}
+            {this.props.tags.map(tag => <option value={tag} key={tag}>{tag}</option>)}
           </select>
         </div>
         <form id="orderForm" onSubmit={this.handleSubmit}>

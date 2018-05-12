@@ -21,14 +21,12 @@ const divTagStyle = {
   display: 'flex',
   flexWrap: 'wrap',
   marginLeft: '10px',
-
 }
 
 class TagSearch extends React.Component {
   state = {
     tags: [],
   }
-
 
   componentDidMount() {
     fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(

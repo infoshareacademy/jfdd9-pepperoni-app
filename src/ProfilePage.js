@@ -3,7 +3,7 @@ import moment from 'moment'
 import Calendar from "./Calendar";
 import StarsRating from "./StarsRating";
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+// const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const profilePageStyle = {
   width: '80%',
@@ -138,7 +138,7 @@ class ProfilePage extends React.Component {
                 <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
 
                 <div style={divTagStyle}>
-                  {gangster.tags.map(tag => <p style={smallTagStyle}>{tag}</p>)}
+                  {gangster.tags.map(tag => <p key={tag} style={smallTagStyle}>{tag}</p>)}
                 </div>
 
                 <h3>{gangster.gender}</h3>

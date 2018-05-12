@@ -8,6 +8,7 @@ const Style = {
   marginLeft: '100px',
   // textAlign: 'center',
 }
+
 const policeStyle = {
   height: '60px',
   margin: '0 auto',

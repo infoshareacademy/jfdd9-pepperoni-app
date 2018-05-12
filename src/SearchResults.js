@@ -16,13 +16,7 @@ const name = {
   color: '#ececec',
   textDecoration:'none',
 }
-const listStyleTown = {
-  fontSize: '25px',
-  display: 'block',
-  textDecoration: 'none',
-  marginTop: '30px',
-  verticalAlign: 'top'
-}
+
 const imageStyle = {
   borderRadius: '50%',
   margin: '10px',
@@ -36,13 +30,11 @@ const contenerStyle = {
   marginTop: '10px',
   padding: '20px'
 }
+
 const tagStyle = {
   margin: '0px',
   fontSize:'15px',
-
-
 }
-
 
 class SearchResults extends React.Component {
 
@@ -90,7 +82,6 @@ class SearchResults extends React.Component {
             gangster =>
 
               <div style={contenerStyle} key={gangster.id}>
-
                   <div>
                     <img style={imageStyle} src={gangster.image} alt={'face'}/>
                     <p style={listStyle}>
@@ -100,10 +91,7 @@ class SearchResults extends React.Component {
                       <br/>{gangster.hometown}
                       <br/> <span style={tagStyle}>{gangster.tags.join(', ')}</span>
                       </p>
-
                   </div>
-
-
               </div>
           )
         }

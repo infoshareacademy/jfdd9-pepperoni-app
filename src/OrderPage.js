@@ -22,7 +22,6 @@ class OrderPage extends React.Component {
     )
   }
 
-
   handleTagChange = event => {
     this.setState({
       selectedTag: event.target.value
@@ -40,7 +39,7 @@ class OrderPage extends React.Component {
           ? 'Ładuję gangusa'
           : (
             <div>
-              <img src={process.env.PUBLIC_URL + '/arrowIcon.png'} />
+              <img src={process.env.PUBLIC_URL + '/arrowIcon.png'} alt="Go back" />
               <Link to={'/profile/' + this.state.gangster.id}>Go back to gangster profile</Link>
               <h1>Your order</h1>
               <h2>Gangster: {this.state.gangster.first_name}</h2>
