@@ -39,12 +39,14 @@ const tagStyle = {
   fontSize:'15px',
 }
 const divTagStyle = {
+  textDecoration: 'none',
   width: '100%',
   display: 'flex',
   flexWrap: 'wrap',
   marginLeft: '0px',
   textAlign: 'center',
   alignItems: 'center',
+
 }
 const smallTagStyle = {
   margin: '8px',
@@ -54,7 +56,7 @@ const smallTagStyle = {
   padding: '5px',
   borderRadius: '5px',
   border: 'none',
-  backgroundColor: '#4b5062',
+  backgroundColor: '#E2083C',
   textShadow: 'none',
   outline: 'inherit',
   fontFamily: 'Quattrocento, serif',
@@ -63,6 +65,7 @@ const smallTagStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  textDecoration: 'none'
 };
 
 class SearchResults extends React.Component {
@@ -119,9 +122,8 @@ class SearchResults extends React.Component {
                       <StarsRating rating={gangster.rating}/>
                       <br/>{gangster.hometown}
                       <br/>
-                      <div style={divTagStyle}>
+                      <span style={divTagStyle}>
                       {gangster.tags.map(tag =>
-
                           <Link
                             to={'/gangsters-for-tag/' + tag}
                             key={tag}
@@ -129,7 +131,7 @@ class SearchResults extends React.Component {
                             {tag}
                           </Link>
                         )}
-                    </div>
+                    </span>
                       </p>
                   </div>
               </div>
