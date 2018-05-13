@@ -8,6 +8,7 @@ const listStyle = {
   display: 'inline-block',
   textDecoration: 'none',
   marginTop: '26px',
+  marginBottom: '0px',
   verticalAlign: 'top',
   color: '#ececec',
 }
@@ -29,6 +30,7 @@ const contenerStyle = {
   borderRadius: '10px',
   backgroundColor: 'rgba(15, 15, 15, 0.83)',
   marginTop: '10px',
+  marginBottom: '0px',
   padding: '20px'
 }
 
@@ -36,6 +38,32 @@ const tagStyle = {
   margin: '0px',
   fontSize:'15px',
 }
+const divTagStyle = {
+  width: '100%',
+  display: 'flex',
+  flexWrap: 'wrap',
+  marginLeft: '0px',
+  textAlign: 'center',
+  alignItems: 'center',
+}
+const smallTagStyle = {
+  margin: '8px',
+  minHeight: '30px',
+  width: '150px',
+  fontSize: '14px',
+  padding: '5px',
+  borderRadius: '5px',
+  border: 'none',
+  backgroundColor: '#4b5062',
+  textShadow: 'none',
+  outline: 'inherit',
+  fontFamily: 'Quattrocento, serif',
+  color: 'white',
+  fontWeight: 'bold',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
 
 class SearchResults extends React.Component {
 
@@ -90,7 +118,19 @@ class SearchResults extends React.Component {
                       </Link>
                       <StarsRating rating={gangster.rating}/>
                       <br/>{gangster.hometown}
-                      <br/> <span style={tagStyle}>{gangster.tags.join(', ')}</span>
+                      <br/>
+                      <div style={divTagStyle}>
+                      {gangster.tags.map(tag =>
+
+                        <button
+                          key={tag}
+                          style={smallTagStyle}
+                          onClick={(event) => this.props.selectTag(event.currentTarget.name)}>
+
+                          {tag}
+                          </button>
+                        )}
+                    </div>
                       </p>
                   </div>
               </div>
