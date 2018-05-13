@@ -121,7 +121,7 @@ class GangstersForTag extends React.Component {
                       {gangster.tags.map(tag =>
 
                         <Link
-                          to={'/gangsters-for-tag/' + gangster.tag}
+                          to={'/gangsters-for-tag/' + tag}
                           key={tag}
                           style={smallTagStyle}>
                           {tag}
