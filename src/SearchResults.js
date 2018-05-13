@@ -123,7 +123,7 @@ class SearchResults extends React.Component {
                       {gangster.tags.map(tag =>
 
                           <Link
-                            to={'gangsters-for-tag/' + gangster.tagName}
+                            to={'/gangsters-for-tag/' + gangster.tag}
                             key={tag}
                             style={smallTagStyle}>
                             {tag}
