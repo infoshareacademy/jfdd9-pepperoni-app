@@ -2,6 +2,11 @@ import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 
+const gangstersForTagStyle = {
+  width: '80%',
+  margin: '0 auto',
+}
+
 const listStyle = {
   fontSize: '25px',
   width: '80%',
@@ -44,13 +49,13 @@ const divTagStyle = {
 }
 const smallTagStyle = {
   margin: '8px',
-  minHeight: '30px',
-  width: '150px',
-  fontSize: '14px',
-  padding: '5px',
+  minHeight: '15px',
+  width: '110px',
+  fontSize: '13px',
+  padding: '4px',
   borderRadius: '5px',
   border: 'none',
-  backgroundColor: '#4b5062',
+  backgroundColor: '#E2083C',
   textShadow: 'none',
   outline: 'inherit',
   fontFamily: 'Quattrocento, serif',
@@ -59,7 +64,8 @@ const smallTagStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-};
+  textDecoration: 'none'
+}
 
 class GangstersForTag extends React.Component {
 
@@ -95,7 +101,8 @@ class GangstersForTag extends React.Component {
     }
 
     return (
-      <div>
+      <div style={gangstersForTagStyle}>
+        <h1>Gangsters offering {this.props.match.params.tagName}</h1>
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading gangsters...</p>}
         {

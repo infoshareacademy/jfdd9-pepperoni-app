@@ -46,10 +46,10 @@ const divTagStyle = {
 }
 const smallTagStyle = {
   margin: '8px',
-  minHeight: '30px',
-  width: '150px',
-  fontSize: '14px',
-  padding: '5px',
+  minHeight: '15px',
+  width: '110px',
+  fontSize: '13px',
+  padding: '4px',
   borderRadius: '5px',
   border: 'none',
   backgroundColor: '#E2083C',
