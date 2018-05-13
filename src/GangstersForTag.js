@@ -2,6 +2,11 @@ import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 
+const gangstersForTagStyle = {
+  width: '80%',
+  margin: '0 auto',
+}
+
 const listStyle = {
   fontSize: '25px',
   width: '80%',
@@ -34,10 +39,6 @@ const contenerStyle = {
   padding: '20px'
 }
 
-const tagStyle = {
-  margin: '0px',
-  fontSize:'15px',
-}
 const divTagStyle = {
   width: '100%',
   display: 'flex',
@@ -48,13 +49,13 @@ const divTagStyle = {
 }
 const smallTagStyle = {
   margin: '8px',
-  minHeight: '30px',
-  width: '150px',
-  fontSize: '14px',
-  padding: '5px',
+  minHeight: '15px',
+  width: '110px',
+  fontSize: '13px',
+  padding: '4px',
   borderRadius: '5px',
   border: 'none',
-  backgroundColor: '#4b5062',
+  backgroundColor: '#E2083C',
   textShadow: 'none',
   outline: 'inherit',
   fontFamily: 'Quattrocento, serif',
@@ -63,7 +64,8 @@ const smallTagStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-};
+  textDecoration: 'none'
+}
 
 class GangstersForTag extends React.Component {
 
@@ -99,7 +101,8 @@ class GangstersForTag extends React.Component {
     }
 
     return (
-      <div>
+      <div style={gangstersForTagStyle}>
+        <h1>Gangsters offering {this.props.match.params.tagName}</h1>
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading gangsters...</p>}
         {
@@ -117,7 +120,7 @@ class GangstersForTag extends React.Component {
                     <StarsRating rating={gangster.rating}/>
                     <br/>{gangster.hometown}
                     <br/>
-                    <div style={divTagStyle}>
+                    <span style={divTagStyle}>
                       {gangster.tags.map(tag =>
 
                         <Link
@@ -127,7 +130,7 @@ class GangstersForTag extends React.Component {
                           {tag}
                         </Link>
                       )}
-                    </div>
+                    </span>
                   </p>
                 </div>
               </div>
