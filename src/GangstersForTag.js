@@ -65,7 +65,7 @@ const smallTagStyle = {
   justifyContent: 'center',
 };
 
-class SearchResults extends React.Component {
+class GangstersForTag extends React.Component {
 
   state = {
     gangsters: null,
@@ -104,34 +104,32 @@ class SearchResults extends React.Component {
         {fetching && <p>Loading gangsters...</p>}
         {
           gangsters !== null && gangsters.filter(
-            gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
-          ).sort(compareRatings).filter(
-            gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
-          ).map(
+            gangster => gangster.tags.includes(this.props.match.params.tagName)
+          ).sort(compareRatings).map(
             gangster =>
 
               <div style={contenerStyle} key={gangster.id}>
-                  <div>
-                    <img style={imageStyle} src={gangster.image} alt={'face'}/>
-                    <p style={listStyle}>
-                      <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
-                      </Link>
-                      <StarsRating rating={gangster.rating}/>
-                      <br/>{gangster.hometown}
-                      <br/>
-                      <div style={divTagStyle}>
+                <div>
+                  <img style={imageStyle} src={gangster.image} alt={'face'}/>
+                  <p style={listStyle}>
+                    <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
+                    </Link>
+                    <StarsRating rating={gangster.rating}/>
+                    <br/>{gangster.hometown}
+                    <br/>
+                    <div style={divTagStyle}>
                       {gangster.tags.map(tag =>
 
-                          <Link
-                            to={'gangsters-for-tag/' + gangster.tagName}
-                            key={tag}
-                            style={smallTagStyle}>
-                            {tag}
-                          </Link>
-                        )}
+                        <Link
+                          to={'gangsters-for-tag/' + gangster.tagName}
+                          key={tag}
+                          style={smallTagStyle}>
+                          {tag}
+                        </Link>
+                      )}
                     </div>
-                      </p>
-                  </div>
+                  </p>
+                </div>
               </div>
           )
         }
@@ -140,5 +138,4 @@ class SearchResults extends React.Component {
   }
 }
 
-export default SearchResults
-
+export default GangstersForTag
