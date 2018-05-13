@@ -113,7 +113,7 @@ class GangstersForTag extends React.Component {
                     <StarsRating rating={gangster.rating}/>
                     <br/>{gangster.hometown}
                     <br/>
-                    <div style={divTagStyle}>
+                    <span style={divTagStyle}>
                       {gangster.tags.map(tag =>
 
                         <Link
@@ -123,7 +123,7 @@ class GangstersForTag extends React.Component {
                           {tag}
                         </Link>
                       )}
-                    </div>
+                    </span>
                   </p>
                 </div>
               </div>
