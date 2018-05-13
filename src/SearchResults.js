@@ -34,10 +34,6 @@ const contenerStyle = {
   padding: '20px'
 }
 
-const tagStyle = {
-  margin: '0px',
-  fontSize:'15px',
-}
 const divTagStyle = {
   textDecoration: 'none',
   width: '100%',
