@@ -30,7 +30,6 @@ class OrderPage extends React.Component {
 
   render() {
     var date = moment.unix((this.props.match.params.selectedDate/1000)).format("DD/MM/YYYY");
-  console.log(process.env)
     return (
       <div style={orderPageStyle}>
         {
