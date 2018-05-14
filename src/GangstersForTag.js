@@ -115,7 +115,7 @@ class GangstersForTag extends React.Component {
                 <div>
                   <img style={imageStyle} src={gangster.image} alt={'face'}/>
                   <p style={listStyle}>
-                    <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
+                    <Link to={'/profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                     </Link>
                     <StarsRating rating={gangster.rating}/>
                     <br/>{gangster.hometown}
