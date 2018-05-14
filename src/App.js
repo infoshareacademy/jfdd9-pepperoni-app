@@ -7,6 +7,7 @@ import OrderPage from "./OrderPage";
 import ProfilePage from "./ProfilePage";
 import ThankYouPage from "./ThankYouPage";
 import NavBar from "./NavBar";
+import GangstersForTag from "./GangstersForTag"
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="/profile/:gangsterId" component={ProfilePage}/>
           <Route path="/order/:gangsterId/:selectedDate" component={OrderPage}/>
           <Route path="/thank-you" component={ThankYouPage}/>
+          <Route path="/gangsters-for-tag/:tagName" component={GangstersForTag}/>
         </div>
       </Router>
     );

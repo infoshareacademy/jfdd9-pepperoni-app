@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 const emailInputStyle = {
   width: '40%',
-  padding: '5px 20px',
+  padding: '5px',
   backgroundColor: 'transparent',
   border: 'none',
-  outline: 'solid 1px rgba(31, 31, 31, 0.83)',
+  borderBottom: 'solid 1px rgba(31, 31, 31, 0.83)',
+  outline: 'none',
   color: 'white',
   fontFamily: 'inherit',
   fontSize: '1.1rem',
@@ -15,32 +17,63 @@ const inputStyle = {
   boxShadow: 'none',
   overflow: 'auto',
   width: '40%',
-  padding: '20px',
+  padding: '5px',
   backgroundColor: 'transparent',
   border: 'none',
-  outline: 'solid 1px rgba(31, 31, 31, 0.83)',
+  borderBottom: 'solid 1px rgba(31, 31, 31, 0.83)',
+  outline: 'none',
   color: 'white',
   fontFamily: 'inherit',
   fontSize: '1.1rem',
-
 }
 
+const divSelectStyle = {
+  backgroundColor: '#090909',
+  fontFamily: 'inherit',
+  fontSize: '1.1rem',
+  color: 'white',
+  overflow: 'hidden',
+  width: '40%',
+  border: 'none',
+}
+
+const selectStyle = {
+  backgroundColor: '#090909',
+  padding: '5px',
+  fontFamily: 'inherit',
+  fontSize: '1.1rem',
+  color: '#6c7267',
+  width: '100%',
+  border: 'none',
+}
 
 class ContactForm extends Component {
+
  handleSubmit = event =>{
    event.preventDefault();
-   console.log('submit');
  };
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input style={emailInputStyle} name="email" placeholder="Email address"/>
+        <br/>
+        <div style={divSelectStyle}>
+          <label htmlFor="tagSelect">Select the job you need to get done:</label>
           <br/>
-          <textarea style={inputStyle} placeholder="Type in your message"/>
           <br/>
-          <button>Send</button>
+          <select id="tagSelect" style={selectStyle} onChange={this.props.handleTagChange} name="job" form="orderForm">
+            {this.props.tags.map(tag => <option value={tag} key={tag}>{tag}</option>)}
+          </select>
+        </div>
+        <form id="orderForm" onSubmit={this.handleSubmit}>
+          <br/>
+          <input style={emailInputStyle} name="email" placeholder="type in your email" required/>
+          <br/>
+          <br/>
+          <textarea style={inputStyle} placeholder="add details about your order"/>
+          <br/>
+          <Link to={'/thank-you'}><button type='submit'>Send</button></Link>
+
         </form>
       </div>
     )

@@ -2,6 +2,11 @@ import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 
+const gangstersForTagStyle = {
+  width: '80%',
+  margin: '0 auto',
+}
+
 const listStyle = {
   fontSize: '25px',
   width: '80%',
@@ -35,14 +40,12 @@ const contenerStyle = {
 }
 
 const divTagStyle = {
-  textDecoration: 'none',
   width: '100%',
   display: 'flex',
   flexWrap: 'wrap',
   marginLeft: '0px',
   textAlign: 'center',
   alignItems: 'center',
-
 }
 const smallTagStyle = {
   margin: '8px',
@@ -62,9 +65,9 @@ const smallTagStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   textDecoration: 'none'
-};
+}
 
-class SearchResults extends React.Component {
+class GangstersForTag extends React.Component {
 
   state = {
     gangsters: null,
@@ -98,38 +101,38 @@ class SearchResults extends React.Component {
     }
 
     return (
-      <div>
+      <div style={gangstersForTagStyle}>
+        <h1>Gangsters offering {this.props.match.params.tagName}</h1>
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading gangsters...</p>}
         {
           gangsters !== null && gangsters.filter(
-            gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
-          ).sort(compareRatings).filter(
-            gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
-          ).map(
+            gangster => gangster.tags.includes(this.props.match.params.tagName)
+          ).sort(compareRatings).map(
             gangster =>
 
               <div style={contenerStyle} key={gangster.id}>
-                  <div>
-                    <img style={imageStyle} src={gangster.image} alt={'face'}/>
-                    <p style={listStyle}>
-                      <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
-                      </Link>
-                      <StarsRating rating={gangster.rating}/>
-                      <br/>{gangster.hometown}
-                      <br/>
-                      <span style={divTagStyle}>
+                <div>
+                  <img style={imageStyle} src={gangster.image} alt={'face'}/>
+                  <p style={listStyle}>
+                    <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
+                    </Link>
+                    <StarsRating rating={gangster.rating}/>
+                    <br/>{gangster.hometown}
+                    <br/>
+                    <span style={divTagStyle}>
                       {gangster.tags.map(tag =>
-                          <Link
-                            to={'/gangsters-for-tag/' + tag}
-                            key={tag}
-                            style={smallTagStyle}>
-                            {tag}
-                          </Link>
-                        )}
+
+                        <Link
+                          to={'/gangsters-for-tag/' + tag}
+                          key={tag}
+                          style={smallTagStyle}>
+                          {tag}
+                        </Link>
+                      )}
                     </span>
-                      </p>
-                  </div>
+                  </p>
+                </div>
               </div>
           )
         }
@@ -138,5 +141,4 @@ class SearchResults extends React.Component {
   }
 }
 
-export default SearchResults
-
+export default GangstersForTag

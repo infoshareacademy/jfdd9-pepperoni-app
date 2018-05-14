@@ -10,6 +10,7 @@ const orderPageStyle = {
 class OrderPage extends React.Component {
   state = {
     gangster: null,
+    selectedTag: ''
   }
 
   componentDidMount() {
@@ -20,22 +21,28 @@ class OrderPage extends React.Component {
     )
   }
 
+  handleTagChange = event => {
+    this.setState({
+      selectedTag: event.target.value
+    })
+  }
+
 
   render() {
-    var date = moment.unix((this.props.match.params.selectedDate/1000)).format("YYYY-MM-DD");
-
+    var date = moment.unix((this.props.match.params.selectedDate/1000)).format("DD/MM/YYYY");
+  console.log(process.env)
     return (
       <div style={orderPageStyle}>
         {
           this.state.gangster === null
-          ? 'Ładuję gangusa'
+          ? 'Loading order'
           : (
             <div>
-              <h1>Your order summary</h1>
-              <h2>Name: {this.state.gangster.first_name}</h2>
+              <h1>Your order</h1>
+              <h2>Gangster: {this.state.gangster.first_name}</h2>
               <h2>Date: {date}</h2>
-              <h2>Job: </h2>
-              <ContactForm/>
+              <h2>Job: {this.state.selectedTag}</h2>
+              <ContactForm tags={this.state.gangster.tags} handleTagChange={this.handleTagChange}/>
             </div>
             )
         }

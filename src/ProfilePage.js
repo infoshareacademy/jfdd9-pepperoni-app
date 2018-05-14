@@ -3,17 +3,23 @@ import moment from 'moment'
 import Calendar from "./Calendar";
 import StarsRating from "./StarsRating";
 
-const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+// const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const profilePageStyle = {
   width: '80%',
-  margin: '0 auto'
+  margin: '0 auto',
 }
 
 const profileStyle = {
-  display: 'flex',
-  alignItems: 'center',
+  display: 'block',
+  verticalAlign: 'middle',
 }
+
+const headerStyle = {
+  margin: '10px',
+  display: 'inline-block',
+}
+
 
 const calendarStyle = {
   float: 'right',
@@ -26,14 +32,15 @@ const calendarStyle = {
   backgroundColor: 'rgba(15, 15, 15, 0.83)',
 }
 
-const headerStyle = {
-  display: 'inline-block',
+const starsStyle ={
+  display: 'inline',
+  fontSize: '32px',
 }
 
 const imageStyle = {
-  borderRadius: '50%',
-  margin: '10px',
-  height: '200px',
+    borderRadius: '50%',
+    margin: '10px',
+    height: '200px',
 }
 
 const lineSeparated = {
@@ -48,7 +55,6 @@ const divTagStyle = {
   marginLeft: '10px',
   textAlign: 'center',
   alignItems: 'center',
-
 }
 
 const smallTagStyle = {
@@ -68,7 +74,6 @@ const smallTagStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-
 };
 
 class ProfilePage extends React.Component {
@@ -82,7 +87,7 @@ class ProfilePage extends React.Component {
 
   tick = () => {
     const dt = moment();
-    this.setState({currentTime: dt.format('MMMM Do YYYY, h:mm:ss ')});
+    this.setState({currentTime: dt.format('MMMM Do YYYY')});
   }
 
   componentDidMount() {
@@ -119,69 +124,51 @@ class ProfilePage extends React.Component {
   render() {
     const gangster = this.state.gangster
 
-    if (gangster === null) {
-      return <p>Ładuję gangusa</p>
-    }
-
-
-    const avail= gangster.availability.join(' ')
-    // const sorter = {
-    //   "monday": 1,
-    //   "tuesday": 2,
-    //   "wednesday": 3,
-    //   "thursday": 4,
-    //   "friday": 5,
-    //   "saturday": 6,
-    //   "sunday": 7
-    // }
-    // avail.sort(function sortByDay(a, b) {
-    //   const day1 = a.day;
-    //   const day2 = b.day;
-    //   return (sorter[day1] > sorter[day2]);
-    //   });
     return (
       <div style={profilePageStyle}>
+        {
+          this.state.gangster === null
+            ? 'Ładuję gangusa'
+            : (
+              <div>
+                <div style={calendarStyle}>
+                  <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
+                </div>
 
-        <div>
-          <div style={calendarStyle}>
-            <Calendar availability={gangster.availability} gangsterId={this.state.gangster.id}/>
-          </div>
+                <div style={profileStyle}>
+                  <h1 style={headerStyle}>{gangster.first_name}</h1>
+                  <div style={starsStyle}><StarsRating rating={gangster.rating}/></div>
+                </div>
 
-          <p>{this.state.currentTime}</p>
+                <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
 
-          <div style={profileStyle}>
-            <h1 style={headerStyle}>{gangster.first_name}</h1>
-            <StarsRating rating={gangster.rating}/>
-          </div>
+                <div style={divTagStyle}>
+                  {gangster.tags.map(tag => <p key={tag} style={smallTagStyle}>{tag}</p>)}
+                </div>
 
-          <img style={imageStyle} src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
+                <h3>{gangster.gender}</h3>
 
-          <div style={divTagStyle}>
-            {gangster.tags.map(tag => <p style={smallTagStyle}>{tag}</p>)}
-          </div>
+                <h3>Email: {gangster.email}</h3>
 
-          <h3>{gangster.gender}</h3>
+                <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
 
-          <h3>Email: {gangster.email}</h3>
-
-          <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
-
-          <h3>Availability: </h3>
-          <p style={lineSeparated}>{avail}</p>
-
-
-          <h2>About me</h2>
-          <p style={lineSeparated}>{gangster.description}</p>
-
-          <h2>My experience</h2>
-          <p style={lineSeparated}>{gangster.experience}</p>
-
-          <h2>They recommend me</h2>
-          <p style={lineSeparated}>{gangster.opinions}</p>
+                <h3>Availability: </h3>
+                <p style={lineSeparated}>{gangster.availability.join(', ')}</p>
 
 
-        </div>
+                <h2>About me</h2>
+                <p style={lineSeparated}>{gangster.description}</p>
 
+                <h2>My experience</h2>
+                <p style={lineSeparated}>{gangster.experience}</p>
+
+                <h2>They recommend me</h2>
+                <p style={lineSeparated}>{gangster.opinions}</p>
+
+
+              </div>
+            )
+        }
       </div>
 
     )
