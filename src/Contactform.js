@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const emailInputStyle = {
   width: '40%',
@@ -51,6 +51,7 @@ class ContactForm extends Component {
 
  handleSubmit = event =>{
    event.preventDefault();
+   this.props.history.push('/thank-you')
  };
 
   render() {
@@ -72,7 +73,7 @@ class ContactForm extends Component {
           <br/>
           <textarea style={inputStyle} placeholder="add details about your order"/>
           <br/>
-          <Link to={'/thank-you'}><button type='submit'>Send</button></Link>
+          <button type='submit'>Send</button>
 
         </form>
       </div>
@@ -80,4 +81,4 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+export default withRouter(ContactForm);

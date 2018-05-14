@@ -29,6 +29,7 @@ class Calendar extends React.Component {
           <div>
             <h2>When do you want to get your job done?</h2>
           <DatePicker
+            dateFormat="DD/MM/YYYY"
             selected={this.state.selectedDate}
             onChange={this.handleChange}
             includeDates={this.props.availability.map(weekday => moment()
