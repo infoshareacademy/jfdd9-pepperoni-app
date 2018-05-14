@@ -76,6 +76,12 @@ const smallTagStyle = {
   justifyContent: 'center',
 };
 
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'inherit',
+  cursor: 'pointer',
+}
+
 class ProfilePage extends React.Component {
   state = {
     gangster: null,
@@ -148,7 +154,7 @@ class ProfilePage extends React.Component {
 
                 <h3>{gangster.gender}</h3>
 
-                <h3>Email: {gangster.email}</h3>
+                <h3>Email: <a style={linkStyle} href={"mailto:" + gangster.email}>{gangster.email}</a></h3>
 
                 <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
 
