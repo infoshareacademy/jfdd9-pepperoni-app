@@ -128,7 +128,7 @@ class ProfilePage extends React.Component {
       <div style={profilePageStyle}>
         {
           this.state.gangster === null
-            ? 'Ładuję gangusa'
+            ? 'Loading gangster details'
             : (
               <div>
                 <div style={calendarStyle}>
