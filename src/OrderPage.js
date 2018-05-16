@@ -1,6 +1,7 @@
 import React from 'react'
 import ContactForm from "./Contactform";
 import moment from 'moment';
+import firebase from 'firebase'
 
 const orderPageStyle = {
   width: '80%',
@@ -14,11 +15,18 @@ class OrderPage extends React.Component {
   }
 
   componentDidMount() {
-    fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-      response => response.json()
-    ).then(
-      gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
+    firebase.database().ref('/gangsters').once('value').then(
+      snapshot => this.setState({
+        gangster: Object.entries(snapshot.val() || {}).map(([id, rest]) => ({id, ...rest})).find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)
+      })
     )
+
+
+    // fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
+    //   response => response.json()
+    // ).then(
+    //   gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
+    // )
   }
 
   handleTagChange = event => {
