@@ -1,6 +1,7 @@
 import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
+import firebase from 'firebase'
 
 const gangstersForTagStyle = {
   width: '80%',
@@ -30,6 +31,7 @@ const imageStyle = {
   height: '120px',
 
 }
+
 const contenerStyle = {
   border: 'solid 1px rgba(31, 31, 31, 0.83)',
   borderRadius: '10px',
@@ -81,16 +83,19 @@ class GangstersForTag extends React.Component {
       error: null
     })
 
-    fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-      response => response.json()
-    ).then(
-      gangsters => this.setState({gangsters: gangsters, fetching: false})
+
+    firebase.database().ref('/gangsters').once('value').then(
+      snapshot => this.setState({
+        gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
+        fetching: false
+      })
     ).catch(
       error => this.setState({
         error,
         fetching: false
       })
     )
+
   }
 
   render() {
