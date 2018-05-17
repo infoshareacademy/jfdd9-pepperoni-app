@@ -10,6 +10,7 @@ import NavBar from "./NavBar";
 import GangstersForTag from "./GangstersForTag";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
+import { withUser } from './User';
 
 
 class App extends Component {
@@ -43,4 +44,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withUser(App);
