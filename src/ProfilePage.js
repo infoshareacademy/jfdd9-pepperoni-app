@@ -104,13 +104,6 @@ class ProfilePage extends React.Component {
       })
     )
 
-
-    // fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-    //   response => response.json()
-    // ).then(
-    //   gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
-    // )
-
     this.tick();
     this.interval = setInterval(this.tick, 1000);
   }
