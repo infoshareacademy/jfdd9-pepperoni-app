@@ -1,6 +1,8 @@
 import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
+import firebase from 'firebase'
+import {withGangsters} from "./contexts/Gangsters";
 
 const gangstersForTagStyle = {
   width: '80%',
@@ -30,6 +32,7 @@ const imageStyle = {
   height: '120px',
 
 }
+
 const contenerStyle = {
   border: 'solid 1px rgba(31, 31, 31, 0.83)',
   borderRadius: '10px',
@@ -69,33 +72,38 @@ const smallTagStyle = {
 
 class GangstersForTag extends React.Component {
 
-  state = {
-    gangsters: null,
-    fetching: false,
-    error: null
-  }
-
-  componentDidMount() {
-    this.setState({
-      fetching: true,
-      error: null
-    })
-
-    fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-      response => response.json()
-    ).then(
-      gangsters => this.setState({gangsters: gangsters, fetching: false})
-    ).catch(
-      error => this.setState({
-        error,
-        fetching: false
-      })
-    )
-  }
+  // state = {
+  //   gangsters: null,
+  //   fetching: false,
+  //   error: null
+  // }
+  //
+  // componentDidMount() {
+  //   this.setState({
+  //     fetching: true,
+  //     error: null
+  //   })
+  //
+  //
+  //   firebase.database().ref('/gangsters').once('value').then(
+  //     snapshot => this.setState({
+  //       gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
+  //       fetching: false
+  //     })
+  //   ).catch(
+  //     error => this.setState({
+  //       error,
+  //       fetching: false
+  //     })
+  //   )
+  //
+  // }
 
   render() {
-    const {gangsters, error, fetching} = this.state
-
+    // const {gangsters, error, fetching} = this.state
+    const error = this.props.error
+    const fetching = this.props.fetching
+    const gangsters = this.props.gangsters
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
@@ -115,7 +123,7 @@ class GangstersForTag extends React.Component {
                 <div>
                   <img style={imageStyle} src={gangster.image} alt={'face'}/>
                   <p style={listStyle}>
-                    <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
+                    <Link to={'/profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                     </Link>
                     <StarsRating rating={gangster.rating}/>
                     <br/>{gangster.hometown}
@@ -141,4 +149,4 @@ class GangstersForTag extends React.Component {
   }
 }
 
-export default GangstersForTag
+export default withGangsters(GangstersForTag)

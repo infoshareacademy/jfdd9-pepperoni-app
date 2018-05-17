@@ -2,6 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Calendar from "./Calendar";
 import StarsRating from "./StarsRating";
+import firebase from "firebase";
 
 // const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -76,6 +77,12 @@ const smallTagStyle = {
   justifyContent: 'center',
 };
 
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'inherit',
+  cursor: 'pointer',
+}
+
 class ProfilePage extends React.Component {
   state = {
     gangster: null,
@@ -91,10 +98,10 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-      response => response.json()
-    ).then(
-      gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
+    firebase.database().ref('/gangsters').once('value').then(
+      snapshot => this.setState({
+        gangster: Object.entries(snapshot.val() || {}).map(([id, rest]) => ({id, ...rest})).find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)
+      })
     )
 
     this.tick();
@@ -128,7 +135,7 @@ class ProfilePage extends React.Component {
       <div style={profilePageStyle}>
         {
           this.state.gangster === null
-            ? 'Ładuję gangusa'
+            ? 'Loading gangster details'
             : (
               <div>
                 <div style={calendarStyle}>
@@ -148,7 +155,7 @@ class ProfilePage extends React.Component {
 
                 <h3>{gangster.gender}</h3>
 
-                <h3>Email: {gangster.email}</h3>
+                <h3>Email: <a style={linkStyle} href={"mailto:" + gangster.email}>{gangster.email}</a></h3>
 
                 <h3 style={lineSeparated}>City: {gangster.hometown}</h3>
 
