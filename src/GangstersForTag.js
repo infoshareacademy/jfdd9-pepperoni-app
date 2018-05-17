@@ -101,14 +101,18 @@ class GangstersForTag extends React.Component {
 
   render() {
     // const {gangsters, error, fetching} = this.state
-    const error = this.props.error
-    const fetching = this.props.fetching
-    const gangsters = this.props.gangsters
+    const error = this.props.gangsters.error
+    const fetching = this.props.gangsters.fetching
+    const gangsters = this.props.gangsters.data
+
+
+
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
-
+debugger
     return (
+
       <div style={gangstersForTagStyle}>
         <h1>Gangsters offering {this.props.match.params.tagName}</h1>
         {error && <p>{error.message}</p>}
