@@ -105,7 +105,7 @@ class GangstersForTag extends React.Component {
     const fetching = this.props.gangsters.fetching
     const gangsters = this.props.gangsters.data
 
-  /*  if (this.props.gangsters=== null){return <p>loading</p>}*/
+
 
     function compareRatings(a,b) {
       return b.rating - a.rating
