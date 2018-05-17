@@ -8,6 +8,7 @@ import ProfilePage from "./ProfilePage";
 import ThankYouPage from "./ThankYouPage";
 import NavBar from "./NavBar";
 import GangstersForTag from "./GangstersForTag"
+import {withGangsters} from "./contexts/Gangsters";
 
 
 class App extends Component {
@@ -28,4 +29,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withGangsters(App);

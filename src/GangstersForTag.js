@@ -2,6 +2,7 @@ import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 import firebase from 'firebase'
+import {withGangsters} from "./contexts/Gangsters";
 
 const gangstersForTagStyle = {
   width: '80%',
@@ -71,36 +72,38 @@ const smallTagStyle = {
 
 class GangstersForTag extends React.Component {
 
-  state = {
-    gangsters: null,
-    fetching: false,
-    error: null
-  }
-
-  componentDidMount() {
-    this.setState({
-      fetching: true,
-      error: null
-    })
-
-
-    firebase.database().ref('/gangsters').once('value').then(
-      snapshot => this.setState({
-        gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
-        fetching: false
-      })
-    ).catch(
-      error => this.setState({
-        error,
-        fetching: false
-      })
-    )
-
-  }
+  // state = {
+  //   gangsters: null,
+  //   fetching: false,
+  //   error: null
+  // }
+  //
+  // componentDidMount() {
+  //   this.setState({
+  //     fetching: true,
+  //     error: null
+  //   })
+  //
+  //
+  //   firebase.database().ref('/gangsters').once('value').then(
+  //     snapshot => this.setState({
+  //       gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
+  //       fetching: false
+  //     })
+  //   ).catch(
+  //     error => this.setState({
+  //       error,
+  //       fetching: false
+  //     })
+  //   )
+  //
+  // }
 
   render() {
-    const {gangsters, error, fetching} = this.state
-
+    // const {gangsters, error, fetching} = this.state
+    const error = this.props.error
+    const fetching = this.props.fetching
+    const gangsters = this.props.gangsters
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
@@ -146,4 +149,4 @@ class GangstersForTag extends React.Component {
   }
 }
 
-export default GangstersForTag
+export default withGangsters(GangstersForTag)
