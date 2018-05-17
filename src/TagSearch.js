@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from "firebase";
 
 const tagStyle = {
   width: '150px',
@@ -29,11 +30,9 @@ class TagSearch extends React.Component {
   }
 
   componentDidMount() {
-    fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-      response => response.json()
-    ).then(
-      gangsters => this.setState({
-        tags: Array.from(new Set(gangsters.map(gangster => gangster.tags).reduce((prev, next) => prev.concat(next))))
+    firebase.database().ref('/gangsters').once('value').then(
+      gangsters =>  this.setState({
+        tags: Array.from(new Set(Object.entries(gangsters.val() || {}).map(([, {tags} ]) => tags).reduce((prev, next) => prev.concat(next))))
       })
     )
   }
