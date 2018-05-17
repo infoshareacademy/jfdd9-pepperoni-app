@@ -8,7 +8,7 @@ const GangstersConsumer = GangstersContext.Consumer
 
 export class GangstersProvider extends Component {
   state = {
-    gangsters: null,
+    data: null,
     fetching: false,
     error: null
   }
@@ -22,7 +22,7 @@ export class GangstersProvider extends Component {
 
     firebase.database().ref('/gangsters').once('value').then(
       snapshot => this.setState({
-        gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
+        data: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
         fetching: false
       })
     ).catch(
