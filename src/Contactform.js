@@ -68,7 +68,7 @@ class ContactForm extends Component {
         </div>
         <form id="orderForm" onSubmit={this.handleSubmit}>
           <br/>
-          <input style={emailInputStyle} name="email" placeholder="type in your email" required/>
+          <input type="email" style={emailInputStyle} name="email" placeholder="type in your email" required/>
           <br/>
           <br/>
           <textarea style={inputStyle} placeholder="add details about your order"/>
