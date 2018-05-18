@@ -1,7 +1,7 @@
 import React from 'react'
 import ContactForm from "./Contactform";
 import moment from 'moment';
-import firebase from 'firebase'
+import {withGangsters} from "./contexts/Gangsters";
 
 const orderPageStyle = {
   width: '80%',
@@ -14,19 +14,11 @@ class OrderPage extends React.Component {
     selectedTag: ''
   }
 
-  componentDidMount() {
-    firebase.database().ref('/gangsters').once('value').then(
-      snapshot => this.setState({
-        gangster: Object.entries(snapshot.val() || {}).map(([id, rest]) => ({id, ...rest})).find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)
-      })
-    )
-
-
-    // fetch(process.env.PUBLIC_URL + '/gangsterDatabase.json').then(
-    //   response => response.json()
-    // ).then(
-    //   gangsters => this.setState({gangster: gangsters.find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)})
-    // )
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const gangsters = nextProps.gangsters.data
+    return {
+      gangster: gangsters.find(gangster => gangster.id.toString() === nextProps.match.params.gangsterId)
+    }
   }
 
   handleTagChange = event => {
@@ -41,7 +33,7 @@ class OrderPage extends React.Component {
     return (
       <div style={orderPageStyle}>
         {
-          this.state.gangster === null
+          this.state.gangster === null || this.state.gangster === undefined
           ? 'Loading order'
           : (
             <div>
@@ -58,4 +50,4 @@ class OrderPage extends React.Component {
   }
 }
 
-export default OrderPage
+export default withGangsters(OrderPage)

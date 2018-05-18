@@ -1,5 +1,5 @@
 import React from 'react'
-import firebase from "firebase";
+import {withGangsters} from "./contexts/Gangsters";
 
 const tagStyle = {
   width: '150px',
@@ -25,22 +25,12 @@ const divTagStyle = {
 }
 
 class TagSearch extends React.Component {
-  state = {
-    tags: [],
-  }
-
-  componentDidMount() {
-    firebase.database().ref('/gangsters').once('value').then(
-      gangsters =>  this.setState({
-        tags: Array.from(new Set(Object.entries(gangsters.val() || {}).map(([, {tags} ]) => tags).reduce((prev, next) => prev.concat(next))))
-      })
-    )
-  }
-
   render() {
+    const tags = this.props.gangsters.uniqueTags
+
     return (
       <div style={divTagStyle}>
-        {this.state.tags.map(tag =>
+        {tags.map(tag =>
           <button
             name={tag}
             style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#E2083C' : tagStyle.backgroundColor }}
@@ -54,4 +44,4 @@ class TagSearch extends React.Component {
   }
 }
 
-export default TagSearch
+export default withGangsters(TagSearch)

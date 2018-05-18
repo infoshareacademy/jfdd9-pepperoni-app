@@ -7,10 +7,8 @@ import OrderPage from "./OrderPage";
 import ProfilePage from "./ProfilePage";
 import ThankYouPage from "./ThankYouPage";
 import NavBar from "./NavBar";
-import GangstersForTag from "./GangstersForTag";
-import SignInForm from "./SignInForm";
-import SignUpForm from "./SignUpForm";
-import { withUser } from './User';
+import GangstersForTag from "./GangstersForTag"
+import {withGangsters} from "./contexts/Gangsters";
 
 
 class App extends Component {
@@ -44,4 +42,5 @@ class App extends Component {
   }
 }
 
+export default withGangsters(App);
 export default withUser(App);

@@ -5,13 +5,20 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import setupFirebase from './setupFirebase';
 import { UserProvider } from './User';
+import setupFirebase from './setupFirebase'
+import {GangstersProvider} from "./contexts/Gangsters";
 
 setupFirebase()
 
+const composeProviders = (children, ...providers) => providers.reduce(
+  (result, Next) => <Next>{result}</Next>,
+  children
+)
+
 ReactDOM.render(
-  <UserProvider>
-  <App />
-  </UserProvider>,
-  document.getElementById('root')
-);
+  composeProviders(
+    <App />,
+    GangstersProvider
+  ),
+  document.getElementById('root'));
 registerServiceWorker();

@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Calendar from "./Calendar";
 import StarsRating from "./StarsRating";
-import firebase from "firebase";
+import {withGangsters} from "./contexts/Gangsters";
 
 // const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -88,24 +88,22 @@ class ProfilePage extends React.Component {
     gangster: null,
   }
 
-  static defaultProps = {
-    hometown: 'Gdańsk'
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const gangsters = nextProps.gangsters.data
+    return {
+      gangster: gangsters.find(gangster => gangster.id.toString() === nextProps.match.params.gangsterId)
+    }
   }
 
-  tick = () => {
-    const dt = moment();
-    this.setState({currentTime: dt.format('MMMM Do YYYY')});
-  }
+  // tick = () => {
+  //   const dt = moment();
+  //   this.setState({currentTime: dt.format('MMMM Do YYYY')});
+  // }
 
   componentDidMount() {
-    firebase.database().ref('/gangsters').once('value').then(
-      snapshot => this.setState({
-        gangster: Object.entries(snapshot.val() || {}).map(([id, rest]) => ({id, ...rest})).find(gangster => gangster.id.toString() === this.props.match.params.gangsterId)
-      })
-    )
-
-    this.tick();
-    this.interval = setInterval(this.tick, 1000);
+    window.scrollTo(0, 0)
+    // this.tick();
+    // this.interval = setInterval(this.tick, 1000);
   }
 
   /* state = {
@@ -127,14 +125,13 @@ class ProfilePage extends React.Component {
     clearInterval(this.interval);
   }
 
-
   render() {
     const gangster = this.state.gangster
 
     return (
       <div style={profilePageStyle}>
         {
-          this.state.gangster === null
+          this.state.gangster === null || this.state.gangster === undefined
             ? 'Loading gangster details'
             : (
               <div>
@@ -182,5 +179,5 @@ class ProfilePage extends React.Component {
   }
 }
 
-export default ProfilePage
+export default withGangsters(ProfilePage)
 
