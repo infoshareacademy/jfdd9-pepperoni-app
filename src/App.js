@@ -9,6 +9,9 @@ import ThankYouPage from "./ThankYouPage";
 import NavBar from "./NavBar";
 import GangstersForTag from "./GangstersForTag"
 import {withGangsters} from "./contexts/Gangsters";
+import SignInForm from './SignInForm';
+import SignUpForm from './SignUpForm';
+import { withUser } from './User';
 
 
 class App extends Component {
@@ -42,5 +45,5 @@ class App extends Component {
   }
 }
 
-export default withGangsters(App);
-export default withUser(App);
+export default withUser(withGangsters(App));
+
