@@ -66,7 +66,6 @@ const smallTagStyle = {
 };
 
 class SearchResults extends React.Component {
-
   render() {
 
     const error = this.props.gangsters.error
@@ -76,19 +75,22 @@ class SearchResults extends React.Component {
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
-
+const gangstersAfterFiltering = gangsters !== null && gangsters.filter(
+  gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
+).sort(compareRatings).filter(
+  gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
+)
     return (
+
       <div>
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading gangsters...</p>}
-        {
-          gangsters !== null && gangsters.filter(
-            gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
-          ).sort(compareRatings).filter(
-            gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
-          ).map(
-            gangster =>
 
+        { !fetching && gangstersAfterFiltering.length === 0 && <h2>We're sorry, there are no gangsters that meet your search criteria</h2>}
+
+        {
+          gangstersAfterFiltering.map(
+            gangster =>
               <div style={contenerStyle} key={gangster.id}>
                   <div>
                     <Link to={'profile/' + gangster.id}><img style={imageStyle} src={gangster.image} alt={'face'}/></Link>
