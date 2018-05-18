@@ -91,7 +91,7 @@ class SearchResults extends React.Component {
 
               <div style={contenerStyle} key={gangster.id}>
                   <div>
-                    <img style={imageStyle} src={gangster.image} alt={'face'}/>
+                    <Link to={'profile/' + gangster.id}><img style={imageStyle} src={gangster.image} alt={'face'}/></Link>
                     <p style={listStyle}>
                       <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                       </Link>
