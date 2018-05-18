@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import setupFirebase from './setupFirebase'
+import setupFirebase from './setupFirebase';
+import { UserProvider } from './User';
 import {GangstersProvider} from "./contexts/Gangsters";
 
 setupFirebase()
@@ -16,7 +17,8 @@ const composeProviders = (children, ...providers) => providers.reduce(
 ReactDOM.render(
   composeProviders(
     <App />,
-    GangstersProvider
+    GangstersProvider,
+    UserProvider
   ),
   document.getElementById('root'));
 registerServiceWorker();
