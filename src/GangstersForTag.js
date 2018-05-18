@@ -1,7 +1,6 @@
 import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
-import firebase from 'firebase'
 import {withGangsters} from "./contexts/Gangsters";
 
 const gangstersForTagStyle = {
@@ -72,45 +71,21 @@ const smallTagStyle = {
 
 class GangstersForTag extends React.Component {
 
-  // state = {
-  //   gangsters: null,
-  //   fetching: false,
-  //   error: null
-  // }
-  //
-  // componentDidMount() {
-  //   this.setState({
-  //     fetching: true,
-  //     error: null
-  //   })
-  //
-  //
-  //   firebase.database().ref('/gangsters').once('value').then(
-  //     snapshot => this.setState({
-  //       gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
-  //       fetching: false
-  //     })
-  //   ).catch(
-  //     error => this.setState({
-  //       error,
-  //       fetching: false
-  //     })
-  //   )
-  //
-  // }
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
 
   render() {
-    // const {gangsters, error, fetching} = this.state
     const error = this.props.gangsters.error
     const fetching = this.props.gangsters.fetching
     const gangsters = this.props.gangsters.data
 
 
-
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
-debugger
+
+
     return (
 
       <div style={gangstersForTagStyle}>
