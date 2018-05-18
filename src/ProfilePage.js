@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import Calendar from "./Calendar";
 import StarsRating from "./StarsRating";
 import {withGangsters} from "./contexts/Gangsters";
