@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+import moment from "moment/moment";
 
 const emailInputStyle = {
   width: '40%',
@@ -48,27 +49,39 @@ const selectStyle = {
 }
 
 class ContactForm extends Component {
+  state = {
+    selectedTag: ''
+  }
 
  handleSubmit = event =>{
    event.preventDefault();
    this.props.history.push('/thank-you')
  };
+  handleTagChange = event => {
+    this.setState({
+      selectedTag: event.target.value
+    })
+  }
 
   render() {
+    var date = moment.unix((this.props.match.params.selectedDate/1000)).format("DD/MM/YYYY");
+
     return (
       <div>
+        <h1>Your order</h1>
+        <h2>Gangster: {this.props.gangster.first_name}</h2>
+        <h2>Date: {date}</h2>
+        <h2>Job: {this.props.selectedTag}</h2>
         <br/>
         <div style={divSelectStyle}>
           <label htmlFor="tagSelect">Select the job you need to get done:</label>
           <br/>
           <br/>
-          <select id="tagSelect" style={selectStyle} onChange={this.props.handleTagChange} name="job" form="orderForm">
-            {this.props.tags.map(tag => <option value={tag} key={tag}>{tag}</option>)}
+          <select id="tagSelect" style={selectStyle} onChange={this.handleTagChange} name="job" form="orderForm">
+            {this.props.gangster.tags.map(tag => <option value={tag} key={tag}>{tag}</option>)}
           </select>
         </div>
         <form id="orderForm" onSubmit={this.handleSubmit}>
-          <br/>
-          <input type="email" style={emailInputStyle} name="email" placeholder="type in your email" required/>
           <br/>
           <br/>
           <textarea style={inputStyle} placeholder="add details about your order"/>
