@@ -1,7 +1,7 @@
 import React from 'react'
 import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
-import firebase from "firebase";
+import {withGangsters} from "./contexts/Gangsters";
 
 const listStyle = {
   fontSize: '25px',
@@ -66,55 +66,34 @@ const smallTagStyle = {
 };
 
 class SearchResults extends React.Component {
-
-  state = {
-    gangsters: null,
-    fetching: false,
-    error: null
-  }
-
-  componentDidMount() {
-    this.setState({
-      fetching: true,
-      error: null
-    })
-
-
-    firebase.database().ref('/gangsters').once('value').then(
-      snapshot => this.setState({
-        gangsters: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
-        fetching: false
-      })
-    ).catch(
-      error => this.setState({
-        error,
-        fetching: false
-      })
-    )
-  }
-
   render() {
-    const {gangsters, error, fetching} = this.state
+
+    const error = this.props.gangsters.error
+    const fetching = this.props.gangsters.fetching
+    const gangsters = this.props.gangsters.data
 
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
-
+const gangstersAfterFiltering = gangsters !== null && gangsters.filter(
+  gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
+).sort(compareRatings).filter(
+  gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
+)
     return (
+
       <div>
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading gangsters...</p>}
-        {
-          gangsters !== null && gangsters.filter(
-            gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
-          ).sort(compareRatings).filter(
-            gangster => this.props.selectedTags.every(tag => gangster.tags.includes(tag))
-          ).map(
-            gangster =>
 
+        { !fetching && gangstersAfterFiltering.length === 0 && <h2>We're sorry, there are no gangsters that meet your search criteria</h2>}
+
+        {
+          gangstersAfterFiltering.map(
+            gangster =>
               <div style={contenerStyle} key={gangster.id}>
                   <div>
-                    <img style={imageStyle} src={gangster.image} alt={'face'}/>
+                    <Link to={'profile/' + gangster.id}><img style={imageStyle} src={gangster.image} alt={'face'}/></Link>
                     <p style={listStyle}>
                       <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                       </Link>
@@ -141,5 +120,5 @@ class SearchResults extends React.Component {
   }
 }
 
-export default SearchResults
+export default withGangsters(SearchResults)
 
