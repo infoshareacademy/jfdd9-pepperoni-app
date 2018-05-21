@@ -9,8 +9,11 @@ export class UserProvider extends Component {
   state = {
     signInError: null,
     user: null,
+    userData: null,
     signIn: (username, password) => {
-      firebase.auth().signInWithEmailAndPassword(username, password).catch(
+      firebase.auth().signInWithEmailAndPassword(username, password).then(user => {
+        //firebase.database().ref('/gangsters/' + user.uid).once()
+      } ).catch(
         error => this.setState({
           signInError: error
         })
@@ -18,7 +21,16 @@ export class UserProvider extends Component {
     },
     signOut: () => firebase.auth().signOut(),
     signUp: (username, password) => {
-      return firebase.auth().createUserWithEmailAndPassword(username, password)
+      return firebase.auth().createUserWithEmailAndPassword(username, password).then(
+        (data) => {
+          console.log(data.user.uid, data.user.email);
+          firebase.database().ref('/gangsters/' + data.user.uid).set({
+            email: data.user.email,
+            tags: ['newbe']
+          })
+          return data
+        }
+      )
     }
   }
 
