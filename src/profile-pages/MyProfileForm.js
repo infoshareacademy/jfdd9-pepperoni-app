@@ -1,6 +1,6 @@
 import React from 'react'
-import {withUser} from "./User";
-import {withGangsters} from "./contexts/Gangsters";
+import {withUser} from "../contexts/User";
+import {withGangsters} from "../contexts/Gangsters";
 import './profile.css'
 
 const divSelectStyle = {

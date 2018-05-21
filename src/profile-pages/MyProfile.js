@@ -1,7 +1,7 @@
 import React from 'react'
-import StarsRating from "./StarsRating";
-import { withGangsters } from "./contexts/Gangsters";
-import { withUser} from "./User";
+import StarsRating from "../StarsRating";
+import { withGangsters } from "../contexts/Gangsters";
+import { withUser} from "../contexts/User";
 import './profile.css'
 import firebase from 'firebase'
 import MyProfileForm from "./MyProfileForm";

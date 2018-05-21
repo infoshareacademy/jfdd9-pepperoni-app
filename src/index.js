@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import setupFirebase from './setupFirebase';
-import { UserProvider } from './User';
+import { UserProvider } from './contexts/User';
 import {GangstersProvider} from "./contexts/Gangsters";
 
 setupFirebase()
