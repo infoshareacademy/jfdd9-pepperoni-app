@@ -25,7 +25,38 @@ const formSectionLayer = {
   border: 'solid 1px rgba(31, 31, 31, 0.83)',
   borderRadius: '10px',
   backgroundColor: 'rgba(15, 15, 15, 0.83)',
+  marginTop: '2rem',
 }
+const header = {
+  color: '#ececec',
+fontFamily: 'Quattrocento, serif',
+  fontSize: '1,5em',
+  fontWeight: 'bold',
+}
+  const formEmail = {
+  padding: '1rem',
+    boxSizing: 'border-box',
+  width: '70%',
+  border: 'solid 2px black',
+    borderRadius: '10px',
+}
+
+  const formButton = {
+  height: '3rem',
+  width: '70%',
+  backgroundColor: '#E2083C',
+  border: 'none',
+  color: '#fff',
+  fontWeight: 'bolder',
+  fontSize: '1.2rem',
+  marginTop: '0.5rem',
+  cursor: 'pointer',
+  boxSizing: 'border-box',
+    borderRadius: '10px',
+    marginBottom: '1rem',
+}
+
+
 
 class SignInForm extends Component {
 
@@ -48,24 +79,28 @@ class SignInForm extends Component {
   render() {
     return (
       <div style={formSectionLayer}>
-        <h2>Welcome text</h2>
+        <h2 style={header}>WELCOME GUYS</h2>
         {this.props.signInError && <p>{this.props.signInError.message}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
+            style={formEmail}
             value={this.state.username}
             name="username"
             type="text"
-            placeholder="Username"
+            placeholder="Your email"
             onChange={this.handleChange}
           /><br/>
           <input
+            style={formEmail}
             value={this.state.password}
             name="password"
             type="password"
-            placeholder="Your Email"
+            placeholder="Password"
             onChange={this.handleChange}
           /><br/>
-          <button>sign in</button>
+          <button
+            style={formButton}
+          >Sign in</button>
         </form>
       </div>
     )
