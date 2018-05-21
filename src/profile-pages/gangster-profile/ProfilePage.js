@@ -1,8 +1,8 @@
 import React from 'react'
-import Calendar from "./Calendar";
-import StarsRating from "../StarsRating";
-import {withGangsters} from "../contexts/Gangsters";
-import './profile.css'
+import Calendar from "../Calendar";
+import StarsRating from "../../StarsRating";
+import {withGangsters} from "../../contexts/Gangsters";
+import '../profile.css'
 
 // const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
