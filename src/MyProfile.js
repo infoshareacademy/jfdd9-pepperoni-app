@@ -14,15 +14,15 @@ class MyProfile extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const gangsters = nextProps.gangsters.data
     return {
-      gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.user.uid)
+      gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid)
     }
   }
 
 render() {
+    return (
 
-  <MyProfileForm/>
-
-    return
+      <MyProfileForm/>
+    )
 }
 
 
