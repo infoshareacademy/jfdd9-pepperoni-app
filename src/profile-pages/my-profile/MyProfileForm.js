@@ -4,6 +4,7 @@ import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
 import MyProfileStepTags from './MyProfileStepTags'
 import MyProfileStepPersonalDetails from './MyProfileStepPersonalDetails'
+import MyProfileStepAvailability from './MyProfileStepAvailability'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -18,7 +19,6 @@ class MyProfileForm extends React.Component {
     availability: [],
     description: '',
     experience: '',
-    formError: '',
     addedTag: ''
   }
 
@@ -42,6 +42,14 @@ class MyProfileForm extends React.Component {
   handleNewTagSubmit = (tagName) => {
     this.setState({
       selectedTags: this.state.selectedTags.concat(tagName),
+    })
+  }
+
+  addPersonalDetails = (firstName, hometown, gender) => {
+    this.setState({
+      firstName: firstName,
+      gender: gender,
+      hometown: hometown,
     })
   }
 
@@ -86,7 +94,20 @@ class MyProfileForm extends React.Component {
           }/>
 
 
-          <Route path={'/myprofile/personal-details'} component={MyProfileStepPersonalDetails}/>
+          <Route path={'/myprofile/personal-details'} render={() => {
+            return (
+              <MyProfileStepPersonalDetails
+                firstName={this.state.firstName}
+                hometown={this.state.hometown}
+                gender={this.state.gender}
+                addPersonalDetails={this.addPersonalDetails}
+            />)}
+          }/>
+
+          <Route path={'/myprofile/availability'} render={() => {
+            return (<MyProfileStepAvailability
+            />)}
+          }/>
 
 
       </div>
