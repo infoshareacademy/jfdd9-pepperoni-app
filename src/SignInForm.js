@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withUser } from './User';
+import { withUser } from './contexts/User';
 
 // const listStyle = {
 //   fontSize: '25px',

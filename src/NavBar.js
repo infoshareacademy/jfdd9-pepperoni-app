@@ -3,7 +3,7 @@ import logo from "./logo.png"
 import './App.css'
 import { Link } from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
-import { withUser } from './User'
+import { withUser } from './contexts/User'
 
 
 

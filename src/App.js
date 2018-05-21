@@ -4,15 +4,15 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import MainSearchEngine from "./MainSearchEngine";
 import SearchResults from "./SearchResults";
 import OrderPage from "./OrderPage";
-import ProfilePage from "./ProfilePage";
+import ProfilePage from "./profile-pages/gangster-profile/ProfilePage";
 import ThankYouPage from "./ThankYouPage";
 import NavBar from "./NavBar";
 import GangstersForTag from "./GangstersForTag"
 import {withGangsters} from "./contexts/Gangsters";
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import { withUser } from './User';
-import MyProfile from "./MyProfile";
+import { withUser } from './contexts/User';
+import MyProfile from "./profile-pages/my-profile/MyProfile";
 
 
 class App extends Component {
@@ -38,7 +38,8 @@ class App extends Component {
                 <Route path="/order/:gangsterId/:selectedDate" component={OrderPage}/>
                 <Route path="/thank-you" component={ThankYouPage}/>
                 <Route path="/gangsters-for-tag/:tagName" component={GangstersForTag}/>
-                <Route path="/myprofile" component={MyProfile}/>
+                <Route exact path="/myprofile" component={MyProfile}/>
+                {/*<Route path="/myprofile/name" component={}*/}
               </div>
             </Router>)
         }
