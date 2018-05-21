@@ -61,8 +61,7 @@ class MyProfileForm extends React.Component {
     })
   }
 
-  handleTagChange = event => {
-
+  handleAvailableTagSelect = event => {
     if (this.state.selectedTags.includes(event.target.name)) {
       const newSelectedTags = this.state.selectedTags;
       const tagIndex = newSelectedTags.indexOf(event.target.name);
@@ -80,9 +79,23 @@ class MyProfileForm extends React.Component {
   }
 
 
+  handleTagChange = event => {
+    this.setState({
+      addedTag: event.target.value
+    })
+  }
+
+  handleTagSubmit = event => {
+    event.preventDefault()
+
+    this.setState({
+      selectedTags: this.state.selectedTags.concat(this.state.addedTag),
+      addedTag: ''
+    })
+  }
+
   render() {
     const tags = this.props.gangsters.uniqueTags
-
 
     return (
       <React.Fragment>
@@ -95,9 +108,19 @@ class MyProfileForm extends React.Component {
             className="smallTag"
             style={{backgroundColor: this.state.selectedTags.includes(tag) ? '#E2083C' : '#4b5062'}}
             key={tag}
-            onClick={this.handleTagChange}>
+            onClick={this.handleAvailableTagSelect}>
             {tag}
           </button>)}
+
+        <form onSubmit={this.handleTagSubmit}>
+          <h2>New tag</h2>
+          <input
+            type="text"
+            name="firstName"
+            value={this.state.addedTag}
+            onChange={this.handleTagChange}
+          />
+        </form>
 
 
         <form onSubmit={this.handleSubmit}>
