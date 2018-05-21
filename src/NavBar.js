@@ -3,6 +3,8 @@ import logo from "./logo.png"
 import './App.css'
 import { Link } from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
+import { withUser } from './User'
+
 
 
 const menuStyle = {
@@ -19,7 +21,20 @@ const menuElementStyle = {
   fontFamily: 'Quattrocento, serif',
   cursor: 'pointer',
 }
-
+const formButton = {
+  height: '0.5rem',
+  width: '50%',
+  backgroundColor: 'rgb(75, 80, 98)',
+  border: 'none',
+  color: '#fff',
+  fontWeight: 'bolder',
+  fontSize: '0.9rem',
+  marginTop: '0.5rem',
+  cursor: 'pointer',
+  boxSizing: 'border-box',
+  borderRadius: '5px',
+  marginBottom: '1rem',
+}
 
 class NavBar extends React.Component {
   render() {
@@ -30,9 +45,12 @@ class NavBar extends React.Component {
           {(this.props.location.pathname.includes('profile') || this.props.location.pathname.includes('order') || this.props.location.pathname.includes('gangsters-for-tag')) && <p style={menuElementStyle} onClick={() => this.props.history.goBack()}>
             Go back
           </p>}
+          <p>
+            logged in as: {this.props.user.email} <button style={formButton} onClick={this.props.signOut}>Sign out</button>
+          </p>
         </div>
     )
   }
 }
 
-export default withRouter(NavBar)
+export default withUser(withRouter(NavBar))
