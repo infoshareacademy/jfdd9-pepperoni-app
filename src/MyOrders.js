@@ -19,7 +19,13 @@ class MyOrders extends React.Component {
 
 
     return (
-      <div></div>
+      <div>
+        {error && <p>{error.message}</p>}
+        {fetching && <p>Loading jobs...</p>}
+
+        {!fetching && jobsAfterFiltering.length === 0 &&
+        <h2>We're sorry, there are no job at the moment for you</h2>}
+      </div>
     )
   }
 }
