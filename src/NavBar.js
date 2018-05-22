@@ -43,6 +43,7 @@ class NavBar extends React.Component {
           <Link to="/"><img className="logo" src={logo} alt="GangBook logo"/></Link>
           <Link to="/" style={menuElementStyle}>Home</Link>
           <Link to="/myprofile" style={menuElementStyle}>My Profile</Link>
+          <Link to="/myorder" style={menuElementStyle}>My Order</Link>
           {(this.props.location.pathname.includes('profile') || this.props.location.pathname.includes('order') || this.props.location.pathname.includes('gangsters-for-tag')) && <p style={menuElementStyle} onClick={() => this.props.history.goBack()}>
             Go back
           </p>}
