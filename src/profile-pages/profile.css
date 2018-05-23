@@ -122,6 +122,24 @@
     border: none;
 }
 
+.textareaStyle {
+    box-shadow: none;
+    overflow: auto;
+    height: 30%;
+    width: 40%;
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px rgba(31, 31, 31, 0.83);
+    outline: none;
+    color: white;
+    font-family: inherit;
+    font-size: 1.1rem;
+}
+
+
+
+
 /* STYLES FOR CHECKBOXES */
 
 .container {
