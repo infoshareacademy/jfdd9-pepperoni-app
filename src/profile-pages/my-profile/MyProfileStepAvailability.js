@@ -1,7 +1,8 @@
 import React from 'react'
 import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 
 class MyProfileStepAvailability extends React.Component {
   state = {
@@ -49,19 +50,27 @@ class MyProfileStepAvailability extends React.Component {
         <h2>3. When are you available?</h2>
         <form onSubmit={this.handleSubmit}>
           {weekdays.map(day =>
-            <label key={day}>
+            <label key={day} className="container">
               {day}
               <input
                 name={day}
                 type="checkbox"
                 checked={this.state.availability.includes(day)}
                 onChange={this.handleCheckboxChange} />
+              <span className="checkmark"></span>
               <br/>
             </label>
           )}
           <button style={{width: '150px'}}>Add</button>
         </form>
         <h3>Your working days: {this.props.availability.join(", ")}</h3>
+<br/>
+        <button onClick={() => this.props.history.goBack()}
+          className="myProfileBackButton"
+          style={{backgroundColor: '#4b5062'}}>
+          Go back
+        </button>
+        {console.log(this.props.history)}
         {
           (this.props.availability.length === 0)
             ? (<button
@@ -81,4 +90,4 @@ class MyProfileStepAvailability extends React.Component {
 }
 
 
-export default withGangsters(MyProfileStepAvailability)
+export default withRouter(withGangsters(MyProfileStepAvailability))

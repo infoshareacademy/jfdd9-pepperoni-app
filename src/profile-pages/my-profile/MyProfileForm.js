@@ -5,6 +5,7 @@ import '../profile.css'
 import MyProfileStepTags from './MyProfileStepTags'
 import MyProfileStepPersonalDetails from './MyProfileStepPersonalDetails'
 import MyProfileStepAvailability from './MyProfileStepAvailability'
+import MyProfileStepAdditionalInformation from './MyProfileStepAdditionalInformation'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -59,6 +60,13 @@ class MyProfileForm extends React.Component {
     })
   }
 
+  addAdditionalInformation = (experience, description) => {
+    this.setState({
+      experience: experience,
+      description: description,
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -92,6 +100,15 @@ class MyProfileForm extends React.Component {
               availability={this.state.availability}
             />)}
           }/>
+
+        <Route path={'/myprofile/additional-information'} render={() => {
+          return (
+            <MyProfileStepAdditionalInformation
+              addAdditionalInformation={this.addAdditionalInformation}
+              experience={this.state.experience}
+              description={this.state.description}
+            />)}
+        }/>
 
 
       </div>
