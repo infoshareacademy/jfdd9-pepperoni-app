@@ -7,7 +7,7 @@ class MyProfileStepPersonalDetails extends React.Component {
   state = {
     firstName: '',
     hometown: '',
-    gender: '',
+    gender: 'male',
     firstNameFormError: null,
     genderFormError: null,
     hometownFormError: null,
@@ -40,17 +40,6 @@ class MyProfileStepPersonalDetails extends React.Component {
     }
   }
 
-  validateInput = (inputName) => {
-    const errorFieldName = inputName + 'FormError';
-    if (this.state.inputName.trim() === '' && !this.props.inputName) {
-      this.setState({
-        [errorFieldName]: new Error('Please fill in first name')
-      })
-      isError = true;
-    }
-    const firstName = this.state.firstName !== '' ? this.state.firstName : this.props.firstName;
-  }
-
   handleSubmit = event => {
     event.preventDefault()
 
@@ -58,39 +47,32 @@ class MyProfileStepPersonalDetails extends React.Component {
 
     if (this.state.firstName.trim() === '' && !this.props.firstName) {
       this.setState({
-        firstNameFormError: new Error('Please fill in first name')
+        firstNameFormError: new Error('Please specify your first name')
       })
       isError = true;
     }
-    const firstName = this.state.firstName !== '' ? this.state.firstName : this.props.firstName;
 
     if (this.state.gender === '') {
-      console.log("gender error")
       this.setState({
-        genderFormError: new Error('Please fill in gender')
+        genderFormError: new Error('Please specify your gender')
       })
       isError = true;
     }
 
     if (this.state.hometown.trim() === '' && !this.props.hometown) {
       this.setState({
-        hometownFormError: new Error('Please fill in hometown')
+        hometownFormError: new Error('Please specify where you are based')
       })
       isError = true;
     }
-    const homeTown = this.state.hometown !== '' ? this.state.hometown : this.props.hometown;
 
     if (isError) {
-      console.log(" jest jakis error")
       return
     }
 
-    this.props.addPersonalDetails(firstName, homeTown, this.state.gender)
+    this.props.addPersonalDetails(this.state.firstName, this.state.hometown, this.state.gender)
 
     this.setState({
-      firstName: '',
-      hometown: '',
-      gender: '',
       firstNameFormError: null,
       genderFormError: null,
       hometownFormError: null,
@@ -105,18 +87,19 @@ class MyProfileStepPersonalDetails extends React.Component {
         <br/>
 
         <div className="divWithSelect">
-          <label htmlFor="genderSelect">Gender: {this.props.gender}</label>
+          <strong><label htmlFor="genderSelect">Gender: {this.props.gender}</label></strong>
           <br/>
           <br/>
-          <select id="genderSelect" className="select" onChange={this.handleGenderChange} name="gender" form="personal-details-form">
+          <select value={this.state.gender} id="genderSelect" className="select" onChange={this.handleGenderChange} name="gender" form="personal-details-form">
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
         </div>
+        { this.state.genderFormError && <p>{this.state.genderFormError.message}</p>}
         <br/>
 
         <form id="personal-details-form" onSubmit={this.handleSubmit}>
-          Name: {this.props.firstName}
+          <strong>Name: {this.props.firstName}</strong>
           <br/>
           <input
           className="myProfileInput"
@@ -125,10 +108,10 @@ class MyProfileStepPersonalDetails extends React.Component {
           value={this.state.firstName}
           onChange={this.handleChange}
           />
-          { this.state.firstNameFormError && <h3>{this.state.firstNameFormError.message}</h3>}
+          { this.state.firstNameFormError && <p>{this.state.firstNameFormError.message}</p>}
           <br/>
           <br/>
-          Hometown: {this.props.hometown}
+          <strong>Hometown: {this.props.hometown}</strong>
           <br/>
           <input
             className="myProfileInput"
@@ -137,13 +120,13 @@ class MyProfileStepPersonalDetails extends React.Component {
             value={this.state.hometown}
             onChange={this.handleChange}
           />
-          { this.state.hometownFormError && <h3>{this.state.hometownFormError.message}</h3>}
+          { this.state.hometownFormError && <p>{this.state.hometownFormError.message}</p>}
           <br/>
           <button style={{width: '150px'}}>Add</button>
 
         </form>
         <br/>
-        { this.state.genderFormError && <h3>{this.state.genderFormError.message}</h3>}
+
         <br/>
         {
           (this.props.hometown === '')
