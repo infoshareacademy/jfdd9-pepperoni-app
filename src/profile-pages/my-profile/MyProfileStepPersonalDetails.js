@@ -1,7 +1,7 @@
 import React from 'react'
 import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class MyProfileStepPersonalDetails extends React.Component {
   state = {
@@ -126,6 +126,11 @@ class MyProfileStepPersonalDetails extends React.Component {
 
         </form>
         <br/>
+        <button onClick={() => this.props.history.goBack()}
+                className="myProfileBackButton"
+                style={{backgroundColor: '#4b5062'}}>
+          Go back
+        </button>
 
         <br/>
         {
@@ -147,4 +152,4 @@ class MyProfileStepPersonalDetails extends React.Component {
 
 }
 
-export default withGangsters(MyProfileStepPersonalDetails)
+export default withRouter(withGangsters(MyProfileStepPersonalDetails))
