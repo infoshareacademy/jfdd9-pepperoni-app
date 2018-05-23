@@ -53,30 +53,11 @@ class MyProfileForm extends React.Component {
     })
   }
 
-  // handleSubmit = event => {
-  //   event.preventDefault()
-  //
-  //   if (this.state.taskName.trim() === '') {
-  //     this.setState({
-  //       formError: new Error('Task name cannot be empty')
-  //     })
-  //     return
-  //   }
-  //
-  //   this.setState({
-  //     taskName: '',
-  //     taskDescription: ''
-  //   })
-  // }
-  //
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value,
-  //     formError: null
-  //   })
-  // }
-
-
+  addAvailability = (availability) => {
+    this.setState({
+      availability: availability
+    })
+  }
 
   render() {
     return (
@@ -105,7 +86,10 @@ class MyProfileForm extends React.Component {
           }/>
 
           <Route path={'/myprofile/availability'} render={() => {
-            return (<MyProfileStepAvailability
+            return (
+              <MyProfileStepAvailability
+              addAvailability={this.addAvailability}
+              availability={this.state.availability}
             />)}
           }/>
 

@@ -33,6 +33,12 @@ class MyProfileStepAvailability extends React.Component {
     }
   }
 
+  handleSubmit = event => {
+    event.preventDefault()
+
+    this.props.addAvailability(this.state.availability)
+  }
+
 
   render() {
 
@@ -41,7 +47,7 @@ class MyProfileStepAvailability extends React.Component {
     return (
       <div>
         <h2>3. When are you available?</h2>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           {weekdays.map(day =>
             <label key={day}>
               {day}
@@ -53,8 +59,9 @@ class MyProfileStepAvailability extends React.Component {
               <br/>
             </label>
           )}
+          <button>Add</button>
         </form>
-
+        <h3>Your working days: {this.props.availability.join(", ")}</h3>
 
       </div>
     )
