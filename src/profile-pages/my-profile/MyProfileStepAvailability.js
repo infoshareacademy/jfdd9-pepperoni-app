@@ -59,10 +59,22 @@ class MyProfileStepAvailability extends React.Component {
               <br/>
             </label>
           )}
-          <button>Add</button>
+          <button style={{width: '150px'}}>Add</button>
         </form>
         <h3>Your working days: {this.props.availability.join(", ")}</h3>
-
+        {
+          (this.props.availability.length === 0)
+            ? (<button
+              className="myProfileNextButton"
+              style={{backgroundColor: '#4b5062'}}>
+              Next step
+            </button>)
+            : (<Link to="/myprofile/additional-information"><button
+              className="myProfileNextButton"
+              style={{backgroundColor: '#E2083C'}}>
+              Next step
+            </button></Link>)
+        }
       </div>
     )
   }
