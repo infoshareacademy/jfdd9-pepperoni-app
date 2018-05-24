@@ -69,7 +69,6 @@ class MyProfileForm extends React.Component {
 
   render() {
     return (
-      <Router>
       <div className="profilePage">
       <h1>Complete your profile to become a gangster</h1>
 
@@ -112,7 +111,6 @@ class MyProfileForm extends React.Component {
 
 
       </div>
-      </Router>
     )
   }
 

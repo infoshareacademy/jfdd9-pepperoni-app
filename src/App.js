@@ -38,7 +38,7 @@ class App extends Component {
                 <Route path="/order/:gangsterId/:selectedDate" component={OrderPage}/>
                 <Route path="/thank-you" component={ThankYouPage}/>
                 <Route path="/gangsters-for-tag/:tagName" component={GangstersForTag}/>
-                <Route exact path="/myprofile" component={MyProfile}/>
+                <Route path="/myprofile" component={MyProfile}/>
               </div>
             </Router>)
         }
