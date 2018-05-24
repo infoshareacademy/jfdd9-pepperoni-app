@@ -1,6 +1,5 @@
 import React from 'react'
 import ContactForm from "./Contactform";
-import moment from 'moment';
 import firebase from 'firebase'
 import {withGangsters} from "./contexts/Gangsters";
 import {withUser} from "./contexts/User";
@@ -13,9 +12,7 @@ const orderPageStyle = {
 class OrderPage extends React.Component {
   state = {
     gangster: null,
-    // selectedTag: '',
-    // dateOfOrder: '',
-    // message: ''
+
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
