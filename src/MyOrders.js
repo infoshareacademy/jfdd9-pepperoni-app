@@ -34,7 +34,22 @@ class MyOrders extends React.Component {
     // }]
     const columns = [{
       Header: 'Accepted',
-      accessor: 'accepted' // String-based value accessors!
+      accessor: 'accepted',
+      Cell: row => {
+        console.log('komórka', row, this.props)
+        if(this.props.user.email === row.original.employer) {
+          return (
+            <div>
+              {row.original.accepted ? 'Yes' : 'No'}
+            </div>
+          )
+        }
+
+        return (
+          <div>
+          </div>
+        )
+      }// String-based value accessors!
     }, {
       Header: 'Date of job',
       accessor: 'dateOfJob',
