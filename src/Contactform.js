@@ -2,18 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import moment from "moment/moment";
 
-const emailInputStyle = {
-  width: '40%',
-  padding: '5px',
-  backgroundColor: 'transparent',
-  border: 'none',
-  borderBottom: 'solid 1px rgba(31, 31, 31, 0.83)',
-  outline: 'none',
-  color: 'white',
-  fontFamily: 'inherit',
-  fontSize: '1.1rem',
-}
-
 const inputStyle = {
   boxShadow: 'none',
   overflow: 'auto',
@@ -50,41 +38,54 @@ const selectStyle = {
 
 class ContactForm extends Component {
   state = {
-    selectedTag: ''
+    selectedTag: this.props.gangster.tags[0],
+    message: ''
   }
 
- handleSubmit = event =>{
-   event.preventDefault();
-   this.props.history.push('/thank-you')
- };
   handleTagChange = event => {
+    console.log(event.target.value)
     this.setState({
       selectedTag: event.target.value
     })
   }
 
+  handleMessageChange = event => {
+    this.setState({
+      message: event.target.value
+    })
+  }
+
+  handleSubmit = event =>{
+    event.preventDefault();
+
+    const dateOfOrder = moment().unix()
+
+    this.props.addNewJob(this.state.selectedTag, dateOfOrder, this.state.message)
+
+    this.props.history.push('/thank-you')
+  };
+
   render() {
     var date = moment.unix((this.props.match.params.selectedDate/1000)).format("DD/MM/YYYY");
-
     return (
       <div>
         <h1>Your order</h1>
         <h2>Gangster: {this.props.gangster.first_name}</h2>
         <h2>Date: {date}</h2>
-        <h2>Job: {this.props.selectedTag}</h2>
+        <h2>Job: {this.state.selectedTag}</h2>
         <br/>
         <div style={divSelectStyle}>
           <label htmlFor="tagSelect">Select the job you need to get done:</label>
           <br/>
           <br/>
-          <select id="tagSelect" style={selectStyle} onChange={this.handleTagChange} name="job" form="orderForm">
+          <select value={this.state.selectedTag} id="tagSelect" style={selectStyle} onChange={this.handleTagChange} name="job" form="orderForm">
             {this.props.gangster.tags.map(tag => <option value={tag} key={tag}>{tag}</option>)}
           </select>
         </div>
         <form id="orderForm" onSubmit={this.handleSubmit}>
           <br/>
           <br/>
-          <textarea style={inputStyle} placeholder="add details about your order"/>
+          <textarea style={inputStyle} placeholder="add details about your order" onChange={this.handleMessageChange}/>
           <br/>
           <button type='submit'>Send</button>
 
