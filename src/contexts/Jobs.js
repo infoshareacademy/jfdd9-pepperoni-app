@@ -20,14 +20,9 @@ export class JobsProvider extends Component {
     })
 
 
-    firebase.database().ref('/jobs').once('value').then(
+    firebase.database().ref('/jobs').on('value',
       snapshot => this.setState({
         data: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
-        fetching: false
-      })
-    ).catch(
-      error => this.setState({
-        error,
         fetching: false
       })
     )

@@ -9,17 +9,30 @@ import 'react-table/react-table.css'
 
 class MyOrders extends React.Component {
 
+  handleClick = (event,data) => {
+    console.log(event,data);
+
+    firebase.database().ref('/jobs/' + data.original.id).update({
+      accepted: true,
+
+    })
+  };
+
   render() {
 
 
     const error = this.props.gangsters.error
     const fetching = this.props.gangsters.fetching
     const jobs = this.props.jobs.data
-    const gangsters = this.props.gangsters.data
+    const gangsters = this.props.gangsters.data;
+    console.log(gangsters)
 
-    const jobsAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email)
 
-    console.log(jobsAfterFiltering)
+
+    const myOrdersAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email)
+    const myJobsAfterFiltering = jobs !== null && jobs.filter(job => job.gangster === this.props.user.email)
+
+    console.log('myjobs', myJobsAfterFiltering);
 
     // const data = [{
     //   accepted:'false',
@@ -45,8 +58,10 @@ class MyOrders extends React.Component {
           )
         }
 
+
         return (
           <div>
+            <input type="checkbox" checked={row.original.accepted} onClick={((event) => this.handleClick(event,row))} />
           </div>
         )
       }// String-based value accessors!
@@ -95,13 +110,20 @@ class MyOrders extends React.Component {
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading jobs...</p>}
 
-        {!fetching && jobsAfterFiltering.length === 0 &&
+        {!fetching && myOrdersAfterFiltering.length === 0 &&
         <h2>We're sorry, there are no job at the moment for you</h2>}
 
         {/*{jobsAfterFiltering && gangsters && ....}*/}
         <ReactTable
-          data={jobsAfterFiltering}
+          data={myOrdersAfterFiltering}
           columns={columns}
+          pageSize = {5}
+        />
+        <h2>my jobs </h2>
+        <ReactTable
+          data={myJobsAfterFiltering}
+          columns={columns}
+          pageSize = {5}
         />
       </div>
     )
