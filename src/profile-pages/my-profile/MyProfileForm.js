@@ -5,6 +5,7 @@ import '../profile.css'
 import MyProfileStepTags from './MyProfileStepTags'
 import MyProfileStepPersonalDetails from './MyProfileStepPersonalDetails'
 import MyProfileStepAvailability from './MyProfileStepAvailability'
+import MyProfileStepAdditionalInformation from './MyProfileStepAdditionalInformation'
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -53,30 +54,18 @@ class MyProfileForm extends React.Component {
     })
   }
 
-  // handleSubmit = event => {
-  //   event.preventDefault()
-  //
-  //   if (this.state.taskName.trim() === '') {
-  //     this.setState({
-  //       formError: new Error('Task name cannot be empty')
-  //     })
-  //     return
-  //   }
-  //
-  //   this.setState({
-  //     taskName: '',
-  //     taskDescription: ''
-  //   })
-  // }
-  //
-  // handleChange = event => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value,
-  //     formError: null
-  //   })
-  // }
+  addAvailability = (availability) => {
+    this.setState({
+      availability: availability
+    })
+  }
 
-
+  addAdditionalInformation = (experience, description) => {
+    this.setState({
+      experience: experience,
+      description: description,
+    })
+  }
 
   render() {
     return (
@@ -105,9 +94,21 @@ class MyProfileForm extends React.Component {
           }/>
 
           <Route path={'/myprofile/availability'} render={() => {
-            return (<MyProfileStepAvailability
+            return (
+              <MyProfileStepAvailability
+              addAvailability={this.addAvailability}
+              availability={this.state.availability}
             />)}
           }/>
+
+        <Route path={'/myprofile/additional-information'} render={() => {
+          return (
+            <MyProfileStepAdditionalInformation
+              addAdditionalInformation={this.addAdditionalInformation}
+              experience={this.state.experience}
+              description={this.state.description}
+            />)}
+        }/>
 
 
       </div>

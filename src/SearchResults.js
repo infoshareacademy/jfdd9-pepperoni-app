@@ -70,7 +70,8 @@ class SearchResults extends React.Component {
 
     const error = this.props.gangsters.error
     const fetching = this.props.gangsters.fetching
-    const gangsters = this.props.gangsters.data
+    const allUsers = this.props.gangsters.data
+    const gangsters = allUsers.filter(user => user.tags.length>0 && user.hometown)
 
     function compareRatings(a,b) {
       return b.rating - a.rating
