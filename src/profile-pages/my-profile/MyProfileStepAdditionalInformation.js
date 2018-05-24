@@ -9,6 +9,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
     description: '',
     experienceFormError: null,
     descriptionFormError: null,
+    file: null,
+    imagePreviewUrl: null
   }
 
   handleChange = event => {
@@ -28,6 +30,21 @@ class MyProfileStepAdditionalInformation extends React.Component {
         descriptionFormError: null
       })
     }
+  }
+
+  getPhoto = event => {
+    event.preventDefault()
+    let reader = new FileReader();
+    let file = event.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file);
   }
 
   handleSubmit = event => {
@@ -68,9 +85,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <strong>Experience</strong>
           <br/>
-          <input
+          <textarea
             className="textareaStyle"
-            type="textarea"
             name="experience"
             value={this.state.experience}
             onChange={this.handleChange}
@@ -80,9 +96,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
           <br/>
           <strong>Description</strong>
           <br/>
-          <input
+          <textarea
             className="textareaStyle"
-            type="textarea"
             name="description"
             value={this.state.description}
             onChange={this.handleChange}
