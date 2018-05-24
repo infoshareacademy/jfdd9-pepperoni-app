@@ -75,6 +75,7 @@ class SearchResults extends React.Component {
     function compareRatings(a,b) {
       return b.rating - a.rating
     }
+    console.log(gangsters);
 const gangstersAfterFiltering = gangsters !== null && gangsters.filter(
   gangster => gangster.hometown.toLowerCase().startsWith(this.props.hometown.toLowerCase())
 ).sort(compareRatings).filter(
