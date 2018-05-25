@@ -6,8 +6,8 @@ import MyProfileStepTags from './MyProfileStepTags'
 import MyProfileStepPersonalDetails from './MyProfileStepPersonalDetails'
 import MyProfileStepAvailability from './MyProfileStepAvailability'
 import MyProfileStepAdditionalInformation from './MyProfileStepAdditionalInformation'
-
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import firebase from "firebase";
 
 
 class MyProfileForm extends React.Component {
@@ -29,7 +29,8 @@ class MyProfileForm extends React.Component {
       const tagIndex = newSelectedTags.indexOf(tagName);
       if (newSelectedTags.includes(tagName)) {
         newSelectedTags.splice(tagIndex, 1)
-      };
+      }
+      ;
       this.setState({
         selectedTags: newSelectedTags
       })
@@ -65,6 +66,39 @@ class MyProfileForm extends React.Component {
       experience: experience,
       description: description,
     })
+  }
+
+  sendDataToFirebase = () => {
+    const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
+    gangsterRef.set({
+      'availability': [],
+      'description': '',
+      'experience': '',
+      'first_name': '',
+      'gender': '',
+      'hometown': '',
+      'image': '',
+      'tags': [],
+      'rating': 0,
+    })
+
+    // firebase.database().ref('/gangsters/' + this.props.user.uid).set({
+    //   email: data.user.email,
+    //   tags: ['newbe']
+    // })
+    //
+    // const newGangster = gangstersRef.push()
+    // newJob.set({
+    //   'accepted': false,
+    //   'dateOfJob': dateOfJob,
+    //   'dateOfOrder': dateOfOrder,
+    //   'done': false,
+    //   'employer': this.props.user.email,
+    //   'gangster': this.state.gangster.email,
+    //   'jobType': jobType,
+    //   'message': message,
+    // })
+
   }
 
   render() {
@@ -106,6 +140,7 @@ class MyProfileForm extends React.Component {
               addAdditionalInformation={this.addAdditionalInformation}
               experience={this.state.experience}
               description={this.state.description}
+              sendDataToFirebase={this.sendDataToFirebase}
             />)}
         }/>
 
@@ -117,4 +152,4 @@ class MyProfileForm extends React.Component {
 
 }
 
-export default withGangsters(MyProfileForm)
+export default withUser(withGangsters(MyProfileForm))

@@ -1,7 +1,7 @@
 import React from 'react'
 import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import firebase from 'firebase'
 import {withUser} from "../../contexts/User";
 
@@ -12,7 +12,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
     experienceFormError: null,
     descriptionFormError: null,
     file: null,
-    imagePreviewUrl: null
+    imagePreviewUrl: ''
   }
 
   handleChange = event => {
@@ -140,6 +140,20 @@ class MyProfileStepAdditionalInformation extends React.Component {
         <div className="imgPreview">
           {imagePreview}
         </div>
+
+        {
+          (this.props.experience === '' && this.state.imagePreviewUrl === '')
+            ? (<button
+              className="myProfileNextButton"
+              style={{backgroundColor: '#4b5062'}}>
+              Update your profile
+            </button>)
+            : (<button onClick={this.props.sendDataToFirebase}
+              className="myProfileNextButton"
+              style={{backgroundColor: '#E2083C'}}>
+             Update your profile
+            </button>)
+        }
       </div>
     )
   }
