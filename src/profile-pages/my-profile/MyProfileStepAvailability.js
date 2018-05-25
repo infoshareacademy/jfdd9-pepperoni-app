@@ -70,7 +70,6 @@ class MyProfileStepAvailability extends React.Component {
           style={{backgroundColor: '#4b5062'}}>
           Go back
         </button>
-        {console.log(this.props.history)}
         {
           (this.props.availability.length === 0)
             ? (<button
