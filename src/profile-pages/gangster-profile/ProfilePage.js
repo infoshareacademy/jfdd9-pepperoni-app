@@ -64,7 +64,9 @@ class ProfilePage extends React.Component {
 
                 <div className="headerContainer">
                   <h1 className="header">{gangster.first_name}</h1>
-                  <div className="stars"><StarsRating rating={gangster.rating}/></div>
+                  <div className="stars"><StarsRating rating={gangster.rating}
+                                                      gangsterId={gangster.id}
+                  /></div>
                 </div>
 
                 <img className="image" src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
