@@ -2,6 +2,8 @@ import React from 'react'
 import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
 import { Link, withRouter } from 'react-router-dom'
+import firebase from 'firebase'
+import {withUser} from "../../contexts/User";
 
 class MyProfileStepAdditionalInformation extends React.Component {
   state = {
@@ -45,6 +47,17 @@ class MyProfileStepAdditionalInformation extends React.Component {
     }
 
     reader.readAsDataURL(file);
+
+    this.uploadPhotoToFirebase(file)
+  }
+
+  uploadPhotoToFirebase = photo => {
+    const storageRef = firebase.storage().ref('/photos');
+    const photoRef = storageRef.child(this.props.user.email)
+
+    photoRef.put(photo).then(function(snapshot) {
+      console.log(snapshot);
+    });
   }
 
   handleSubmit = event => {
@@ -79,6 +92,14 @@ class MyProfileStepAdditionalInformation extends React.Component {
   }
 
   render() {
+    let {imagePreviewUrl} = this.state
+    let imagePreview = null
+    if (imagePreviewUrl) {
+      imagePreview = (<img src={imagePreviewUrl} className="previewedImage"/>)
+    } else {
+      imagePreview = (<p className="imagePreviewText">Please upload your image</p>)
+    }
+
     return (
       <div>
         <h2>4. Additional information</h2>
@@ -103,12 +124,22 @@ class MyProfileStepAdditionalInformation extends React.Component {
             onChange={this.handleChange}
           />
           <br/>
+          <button style={{width: '150px'}}>Add</button>
+          <br/>
+          <br/>
           <strong>Add your photo</strong>
+          <br/>
+          <br/>
           <input
             type="file"
             id="input"
             onChange={this.getPhoto}/>
+          <br/>
         </form>
+        <br/>
+        <div className="imgPreview">
+          {imagePreview}
+        </div>
       </div>
     )
   }
@@ -116,4 +147,4 @@ class MyProfileStepAdditionalInformation extends React.Component {
 }
 
 
-export default withRouter(withGangsters(MyProfileStepAdditionalInformation))
+export default withRouter(withUser(withGangsters(MyProfileStepAdditionalInformation)))

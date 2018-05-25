@@ -137,8 +137,14 @@
     font-size: 1.1rem;
 }
 
+.imgPreview {
+    width: 30%;
+}
 
-
+.previewedImage {
+    max-width: 100%;
+    height: auto;
+}
 
 /* STYLES FOR CHECKBOXES */
 
