@@ -72,12 +72,10 @@ class MyOrders extends React.Component {
       Cell: row => {
         // console.log(row)
         // console.log(moment(Date(row.value)))
-        return (
           <div
             style={{
               width: "100%",
               height: "100%",
-              backgroundColor: "#dadada",
               borderRadius: "2px"
             }}
           >
@@ -98,7 +96,6 @@ class MyOrders extends React.Component {
             style={{
               width: "100%",
               height: "100%",
-              backgroundColor: "#dadada",
               borderRadius: "2px"
             }}
           >
