@@ -72,7 +72,8 @@ class MyOrders extends React.Component {
       Cell: row => {
         // console.log(row)
         // console.log(moment(Date(row.value)))
-          <div
+          return (
+            <div
             style={{
               width: "100%",
               height: "100%",
@@ -81,7 +82,7 @@ class MyOrders extends React.Component {
           >
             {moment(Date(row.value)).format()}
           </div>
-        )
+      )
       }
       //Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
     }, {
