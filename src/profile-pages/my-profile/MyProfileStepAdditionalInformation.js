@@ -53,11 +53,18 @@ class MyProfileStepAdditionalInformation extends React.Component {
 
   uploadPhotoToFirebase = photo => {
     const storageRef = firebase.storage().ref('/photos');
-    const photoRef = storageRef.child(this.props.user.email)
+    const email = this.props.user.email
+    const photoRef = storageRef.child(email)
+    const updateStateURL = this.props.updateStateURL
 
     photoRef.put(photo).then(function(snapshot) {
       console.log(snapshot);
-    });
+    }).then(function(){
+      const imageRef = firebase.storage().ref('/photos/' + email)
+      imageRef.getDownloadURL().then(function(url){
+        updateStateURL(url)
+      })
+    })
   }
 
   handleSubmit = event => {
@@ -104,7 +111,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
       <div>
         <h2>4. Additional information</h2>
         <form onSubmit={this.handleSubmit}>
-          <strong>Experience</strong>
+          <strong>Experience: {this.props.experience}</strong>
           <br/>
           <textarea
             className="textareaStyle"
@@ -115,7 +122,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
           { this.state.experienceFormError && <p>{this.state.experienceFormError.message}</p>}
           <br/>
           <br/>
-          <strong>Description</strong>
+          <strong>Description: {this.props.description}</strong>
           <br/>
           <textarea
             className="textareaStyle"
@@ -143,11 +150,11 @@ class MyProfileStepAdditionalInformation extends React.Component {
         </div>
 
         {
-          (this.props.experience === '' && this.state.imagePreviewUrl === '')
+          (this.props.experience === '' || this.props.image === '')
             ? (<button
               className="myProfileNextButton"
               style={{backgroundColor: '#4b5062'}}>
-              Save and update your profile
+              Update your profile
             </button>)
             : (<button onClick={this.props.sendDataToFirebase}
               className="myProfileNextButton"

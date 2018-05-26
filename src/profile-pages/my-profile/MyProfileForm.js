@@ -68,20 +68,22 @@ class MyProfileForm extends React.Component {
     })
   }
 
+  updateStateURL = (url) => {
+    this.setState({
+      image: url,
+    })
+}
+
   sendDataToFirebase = () => {
     const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
-    const imageRef = firebase.storage().ref('/photos/' + this.props.user.email)
-    imageRef.getDownloadURL().then(function(url) {
-      return url
-    }
-      gangsterRef.set({
+    gangsterRef.set({
       'availability': this.state.availability,
       'description': this.state.description,
       'experience': this.state.experience,
       'first_name': this.state.firstName,
       'gender': this.state.gender,
       'hometown': this.state.hometown,
-      'image': '',
+      'image': this.state.image,
       'tags': this.state.selectedTags,
       'rating': 0,
       'opinions': '',
@@ -143,7 +145,9 @@ class MyProfileForm extends React.Component {
                 addAdditionalInformation={this.addAdditionalInformation}
                 experience={this.state.experience}
                 description={this.state.description}
+                image={this.state.image}
                 sendDataToFirebase={this.sendDataToFirebase}
+                updateStateURL={this.updateStateURL.bind(this)}
               />)}
           }/>
       </div>
