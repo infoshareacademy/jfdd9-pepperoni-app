@@ -5,6 +5,11 @@ import { withUser} from "../../contexts/User";
 import '../profile.css'
 import firebase from 'firebase'
 import MyProfileForm from "./MyProfileForm";
+import MyProfileEdit from "./MyProfileEdit"
+
+
+
+
 
 class MyProfile extends React.Component {
   state = {
@@ -14,18 +19,24 @@ class MyProfile extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const gangsters = nextProps.gangsters.data
     return {
-      gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid)
+      gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid),
     }
   }
 
+
 render() {
+
     return (
-      <MyProfileForm/>
-    )
-}
+      <div>
+        {typeof(this.state.gangster) === 'undefined' ?
+          <div>Fetching data...</div>
+          :
 
-
-
+          (this.state.gangster.description !== '' ? <MyProfileEdit/> : <MyProfileForm/>)
+        }
+      </div>
+      )
+  }
 }
 
 
