@@ -70,16 +70,21 @@ class MyProfileForm extends React.Component {
 
   sendDataToFirebase = () => {
     const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
-    gangsterRef.set({
-      'availability': [],
-      'description': '',
-      'experience': '',
-      'first_name': '',
-      'gender': '',
-      'hometown': '',
+    const imageRef = firebase.storage().ref('/photos/' + this.props.user.email)
+    imageRef.getDownloadURL().then(function(url) {
+      return url
+    }
+      gangsterRef.set({
+      'availability': this.state.availability,
+      'description': this.state.description,
+      'experience': this.state.experience,
+      'first_name': this.state.firstName,
+      'gender': this.state.gender,
+      'hometown': this.state.hometown,
       'image': '',
-      'tags': [],
+      'tags': this.state.selectedTags,
       'rating': 0,
+      'opinions': '',
     })
 
     // firebase.database().ref('/gangsters/' + this.props.user.uid).set({
@@ -113,7 +118,7 @@ class MyProfileForm extends React.Component {
             />)}
             }/>
 
-
+        {console.log(firebase.storage().ref('/photos/' + this.props.user.email))}
             <Route path={'/myprofile/personal-details'} render={() => {
               return (
                 <MyProfileStepPersonalDetails

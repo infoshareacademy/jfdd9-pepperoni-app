@@ -147,7 +147,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
             ? (<button
               className="myProfileNextButton"
               style={{backgroundColor: '#4b5062'}}>
-              Update your profile
+              Save and update your profile
             </button>)
             : (<button onClick={this.props.sendDataToFirebase}
               className="myProfileNextButton"
