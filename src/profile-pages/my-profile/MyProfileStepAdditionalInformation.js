@@ -154,6 +154,11 @@ class MyProfileStepAdditionalInformation extends React.Component {
           {imagePreview}
         </div>
 
+        <button onClick={() => this.props.history.goBack()}
+                className="myProfileBackButton"
+                style={{backgroundColor: '#4b5062'}}>
+          Go back
+        </button>
         {
           (this.props.experience === '' || this.state.processingImage === true)
             ? (<button
