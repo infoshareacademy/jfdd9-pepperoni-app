@@ -150,6 +150,32 @@
     cursor: pointer
 }
 
+.popup-overlay {
+    background-color: #090909;
+    padding: 0;
+    border: none;
+}
+
+.modal {
+    background-color: #090909;
+    border: solid 1px rgba(31, 31, 31, 0.83);
+    padding: 10px;
+    font-family: inherit;
+}
+
+.modalCloseButton {
+    float: right;
+    cursor: pointer;
+}
+
+.modalButton {
+    margin: 8px;
+    min-height: 30px;
+    width: 150px;
+    font-size: 14px;
+    padding: 5px;
+}
+
 /* STYLES FOR CHECKBOXES */
 
 .container {

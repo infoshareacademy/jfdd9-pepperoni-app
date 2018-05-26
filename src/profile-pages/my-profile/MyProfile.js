@@ -10,6 +10,7 @@ import MyProfileEdit from "./MyProfileEdit"
 class MyProfile extends React.Component {
   state = {
     gangster: null,
+
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -28,7 +29,11 @@ render() {
           <div>Fetching data...</div>
           :
 
-          (this.state.gangster.description !== '' ? <MyProfileEdit gangster={this.state.gangster}/> : <MyProfileForm/>)
+          (this.state.gangster.description !== '' ?
+            <MyProfileEdit
+              gangster={this.state.gangster}
+              firstName={this.state.firstName}/>
+            : <MyProfileForm/>)
         }
       </div>
       )

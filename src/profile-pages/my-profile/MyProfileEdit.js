@@ -5,11 +5,13 @@ import { withUser} from "../../contexts/User";
 import '../profile.css'
 import firebase from 'firebase'
 import editIcon from './editIcon.png'
+import closeIcon from './closeIcon.png'
 import Popup from "reactjs-popup";
 
 class MyProfileEdit extends React.Component {
   state = {
     showNamePopup: false,
+    firstName: ''
 
   }
 
@@ -20,6 +22,21 @@ class MyProfileEdit extends React.Component {
     this.setState({ showNamePopup: false });
   };
 
+  handleChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
+
+    gangsterRef.update({
+      'first_name': this.state.firstName,
+
+    })
+  }
 
   render() {
 
@@ -41,11 +58,19 @@ class MyProfileEdit extends React.Component {
                     onClose={this.closeModal}
                   >
                     <div className="modal">
-                      <a className="close" onClick={this.closeModal}>
-                        &times;
-                      </a>
-                      <form>
-                        <input type="text"/>
+                      <a className="modalCloseButton" onClick={this.closeModal}><img src={closeIcon} alt="Close modal"/></a>
+                      <form onSubmit={this.handleSubmit}>
+                        Update your name
+                        <br/>
+                        <input
+                          className="myProfileInput"
+                          type="text"
+                          name="firstName"
+                          value={this.state.firstName}
+                          onChange={this.handleChange}
+                        />
+                        <br/>
+                        <button className="modalButton">Save</button>
                       </form>
                     </div>
                   </Popup>
