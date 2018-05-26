@@ -123,6 +123,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
             value={this.state.description}
             onChange={this.handleChange}
           />
+          { this.state.descriptionFormError && <p>{this.state.descriptionFormError.message}</p>}
           <br/>
           <button style={{width: '150px'}}>Add</button>
           <br/>
