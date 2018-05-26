@@ -76,7 +76,7 @@ class MyProfileForm extends React.Component {
 
   sendDataToFirebase = () => {
     const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
-    gangsterRef.set({
+    gangsterRef.update({
       'availability': this.state.availability,
       'description': this.state.description,
       'experience': this.state.experience,

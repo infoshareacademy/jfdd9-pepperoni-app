@@ -69,7 +69,7 @@ class ProfilePage extends React.Component {
                   /></div>
                 </div>
 
-                <img className="image" src={process.env.PUBLIC_URL + gangster.image} alt={'face'}/>
+                <img className="image" src={gangster.image} alt={'face'}/>
 
                 <div className="tagsContainer">
                   {gangster.tags.map(tag => <p key={tag} className="smallTag">{tag}</p>)}

@@ -1,14 +1,10 @@
 import React from 'react'
-import StarsRating from "../../StarsRating";
 import { withGangsters } from "../../contexts/Gangsters";
 import { withUser} from "../../contexts/User";
 import '../profile.css'
 import firebase from 'firebase'
 import MyProfileForm from "./MyProfileForm";
 import MyProfileEdit from "./MyProfileEdit"
-
-
-
 
 
 class MyProfile extends React.Component {
@@ -32,7 +28,7 @@ render() {
           <div>Fetching data...</div>
           :
 
-          (this.state.gangster.description !== '' ? <MyProfileEdit/> : <MyProfileForm/>)
+          (this.state.gangster.description !== '' ? <MyProfileEdit gangster={this.state.gangster}/> : <MyProfileForm/>)
         }
       </div>
       )

@@ -146,6 +146,10 @@
     height: auto;
 }
 
+.editIcon {
+    cursor: pointer
+}
+
 /* STYLES FOR CHECKBOXES */
 
 .container {
