@@ -12,7 +12,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
     experienceFormError: null,
     descriptionFormError: null,
     file: null,
-    imagePreviewUrl: ''
+    imagePreviewUrl: '',
+    processingImage: false,
   }
 
   handleChange = event => {
@@ -42,7 +43,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imagePreviewUrl: reader.result
+        imagePreviewUrl: reader.result,
+        processingImage: true,
       });
     }
 
@@ -56,13 +58,16 @@ class MyProfileStepAdditionalInformation extends React.Component {
     const email = this.props.user.email
     const photoRef = storageRef.child(email)
     const updateStateURL = this.props.updateStateURL
+    const that = this
 
-    photoRef.put(photo).then(function(snapshot) {
-      console.log(snapshot);
-    }).then(function(){
+
+    photoRef.put(photo).then(function(){
       const imageRef = firebase.storage().ref('/photos/' + email)
       imageRef.getDownloadURL().then(function(url){
         updateStateURL(url)
+        that.setState({
+          processingImage: false,
+        })
       })
     })
   }
@@ -150,7 +155,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
         </div>
 
         {
-          (this.props.experience === '' || this.props.image === '')
+          (this.props.experience === '' || this.state.processingImage === true)
             ? (<button
               className="myProfileNextButton"
               style={{backgroundColor: '#4b5062'}}>

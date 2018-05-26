@@ -16,11 +16,11 @@ class MyProfileForm extends React.Component {
     selectedTags: [],
     gender: '',
     hometown: '',
-    image: '',
+    image: 'https://firebasestorage.googleapis.com/v0/b/pepperoni-app.appspot.com/o/photos%2Fdefault-gangster-photo.jpg?alt=media&token=dc8e6397-dbee-4055-8721-3eb94a35875a',
     availability: [],
     description: '',
     experience: '',
-    addedTag: ''
+    addedTag: '',
   }
 
   selectAvailableTag = (tagName) => {
@@ -89,23 +89,6 @@ class MyProfileForm extends React.Component {
       'opinions': '',
     })
 
-    // firebase.database().ref('/gangsters/' + this.props.user.uid).set({
-    //   email: data.user.email,
-    //   tags: ['newbe']
-    // })
-    //
-    // const newGangster = gangstersRef.push()
-    // newJob.set({
-    //   'accepted': false,
-    //   'dateOfJob': dateOfJob,
-    //   'dateOfOrder': dateOfOrder,
-    //   'done': false,
-    //   'employer': this.props.user.email,
-    //   'gangster': this.state.gangster.email,
-    //   'jobType': jobType,
-    //   'message': message,
-    // })
-
   }
 
   render() {
@@ -120,7 +103,6 @@ class MyProfileForm extends React.Component {
             />)}
             }/>
 
-        {console.log(firebase.storage().ref('/photos/' + this.props.user.email))}
             <Route path={'/myprofile/personal-details'} render={() => {
               return (
                 <MyProfileStepPersonalDetails
