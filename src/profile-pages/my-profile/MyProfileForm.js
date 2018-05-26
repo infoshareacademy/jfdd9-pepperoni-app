@@ -6,7 +6,7 @@ import MyProfileStepTags from './MyProfileStepTags'
 import MyProfileStepPersonalDetails from './MyProfileStepPersonalDetails'
 import MyProfileStepAvailability from './MyProfileStepAvailability'
 import MyProfileStepAdditionalInformation from './MyProfileStepAdditionalInformation'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import firebase from "firebase";
 
 
@@ -30,7 +30,7 @@ class MyProfileForm extends React.Component {
       if (newSelectedTags.includes(tagName)) {
         newSelectedTags.splice(tagIndex, 1)
       }
-      ;
+
       this.setState({
         selectedTags: newSelectedTags
       })
@@ -104,47 +104,43 @@ class MyProfileForm extends React.Component {
   render() {
     return (
       <div className="profilePage">
-      <h1>Complete your profile to become a gangster</h1>
+        <h1>Complete your profile to become a gangster</h1>
+            <Route exact path={'/myprofile/'} render={() => {
+              return (<MyProfileStepTags
+              selectedTags={this.state.selectedTags}
+              handleNewTagSubmit={this.handleNewTagSubmit}
+              selectAvailableTag={this.selectAvailableTag}
+            />)}
+            }/>
 
 
-          <Route exact path={'/myprofile/'} render={() => {
-            return (<MyProfileStepTags
-            selectedTags={this.state.selectedTags}
-            handleNewTagSubmit={this.handleNewTagSubmit}
-            selectAvailableTag={this.selectAvailableTag}
-          />)}
-          }/>
+            <Route path={'/myprofile/personal-details'} render={() => {
+              return (
+                <MyProfileStepPersonalDetails
+                  firstName={this.state.firstName}
+                  hometown={this.state.hometown}
+                  gender={this.state.gender}
+                  addPersonalDetails={this.addPersonalDetails}
+              />)}
+            }/>
 
+            <Route path={'/myprofile/availability'} render={() => {
+              return (
+                <MyProfileStepAvailability
+                addAvailability={this.addAvailability}
+                availability={this.state.availability}
+              />)}
+            }/>
 
-          <Route path={'/myprofile/personal-details'} render={() => {
+          <Route path={'/myprofile/additional-information'} render={() => {
             return (
-              <MyProfileStepPersonalDetails
-                firstName={this.state.firstName}
-                hometown={this.state.hometown}
-                gender={this.state.gender}
-                addPersonalDetails={this.addPersonalDetails}
-            />)}
+              <MyProfileStepAdditionalInformation
+                addAdditionalInformation={this.addAdditionalInformation}
+                experience={this.state.experience}
+                description={this.state.description}
+                sendDataToFirebase={this.sendDataToFirebase}
+              />)}
           }/>
-
-          <Route path={'/myprofile/availability'} render={() => {
-            return (
-              <MyProfileStepAvailability
-              addAvailability={this.addAvailability}
-              availability={this.state.availability}
-            />)}
-          }/>
-
-        <Route path={'/myprofile/additional-information'} render={() => {
-          return (
-            <MyProfileStepAdditionalInformation
-              addAdditionalInformation={this.addAdditionalInformation}
-              experience={this.state.experience}
-              description={this.state.description}
-              sendDataToFirebase={this.sendDataToFirebase}
-            />)}
-        }/>
-
-
       </div>
     )
   }
