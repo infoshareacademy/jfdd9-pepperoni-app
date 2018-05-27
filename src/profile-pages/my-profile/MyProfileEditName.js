@@ -32,7 +32,7 @@ class MyProfileEditName extends React.Component {
           onChange={this.handleChange}
         />
         <br/>
-        <button className="modalButton">Save</button>
+        <button style={{width: '150px'}}>Save</button>
       </form>
     )
   }

@@ -8,12 +8,14 @@ import MyProfileName from "./MyProfileName";
 import MyProfileEditName from "./MyProfileEditName";
 import MyProfileEditImage from "./MyProfileEditImage";
 import MyProfileImage from "./MyProfileImage";
+import MyProfileEditTags from "./MyProfileEditTags";
+import MyProfileTags from "./MyProfileTags";
 
 class MyProfileEdit extends React.Component {
   state = {
     gangster: this.props.gangster,
     editField: null,
-
+    selectedTags: this.props.gangster.tags
   }
 
   editField = (fieldName) => {
@@ -48,11 +50,29 @@ class MyProfileEdit extends React.Component {
     })
   }
 
-  // updateFirebaseUrl = (url) => {
-  //   const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
-  //   gangsterRef.update({
-  //     'image': url,
-  // }
+  selectAvailableTag = (tagName) => {
+    if (this.state.selectedTags.includes(tagName)) {
+      const newSelectedTags = this.state.selectedTags;
+      const tagIndex = newSelectedTags.indexOf(tagName);
+      if (newSelectedTags.includes(tagName)) {
+        newSelectedTags.splice(tagIndex, 1)
+      }
+      this.setState({
+        selectedTags: newSelectedTags
+      })
+    } else {
+      this.setState({
+        selectedTags: this.state.selectedTags.concat(tagName)
+      })
+    }
+  }
+
+  handleNewTagSubmit = (tagName) => {
+    this.setState({
+      selectedTags: this.state.selectedTags.concat(tagName),
+    })
+  }
+
 
   render() {
 
@@ -96,9 +116,23 @@ class MyProfileEdit extends React.Component {
                   />
                 }
 
-                <div className="tagsContainer">
-                  {gangster.tags.map(tag => <p key={tag} className="smallTag">{tag}</p>)}
-                </div>
+                {this.state.editField !== 'tags' ?
+                  <MyProfileTags
+                    tags={this.state.gangster.tags}
+                    editField={this.editField}
+                  />
+                  :
+                  <MyProfileEditTags
+                    updateTagsData={this.updateData}
+                    handleNewTagSubmit={this.handleNewTagSubmit}
+                    selectAvailableTag={this.selectAvailableTag}
+                    selectedTags={this.state.selectedTags}
+                    exitEditMode={this.exitEditMode}
+                    updateData={this.updateData}
+                  />
+                }
+
+
 
                 <h3>{gangster.gender}</h3>
 
