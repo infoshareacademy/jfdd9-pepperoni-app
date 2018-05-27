@@ -1,16 +1,16 @@
 import React from 'react'
 import '../profile.css'
 
-class MyProfileEditName extends React.Component {
+class MyProfileEditHometown extends React.Component {
   state = {
-    firstName: this.props.firstName,
-    error: null,
+    hometown: this.props.hometown,
+    error: null
   }
 
 
   handleChange = (event) => {
     this.setState({
-      firstName: event.target.value,
+      hometown: event.target.value,
       error: null,
     })
   }
@@ -18,14 +18,14 @@ class MyProfileEditName extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    if (this.state.firstName === '') {
+    if (this.state.hometown === '') {
       this.setState({
-        error: new Error('Please specify your name')
+        error: new Error('Please specify your hometown')
       })
       return
     }
 
-    this.props.updateData('firstName', this.state.firstName)
+    this.props.updateData('hometown', this.state.hometown)
     this.props.exitEditMode()
   }
 
@@ -38,8 +38,8 @@ class MyProfileEditName extends React.Component {
         <input
           className="myProfileInput"
           type="text"
-          name="firstName"
-          value={this.state.firstName}
+          name="hometown"
+          value={this.state.hometown}
           onChange={this.handleChange}
         />
         <br/>
@@ -49,4 +49,4 @@ class MyProfileEditName extends React.Component {
   }
 }
 
-export default MyProfileEditName
+export default MyProfileEditHometown

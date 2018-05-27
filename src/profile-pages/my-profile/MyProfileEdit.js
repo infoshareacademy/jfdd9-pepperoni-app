@@ -12,6 +12,12 @@ import MyProfileEditTags from "./MyProfileEditTags";
 import MyProfileTags from "./MyProfileTags";
 import MyProfileGender from "./MyProfileGender";
 import MyProfileEditGender from "./MyProfileEditGender";
+import MyProfileHometown from "./MyProfileHometown";
+import MyProfileEditHometown from "./MyProfileEditHometown";
+import MyProfileDescription from "./MyProfileDescription";
+import MyProfileEditDescription from "./MyProfileEditDescription";
+import MyProfileExperience from "./MyProfileEditExperience";
+import MyProfileEditExperience from "./MyProfileExperience";
 
 class MyProfileEdit extends React.Component {
   state = {
@@ -148,21 +154,51 @@ class MyProfileEdit extends React.Component {
 
                 <h3>Email: <a className="link" href={"mailto:" + gangster.email}>{gangster.email}</a></h3>
 
-                <h3 className="lineSeparated">City: {gangster.hometown}</h3>
+
+                {this.state.editField !== 'hometown' ?
+                  <MyProfileHometown
+                    editField={this.editField}
+                    gangster={this.props.gangster}
+                  />
+                  :
+                  <MyProfileEditHometown
+                    updateData={this.updateData}
+                    hometown={this.state.gangster.hometown}
+                    exitEditMode={this.exitEditMode}
+                  />}
 
                 <h3>Availability: </h3>
                 <p className="lineSeparated">{gangster.availability.join(', ')}</p>
 
 
-                <h2>About me</h2>
-                <p className="lineSeparated">{gangster.description}</p>
+                {this.state.editField !== 'description' ?
+                  <MyProfileDescription
+                    editField={this.editField}
+                    gangster={this.props.gangster}
+                  />
+                  :
+                  <MyProfileEditDescription
+                    updateData={this.updateData}
+                    description={this.state.gangster.description}
+                    exitEditMode={this.exitEditMode}
+                  />}
 
-                <h2>My experience</h2>
-                <p className="lineSeparated">{gangster.experience}</p>
+
+                {this.state.editField !== 'experience' ?
+                  <MyProfileExperience
+                    editField={this.editField}
+                    gangster={this.props.gangster}
+                  />
+                  :
+                  <MyProfileEditExperience
+                    updateData={this.updateData}
+                    experience={this.state.gangster.experience}
+                    exitEditMode={this.exitEditMode}
+                  />}
+
 
                 <h2>They recommend me</h2>
-                <p className="lineSeparated">{gangster.opinions}</p>
-
+                <p className="lineSeparated">{gangster.opinions === '' ? <span>There are no opinions yet</span> : gangster.opinions}</p>
 
               </div>
             )

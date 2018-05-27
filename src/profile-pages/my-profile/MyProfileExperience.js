@@ -1,16 +1,16 @@
 import React from 'react'
 import '../profile.css'
 
-class MyProfileEditName extends React.Component {
+class MyProfileEditExperience extends React.Component {
   state = {
-    firstName: this.props.firstName,
+    experience: this.props.experience,
     error: null,
   }
 
 
   handleChange = (event) => {
     this.setState({
-      firstName: event.target.value,
+      experience: event.target.value,
       error: null,
     })
   }
@@ -18,28 +18,28 @@ class MyProfileEditName extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault()
 
-    if (this.state.firstName === '') {
+    if (this.state.experience === '') {
       this.setState({
-        error: new Error('Please specify your name')
+        error: new Error('Please describe your experience')
       })
       return
     }
 
-    this.props.updateData('firstName', this.state.firstName)
+    this.props.updateData('experience', this.state.experience)
     this.props.exitEditMode()
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <h2 style={{display: 'inline-block'}}>My experience</h2>
         { this.state.error && <p>{this.state.error.message}</p>}
-        <br/>
         <br/>
         <input
           className="myProfileInput"
           type="text"
-          name="firstName"
-          value={this.state.firstName}
+          name="experience"
+          value={this.state.experience}
           onChange={this.handleChange}
         />
         <br/>
@@ -49,4 +49,4 @@ class MyProfileEditName extends React.Component {
   }
 }
 
-export default MyProfileEditName
+export default MyProfileEditExperience

@@ -147,7 +147,10 @@
 }
 
 .editIcon {
-    cursor: pointer
+    cursor: pointer;
+    margin: 3px;
+    width: 20px;
+    height: auto;
 }
 
 .editableImage {
