@@ -42,7 +42,6 @@ class App extends Component {
                 <Route path="/gangsters-for-tag/:tagName" component={GangstersForTag}/>
                 <Route path="/myprofile" component={MyProfile}/>
                 <Route exact path="/myorder" component={MyOrder}/>
-                {/*<Route path="/myprofile/name" component={}*/}
               </div>
             </Router>)
         }
