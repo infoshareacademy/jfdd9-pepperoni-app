@@ -18,6 +18,8 @@ import MyProfileDescription from "./MyProfileDescription";
 import MyProfileEditDescription from "./MyProfileEditDescription";
 import MyProfileExperience from "./MyProfileEditExperience";
 import MyProfileEditExperience from "./MyProfileExperience";
+import MyProfileAvailability from "./MyProfileAvailability";
+import MyProfileEditAvailability from "./MyProfileEditAvailability";
 
 class MyProfileEdit extends React.Component {
   state = {
@@ -167,8 +169,20 @@ class MyProfileEdit extends React.Component {
                     exitEditMode={this.exitEditMode}
                   />}
 
-                <h3>Availability: </h3>
-                <p className="lineSeparated">{gangster.availability.join(', ')}</p>
+
+                {this.state.editField !== 'availability' ?
+                  <MyProfileAvailability
+                    editField={this.editField}
+                    gangster={this.props.gangster}
+                  />
+                  :
+                  <MyProfileEditAvailability
+                    updateData={this.updateData}
+                    availability={this.state.gangster.availability}
+                    exitEditMode={this.exitEditMode}
+                  />}
+
+
 
 
                 {this.state.editField !== 'description' ?

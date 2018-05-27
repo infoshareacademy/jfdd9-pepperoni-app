@@ -1,12 +1,10 @@
 import React from 'react'
-import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
-import { Link, withRouter } from 'react-router-dom'
+import closeIcon from './closeIcon.png'
 
-
-class MyProfileStepAvailability extends React.Component {
+class MyProfileEditAvailability extends React.Component {
   state = {
-    availability: []
+    availability: this.props.availability
   }
 
   unselectDay = (day) => {
@@ -20,7 +18,6 @@ class MyProfileStepAvailability extends React.Component {
     })
   }
 
-
   handleCheckboxChange = event => {
     const target = event.target;
     const name = target.name;
@@ -28,26 +25,26 @@ class MyProfileStepAvailability extends React.Component {
     if (this.state.availability.includes(name)) {
       this.unselectDay(name)
     } else {
-    this.setState({
-      availability: this.state.availability.concat(name)
+      this.setState({
+        availability: this.state.availability.concat(name)
       })
     }
   }
 
   handleSubmit = event => {
     event.preventDefault()
-
-    this.props.addAvailability(this.state.availability)
+    this.props.updateData('availability', this.state.availability)
+    this.props.exitEditMode()
   }
-
 
   render() {
 
     const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
     return (
-      <div>
-        <h2>3. When are you available?</h2>
+
+      <div className="containerInEditMode">
+        <img className="closeButton" src={closeIcon} alt="Cancel" onClick={this.props.exitEditMode}/>
         <form onSubmit={this.handleSubmit}>
           {weekdays.map(day =>
             <label key={day} className="container">
@@ -64,29 +61,26 @@ class MyProfileStepAvailability extends React.Component {
           <button style={{width: '150px'}}>Add</button>
         </form>
         <h3>Your working days: {this.props.availability.join(", ")}</h3>
-          <br/>
-        <button onClick={() => this.props.history.goBack()}
-          className="myProfileBackButton"
-          style={{backgroundColor: '#4b5062'}}>
-          Go back
-        </button>
+        <br/>
+
         {
           (this.props.availability.length === 0)
             ? (<button
               className="myProfileNextButton"
               style={{backgroundColor: '#4b5062'}}>
-              Next step
+              Save
             </button>)
-            : (<Link to="/myprofile/additional-information"><button
-              className="myProfileNextButton"
-              style={{backgroundColor: '#E2083C'}}>
-              Next step
-            </button></Link>)
+            : (<button onClick={this.handleSubmit}
+                       className="myProfileNextButton"
+                       style={{backgroundColor: '#E2083C'}}>
+              Save
+            </button>)
         }
+        <div className="clear"></div>
       </div>
+
     )
   }
 }
 
-
-export default withRouter(withGangsters(MyProfileStepAvailability))
+export default MyProfileEditAvailability
