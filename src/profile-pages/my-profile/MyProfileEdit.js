@@ -34,8 +34,8 @@ class MyProfileEdit extends React.Component {
 
     gangsterRef.update({
       'first_name': this.state.firstName,
-
     })
+    this.props.updateFirstName(this.state.firstName)
   }
 
   render() {
