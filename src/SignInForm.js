@@ -69,7 +69,7 @@ class SignInForm extends Component {
     return (
       <div style={formSectionLayer}>
         <h2 style={header}>SIGN IN</h2>
-        {this.props.signInError && <p>{this.props.signInError.message}</p>}
+        {this.props.signInError && <p style={{color: '#fff'}}>{this.props.signInError.message}</p>}
         <form onSubmit={this.handleSubmit}>
           <input
             style={formEmail}

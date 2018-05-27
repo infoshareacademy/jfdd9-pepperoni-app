@@ -28,7 +28,7 @@ render() {
           <div>Fetching data...</div>
           :
 
-          (this.state.gangster.description !== '' ?
+          (this.state.gangster.description !== '' || this.state.gangster.description !== undefined ?
             <MyProfileEdit
               gangster={this.state.gangster}/>
             : <MyProfileForm
