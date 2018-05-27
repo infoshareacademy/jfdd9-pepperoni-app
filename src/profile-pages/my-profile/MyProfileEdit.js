@@ -10,6 +10,8 @@ import MyProfileEditImage from "./MyProfileEditImage";
 import MyProfileImage from "./MyProfileImage";
 import MyProfileEditTags from "./MyProfileEditTags";
 import MyProfileTags from "./MyProfileTags";
+import MyProfileGender from "./MyProfileGender";
+import MyProfileEditGender from "./MyProfileEditGender";
 
 class MyProfileEdit extends React.Component {
   state = {
@@ -132,9 +134,17 @@ class MyProfileEdit extends React.Component {
                   />
                 }
 
-
-
-                <h3>{gangster.gender}</h3>
+                {this.state.editField !== 'gender' ?
+                  <MyProfileGender
+                    editField={this.editField}
+                    gangster={this.props.gangster}
+                  />
+                  :
+                  <MyProfileEditGender
+                    updateData={this.updateData}
+                    gender={this.state.gangster.gender}
+                    exitEditMode={this.exitEditMode}
+                  />}
 
                 <h3>Email: <a className="link" href={"mailto:" + gangster.email}>{gangster.email}</a></h3>
 

@@ -6,7 +6,7 @@ class MyProfileTags extends React.Component {
 
   render() {
     return (
-        <div className="tagsContainer">
+        <div className="tagsContainer" style={{marginLeft: 0}}>
           <img
             className="editIcon"
             src={editIcon}
