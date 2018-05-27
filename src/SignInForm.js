@@ -1,17 +1,6 @@
 import React, { Component } from 'react'
 import { withUser } from './contexts/User';
 
-// const listStyle = {
-//   fontSize: '25px',
-//   width: '80%',
-//   display: 'inline-block',
-//   textDecoration: 'none',
-//   marginTop: '26px',
-//   marginBottom: '0px',
-//   verticalAlign: 'top',
-//   color: '#ececec',
-// }
-
 const formSectionLayer = {
   maxWidth: '40rem',
   margin: '0 auto',
@@ -79,7 +68,7 @@ class SignInForm extends Component {
   render() {
     return (
       <div style={formSectionLayer}>
-        <h2 style={header}>WELCOME GUYS</h2>
+        <h2 style={header}>SIGN IN</h2>
         {this.props.signInError && <p>{this.props.signInError.message}</p>}
         <form onSubmit={this.handleSubmit}>
           <input

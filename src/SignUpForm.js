@@ -69,7 +69,7 @@ class SignUpForm extends Component {
   render() {
     return (
       <div style={formSectionLayer}>
-        <h2 style={header}>JOIN TO OUR GANGSTER GROUP</h2>
+        <h2 style={header}>JOIN GANGBOOK</h2>
         {this.state.error && <p>{this.state.error.message}</p>}
         <form onSubmit={this.handleSubmit}>
           <input

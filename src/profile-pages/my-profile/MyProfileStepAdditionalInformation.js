@@ -12,7 +12,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
     experienceFormError: null,
     descriptionFormError: null,
     file: null,
-    imagePreviewUrl: ''
+    imagePreviewUrl: '',
+    processingImage: false,
   }
 
   handleChange = event => {
@@ -42,7 +43,8 @@ class MyProfileStepAdditionalInformation extends React.Component {
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imagePreviewUrl: reader.result
+        imagePreviewUrl: reader.result,
+        processingImage: true,
       });
     }
 
@@ -53,11 +55,21 @@ class MyProfileStepAdditionalInformation extends React.Component {
 
   uploadPhotoToFirebase = photo => {
     const storageRef = firebase.storage().ref('/photos');
-    const photoRef = storageRef.child(this.props.user.email)
+    const email = this.props.user.email
+    const photoRef = storageRef.child(email)
+    const updateStateURL = this.props.updateStateURL
+    const that = this
 
-    photoRef.put(photo).then(function(snapshot) {
-      console.log(snapshot);
-    });
+
+    photoRef.put(photo).then(function(){
+      const imageRef = firebase.storage().ref('/photos/' + email)
+      imageRef.getDownloadURL().then(function(url){
+        updateStateURL(url)
+        that.setState({
+          processingImage: false,
+        })
+      })
+    })
   }
 
   handleSubmit = event => {
@@ -104,7 +116,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
       <div>
         <h2>4. Additional information</h2>
         <form onSubmit={this.handleSubmit}>
-          <strong>Experience</strong>
+          <strong>Experience: {this.props.experience}</strong>
           <br/>
           <textarea
             className="textareaStyle"
@@ -115,7 +127,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
           { this.state.experienceFormError && <p>{this.state.experienceFormError.message}</p>}
           <br/>
           <br/>
-          <strong>Description</strong>
+          <strong>Description: {this.props.description}</strong>
           <br/>
           <textarea
             className="textareaStyle"
@@ -123,6 +135,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
             value={this.state.description}
             onChange={this.handleChange}
           />
+          { this.state.descriptionFormError && <p>{this.state.descriptionFormError.message}</p>}
           <br/>
           <button style={{width: '150px'}}>Add</button>
           <br/>
@@ -141,8 +154,13 @@ class MyProfileStepAdditionalInformation extends React.Component {
           {imagePreview}
         </div>
 
+        <button onClick={() => this.props.history.goBack()}
+                className="myProfileBackButton"
+                style={{backgroundColor: '#4b5062'}}>
+          Go back
+        </button>
         {
-          (this.props.experience === '' && this.state.imagePreviewUrl === '')
+          (this.props.experience === '' || this.state.processingImage === true)
             ? (<button
               className="myProfileNextButton"
               style={{backgroundColor: '#4b5062'}}>

@@ -6,7 +6,7 @@ import MyProfileStepTags from './MyProfileStepTags'
 import MyProfileStepPersonalDetails from './MyProfileStepPersonalDetails'
 import MyProfileStepAvailability from './MyProfileStepAvailability'
 import MyProfileStepAdditionalInformation from './MyProfileStepAdditionalInformation'
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import firebase from "firebase";
 
 
@@ -16,11 +16,11 @@ class MyProfileForm extends React.Component {
     selectedTags: [],
     gender: '',
     hometown: '',
-    image: '',
+    image: 'https://firebasestorage.googleapis.com/v0/b/pepperoni-app.appspot.com/o/photos%2Fdefault-gangster-photo.jpg?alt=media&token=dc8e6397-dbee-4055-8721-3eb94a35875a',
     availability: [],
     description: '',
     experience: '',
-    addedTag: ''
+    addedTag: '',
   }
 
   selectAvailableTag = (tagName) => {
@@ -30,7 +30,7 @@ class MyProfileForm extends React.Component {
       if (newSelectedTags.includes(tagName)) {
         newSelectedTags.splice(tagIndex, 1)
       }
-      ;
+
       this.setState({
         selectedTags: newSelectedTags
       })
@@ -68,83 +68,70 @@ class MyProfileForm extends React.Component {
     })
   }
 
+  updateStateURL = (url) => {
+    this.setState({
+      image: url,
+    })
+}
+
   sendDataToFirebase = () => {
     const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
-    gangsterRef.set({
-      'availability': [],
-      'description': '',
-      'experience': '',
-      'first_name': '',
-      'gender': '',
-      'hometown': '',
-      'image': '',
-      'tags': [],
+    gangsterRef.update({
+      'availability': this.state.availability,
+      'description': this.state.description,
+      'experience': this.state.experience,
+      'first_name': this.state.firstName,
+      'gender': this.state.gender,
+      'hometown': this.state.hometown,
+      'image': this.state.image,
+      'tags': this.state.selectedTags,
       'rating': 0,
+      'opinions': '',
     })
-
-    // firebase.database().ref('/gangsters/' + this.props.user.uid).set({
-    //   email: data.user.email,
-    //   tags: ['newbe']
-    // })
-    //
-    // const newGangster = gangstersRef.push()
-    // newJob.set({
-    //   'accepted': false,
-    //   'dateOfJob': dateOfJob,
-    //   'dateOfOrder': dateOfOrder,
-    //   'done': false,
-    //   'employer': this.props.user.email,
-    //   'gangster': this.state.gangster.email,
-    //   'jobType': jobType,
-    //   'message': message,
-    // })
 
   }
 
   render() {
     return (
       <div className="profilePage">
-      <h1>Complete your profile to become a gangster</h1>
+        <h1>Complete your profile to become a gangster</h1>
+            <Route exact path={'/myprofile/'} render={() => {
+              return (<MyProfileStepTags
+              selectedTags={this.state.selectedTags}
+              handleNewTagSubmit={this.handleNewTagSubmit}
+              selectAvailableTag={this.selectAvailableTag}
+            />)}
+            }/>
 
+            <Route path={'/myprofile/personal-details'} render={() => {
+              return (
+                <MyProfileStepPersonalDetails
+                  firstName={this.state.firstName}
+                  hometown={this.state.hometown}
+                  gender={this.state.gender}
+                  addPersonalDetails={this.addPersonalDetails}
+              />)}
+            }/>
 
-          <Route exact path={'/myprofile/'} render={() => {
-            return (<MyProfileStepTags
-            selectedTags={this.state.selectedTags}
-            handleNewTagSubmit={this.handleNewTagSubmit}
-            selectAvailableTag={this.selectAvailableTag}
-          />)}
-          }/>
+            <Route path={'/myprofile/availability'} render={() => {
+              return (
+                <MyProfileStepAvailability
+                addAvailability={this.addAvailability}
+                availability={this.state.availability}
+              />)}
+            }/>
 
-
-          <Route path={'/myprofile/personal-details'} render={() => {
+          <Route path={'/myprofile/additional-information'} render={() => {
             return (
-              <MyProfileStepPersonalDetails
-                firstName={this.state.firstName}
-                hometown={this.state.hometown}
-                gender={this.state.gender}
-                addPersonalDetails={this.addPersonalDetails}
-            />)}
+              <MyProfileStepAdditionalInformation
+                addAdditionalInformation={this.addAdditionalInformation}
+                experience={this.state.experience}
+                description={this.state.description}
+                image={this.state.image}
+                sendDataToFirebase={this.sendDataToFirebase}
+                updateStateURL={this.updateStateURL.bind(this)}
+              />)}
           }/>
-
-          <Route path={'/myprofile/availability'} render={() => {
-            return (
-              <MyProfileStepAvailability
-              addAvailability={this.addAvailability}
-              availability={this.state.availability}
-            />)}
-          }/>
-
-        <Route path={'/myprofile/additional-information'} render={() => {
-          return (
-            <MyProfileStepAdditionalInformation
-              addAdditionalInformation={this.addAdditionalInformation}
-              experience={this.state.experience}
-              description={this.state.description}
-              sendDataToFirebase={this.sendDataToFirebase}
-            />)}
-        }/>
-
-
       </div>
     )
   }
