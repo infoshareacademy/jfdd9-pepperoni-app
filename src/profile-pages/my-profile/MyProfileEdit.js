@@ -6,6 +6,8 @@ import '../profile.css'
 import firebase from 'firebase'
 import MyProfileName from "./MyProfileName";
 import MyProfileEditName from "./MyProfileEditName";
+import MyProfileEditImage from "./MyProfileEditImage";
+import MyProfileImage from "./MyProfileImage";
 
 class MyProfileEdit extends React.Component {
   state = {
@@ -46,6 +48,12 @@ class MyProfileEdit extends React.Component {
     })
   }
 
+  // updateFirebaseUrl = (url) => {
+  //   const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
+  //   gangsterRef.update({
+  //     'image': url,
+  // }
+
   render() {
 
     const gangster = this.props.gangster
@@ -76,7 +84,17 @@ class MyProfileEdit extends React.Component {
                   /></div>
                 </div>
 
-                <img className="image" src={gangster.image} alt={'face'}/>
+                {this.state.editField !== 'image' ?
+                  <MyProfileImage
+                    editField={this.editField}
+                    image={this.state.gangster.image}
+                  />
+                  :
+                  <MyProfileEditImage
+                    exitEditMode={this.exitEditMode}
+                    updateData={this.updateData}
+                  />
+                }
 
                 <div className="tagsContainer">
                   {gangster.tags.map(tag => <p key={tag} className="smallTag">{tag}</p>)}

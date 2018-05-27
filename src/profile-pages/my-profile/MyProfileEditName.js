@@ -21,7 +21,6 @@ class MyProfileEditName extends React.Component {
 
   render() {
     return (
-
       <form onSubmit={this.handleSubmit}>
         <br/>
         <br/>
@@ -35,7 +34,6 @@ class MyProfileEditName extends React.Component {
         <br/>
         <button className="modalButton">Save</button>
       </form>
-
     )
   }
 }
