@@ -4,38 +4,46 @@ import { withGangsters } from "../../contexts/Gangsters";
 import { withUser} from "../../contexts/User";
 import '../profile.css'
 import firebase from 'firebase'
-import editIcon from './editIcon.png'
-import closeIcon from './closeIcon.png'
-import Popup from "reactjs-popup";
+import MyProfileName from "./MyProfileName";
+import MyProfileEditName from "./MyProfileEditName";
 
 class MyProfileEdit extends React.Component {
   state = {
-    showNamePopup: false,
-    firstName: ''
+    gangster: this.props.gangster,
+    editField: null,
 
   }
 
-  openModal = () => {
-    this.setState({ showNamePopup: true });
-  };
-  closeModal = () => {
-    this.setState({ showNamePopup: false });
-  };
-
-  handleChange = event => {
+  editField = (fieldName) => {
     this.setState({
-      [event.target.name]: event.target.value
+      editField: fieldName
     })
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
+  updateData = (dataName, updatedData) => {
     const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
+    const newGangster = this.state.gangster
+
+    if (dataName === 'firstName') {
+      dataName = 'first_name'
+    }
 
     gangsterRef.update({
-      'first_name': this.state.firstName,
+      [dataName]: updatedData,
     })
-    this.props.updateFirstName(this.state.firstName)
+
+    newGangster[dataName] = updatedData;
+
+    this.setState({
+      gangster: newGangster
+    })
+
+  }
+
+  exitEditMode = () => {
+    this.setState({
+      editField: null,
+    })
   }
 
   render() {
@@ -46,34 +54,22 @@ class MyProfileEdit extends React.Component {
       <div className="profilePage">
         {
           this.props.gangster === null || this.props.gangster === undefined
-            ? 'Loading gangster details'
+            ? 'Loading details'
             : (
               <div>
                 <div className="headerContainer">
-                  <img className="editIcon" src={editIcon} alt="Edit field" onClick={this.openModal}/><h1 className="header">{gangster.first_name}</h1>
 
-                  <Popup
-                    open={this.state.showNamePopup}
-                    closeOnDocumentClick
-                    onClose={this.closeModal}
-                  >
-                    <div className="modal">
-                      <a className="modalCloseButton" onClick={this.closeModal}><img src={closeIcon} alt="Close modal"/></a>
-                      <form onSubmit={this.handleSubmit}>
-                        Update your name
-                        <br/>
-                        <input
-                          className="myProfileInput"
-                          type="text"
-                          name="firstName"
-                          value={this.state.firstName}
-                          onChange={this.handleChange}
-                        />
-                        <br/>
-                        <button className="modalButton">Save</button>
-                      </form>
-                    </div>
-                  </Popup>
+                  {this.state.editField !== 'name' ?
+                    <MyProfileName
+                      editField={this.editField}
+                      gangster={this.props.gangster}
+                    />
+                    :
+                    <MyProfileEditName
+                      updateData={this.updateData}
+                      firstName={this.state.gangster.first_name}
+                      exitEditMode={this.exitEditMode}
+                    />}
 
                   <div className="stars"><StarsRating rating={gangster.rating}
                                                       gangsterId={gangster.id}

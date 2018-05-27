@@ -19,15 +19,6 @@ class MyProfile extends React.Component {
     }
   }
 
-  updateFirstName = (newName) => {
-    const newGangster = this.state.gangster
-
-    newGangster.first_name = newName
-    this.setState({
-      gangster: newGangster
-    })
-  }
-
 
 render() {
 
@@ -39,10 +30,10 @@ render() {
 
           (this.state.gangster.description !== '' ?
             <MyProfileEdit
+              gangster={this.state.gangster}/>
+            : <MyProfileForm
               gangster={this.state.gangster}
-              firstName={this.state.firstName}
-              updateFirstName={this.updateFirstName}/>
-            : <MyProfileForm/>)
+            />)
         }
       </div>
       )
