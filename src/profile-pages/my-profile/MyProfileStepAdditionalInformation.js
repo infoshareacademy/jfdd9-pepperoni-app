@@ -1,7 +1,7 @@
 import React from 'react'
 import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
-import { withRouter } from 'react-router-dom'
+import {Link, withRouter } from 'react-router-dom'
 import firebase from 'firebase'
 import {withUser} from "../../contexts/User";
 
@@ -166,11 +166,11 @@ class MyProfileStepAdditionalInformation extends React.Component {
               style={{backgroundColor: '#4b5062'}}>
               Update your profile
             </button>)
-            : (<button onClick={this.props.sendDataToFirebase}
+            : (<Link to="/myprofile/"><button onClick={this.props.sendDataToFirebase}
               className="myProfileNextButton"
               style={{backgroundColor: '#E2083C'}}>
              Update your profile
-            </button>)
+            </button></Link>)
         }
       </div>
     )
