@@ -8,6 +8,12 @@ import moment from 'moment';
 import 'react-table/react-table.css';
 import './react-table-ND.css'
 
+const Style = {
+  width: '80%',
+  fontSize: '1.2rem',
+  margin: '2px auto',
+}
+
 const h2 = {
   margin: '30px auto',
   textAlign: 'center',
@@ -50,8 +56,8 @@ class MyOrders extends React.Component {
     console.log(gangsters)
 
 
-    const myOrdersAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email)
-    const myJobsAfterFiltering = jobs !== null && jobs.filter(job => (job.gangster === this.props.user.email) && (job.gangster !== job.employer))
+    const myOrdersAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email.trim())
+    const myJobsAfterFiltering = jobs !== null && jobs.filter(job => (job.gangster === this.props.user.email.trim()) && (job.gangster !== job.employer))
 
 
     console.log('myjobs', myJobsAfterFiltering);
@@ -227,12 +233,12 @@ class MyOrders extends React.Component {
       }
     ]
     return (
-      <div>
+      <div style={Style}>
         {error && <p>{error.message}</p>}
         {fetching && <p>Loading jobs...</p>}
 
         {!fetching && myOrdersAfterFiltering.length === 0 &&
-        <h2>We're sorry, there are no job at the moment for you</h2>}
+        <h2>You don't have any jobs or orders</h2>}
 
         {/*{jobsAfterFiltering && gangsters && ....}*/}
         <h2 style={h2}>MY ORDERS </h2>
