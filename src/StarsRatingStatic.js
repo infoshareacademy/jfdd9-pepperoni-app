@@ -5,6 +5,7 @@ const stars = Array(5).fill('☆')
 
 
 class StarsRatingStatic extends React.Component {
+  gangsterRatings = firebase.database().ref('/gangsters/'+ this.props.gangsterId+'/ratings');
 
   render() {
     return (

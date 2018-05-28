@@ -110,7 +110,7 @@ class MyProfileEdit extends React.Component {
                     />}
                     <div className="stars">
                       <StarsRatingStatic
-                        rating={gangster.rating}
+                        rating={gangster.avgRating}
                         gangsterId={gangster.id}
                       />
                     </div>
