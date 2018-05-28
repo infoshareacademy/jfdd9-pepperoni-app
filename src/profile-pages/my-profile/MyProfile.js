@@ -10,6 +10,7 @@ import MyProfileEdit from "./MyProfileEdit"
 class MyProfile extends React.Component {
   state = {
     gangster: null,
+    isProfileComplete: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -28,12 +29,14 @@ render() {
           <div>Fetching data...</div>
           :
 
-          (this.state.gangster.description !== '' || this.state.gangster.description !== undefined ?
+          (this.state.gangster.description === null || this.state.gangster.description === '' || typeof(this.state.gangster.description) === 'undefined'?
+            <MyProfileForm
+              gangster={this.state.gangster}
+            />
+            :
             <MyProfileEdit
               gangster={this.state.gangster}/>
-            : <MyProfileForm
-              gangster={this.state.gangster}
-            />)
+            )
         }
       </div>
       )
