@@ -42,6 +42,7 @@ class MyOrders extends React.Component {
 
     firebase.database().ref('/jobs/' + data.original.id).update({
       accepted: true,
+      done:true,
 
     })
   };
