@@ -10,7 +10,7 @@ import MyProfileEdit from "./MyProfileEdit"
 class MyProfile extends React.Component {
   state = {
     gangster: null,
-    isProfileComplete: false,
+    isIncomplete: true,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -18,6 +18,12 @@ class MyProfile extends React.Component {
     return {
       gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid),
     }
+  }
+
+  markProfileAsCompleted = () => {
+    this.setState({
+      isIncomplete: false
+    })
   }
 
 
@@ -30,9 +36,14 @@ render() {
           :
 
           (this.state.gangster.description === null || this.state.gangster.description === '' || typeof(this.state.gangster.description) === 'undefined'?
-            <MyProfileForm
-              gangster={this.state.gangster}
-            />
+
+              (!this.state.isIncomplete
+                ? <p>You have successfully updated your profile. Please give us a minute to process your new data</p>
+                :
+                <MyProfileForm
+                gangster={this.state.gangster}
+                markProfileAsCompleted={this.markProfileAsCompleted}
+                />)
             :
             <MyProfileEdit
               gangster={this.state.gangster}/>

@@ -90,6 +90,7 @@ class MyProfileForm extends React.Component {
       opinions: '',
     })
 
+    this.props.markProfileAsCompleted()
   }
 
   render() {
