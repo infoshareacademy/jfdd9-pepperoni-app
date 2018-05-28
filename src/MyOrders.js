@@ -46,7 +46,6 @@ class MyOrders extends React.Component {
     console.log(gangsters)
 
 
-
     const myOrdersAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email)
     const myJobsAfterFiltering = jobs !== null && jobs.filter(job => (job.gangster === this.props.user.email) && (job.gangster !== job.employer))
 

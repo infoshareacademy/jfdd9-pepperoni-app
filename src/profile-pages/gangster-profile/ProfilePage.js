@@ -91,10 +91,6 @@ class ProfilePage extends React.Component {
                 <h2>My experience</h2>
                 <p className="lineSeparated">{gangster.experience}</p>
 
-                <h2>They recommend me</h2>
-                <p className="lineSeparated">{gangster.opinions}</p>
-
-
               </div>
             )
         }
