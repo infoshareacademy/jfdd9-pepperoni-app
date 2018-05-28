@@ -17,7 +17,9 @@ class StarsRating extends React.Component {
 
   render() {
     return (
-     stars.map((star, index) => index < this.props.rating ? <span key={index} onClick={() => this.onClickHandler(index, this.props.gangsterId)}>★</span> : <span key={index} onClick={() =>this.onClickHandler(index, this.props.gangsterId)}>☆</span>)
+     stars.map((star, index) => index < this.props.rating
+       ? <span key={index} style={{cursor: 'pointer'}} onClick={() => this.onClickHandler(index, this.props.gangsterId)}>★</span>
+       : <span key={index} style={{cursor: 'pointer'}} onClick={() =>this.onClickHandler(index, this.props.gangsterId)}>☆</span>)
     )
   }
 }
