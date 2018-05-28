@@ -47,10 +47,8 @@ class ProfilePage extends React.Component {
   componentWillUnmount() {
     clearInterval(this.interval);
   }
-
   render() {
     const gangster = this.state.gangster
-
     return (
       <div className="profilePage">
         {
