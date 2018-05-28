@@ -20,7 +20,6 @@ export class GangstersProvider extends Component {
       error: null
     })
 
-
     firebase.database().ref('/gangsters').once('value').then(
       snapshot => this.setState({
         data: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),

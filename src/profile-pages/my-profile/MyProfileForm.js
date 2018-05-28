@@ -75,8 +75,8 @@ class MyProfileForm extends React.Component {
 }
 
   sendDataToFirebase = () => {
-    const gangsterRef = firebase.database().ref('/gangsters/' + this.props.user.uid)
-    gangsterRef.set({
+    const userId = this.props.user.uid
+    const completeGangsterData = {
       availability: this.state.availability,
       description: this.state.description,
       experience: this.state.experience,
@@ -88,9 +88,16 @@ class MyProfileForm extends React.Component {
       rating: 0,
       email: this.props.user.email,
       opinions: '',
+    }
+    this.props.waitingForFirebaseToSave()
+    const gangsterRef = firebase.database().ref('/gangsters/' + userId)
+    const that = this
+    gangsterRef.set(completeGangsterData).then(function() {
+      that.props.updateGangster(userId, completeGangsterData)
+      that.props.markProfileAsCompleted()
     })
 
-    this.props.markProfileAsCompleted()
+
   }
 
   render() {
