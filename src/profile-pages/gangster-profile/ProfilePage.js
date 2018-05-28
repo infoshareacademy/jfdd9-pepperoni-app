@@ -81,7 +81,7 @@ class ProfilePage extends React.Component {
 
                 <h3 className="lineSeparated">City: {gangster.hometown}</h3>
 
-                <h3>Availability: </h3>
+                <h2>Availability</h2>
                 <p className="lineSeparated">{gangster.availability.join(', ')}</p>
 
 
