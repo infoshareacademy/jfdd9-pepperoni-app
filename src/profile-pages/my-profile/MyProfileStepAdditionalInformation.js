@@ -75,6 +75,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
   finishUpdatingProfile = () => {
     this.props.sendDataToFirebase()
 
+
     this.props.history.push('/myprofile/')
 
   }
