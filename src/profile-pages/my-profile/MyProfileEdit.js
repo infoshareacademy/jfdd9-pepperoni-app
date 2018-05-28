@@ -1,5 +1,4 @@
 import React from 'react'
-import StarsRating from "../../StarsRating";
 import { withGangsters } from "../../contexts/Gangsters";
 import { withUser} from "../../contexts/User";
 import '../profile.css'
@@ -20,6 +19,7 @@ import MyProfileExperience from "./MyProfileEditExperience";
 import MyProfileEditExperience from "./MyProfileExperience";
 import MyProfileAvailability from "./MyProfileAvailability";
 import MyProfileEditAvailability from "./MyProfileEditAvailability";
+import StarsRatingStatic from "../../StarsRatingStatic";
 
 class MyProfileEdit extends React.Component {
   state = {
@@ -108,10 +108,12 @@ class MyProfileEdit extends React.Component {
                       firstName={this.state.gangster.first_name}
                       exitEditMode={this.exitEditMode}
                     />}
-
-                  <div className="stars"><StarsRating rating={gangster.rating}
-                                                      gangsterId={gangster.id}
-                  /></div>
+                    <div className="stars">
+                      <StarsRatingStatic
+                        rating={gangster.rating}
+                        gangsterId={gangster.id}
+                      />
+                    </div>
                 </div>
 
                 {this.state.editField !== 'image' ?
