@@ -210,10 +210,6 @@ class MyProfileEdit extends React.Component {
                     exitEditMode={this.exitEditMode}
                   />}
 
-
-                <h2>They recommend me</h2>
-                <p className="lineSeparated">{gangster.opinions === '' ? <span>There are no opinions yet</span> : gangster.opinions}</p>
-
               </div>
             )
         }
