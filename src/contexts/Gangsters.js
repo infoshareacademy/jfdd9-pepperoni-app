@@ -20,17 +20,12 @@ export class GangstersProvider extends Component {
       error: null
     })
 
-    firebase.database().ref('/gangsters').once('value').then(
-      snapshot => this.setState({
-        data: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
-        uniqueTags: Array.from(new Set(Object.entries(snapshot.val() || {}).map(([, {tags} ]) => tags).reduce((prev, next) => prev.concat(next || [])))),
-        fetching: false
-      })
-    ).catch(
-      error => this.setState({
-        error,
-        fetching: false
-      })
+    firebase.database().ref('/gangsters').on('value',
+        snapshot => this.setState({
+          data: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
+          uniqueTags: Array.from(new Set(Object.entries(snapshot.val() || {}).map(([, {tags} ]) => tags).reduce((prev, next) => prev.concat(next || [])))),
+          fetching: false
+        })
     )
   }
 
