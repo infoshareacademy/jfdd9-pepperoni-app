@@ -1,27 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 
 const Style = {
   width: '80%',
   fontSize: '1.2rem',
-  marginLeft: '100px',
+  margin: '2px auto'
 }
 
 class ThankYouPage extends React.Component {
+
+  goBackToGangster = () => {
+    this.props.history.go(-2)
+  }
+
   render() {
     return (
       <div style={Style}>
         <div>
-        </div>}
-      <h1>Thank You!</h1>
-      <h2>You have successfully submitted your order.</h2>
-        <div>
-          <Link to=""><button>Book this gangster again</button></Link>
-          <Link to=""><button>See a summary of your orders</button></Link>
-        </div>}
+          <br/>
+          <h2>You have successfully submitted your order.</h2>
+          <br/>
+          <button style={{maxWidth: '200px', marginRight: '3%'}} onClick={this.goBackToGangster}>Book this gangster again</button>
+          <Link to="/myorder"><button style={{maxWidth: '200px'}}>See a summary of your orders</button></Link>
+         </div>
       </div>
     )
   }
 }
 
-export default ThankYouPage
+export default withRouter(ThankYouPage)

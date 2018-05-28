@@ -64,7 +64,7 @@ class ProfilePage extends React.Component {
 
                 <div className="headerContainer">
                   <h1 className="header">{gangster.first_name}</h1>
-                  <div className="stars"><StarsRating rating={gangster.rating}
+                  <div className="stars"><StarsRating rating={gangster.avgRating}
                                                       gangsterId={gangster.id}
                   /></div>
                 </div>
@@ -81,7 +81,7 @@ class ProfilePage extends React.Component {
 
                 <h3 className="lineSeparated">City: {gangster.hometown}</h3>
 
-                <h3>Availability: </h3>
+                <h2>Availability</h2>
                 <p className="lineSeparated">{gangster.availability.join(', ')}</p>
 
 
@@ -90,10 +90,6 @@ class ProfilePage extends React.Component {
 
                 <h2>My experience</h2>
                 <p className="lineSeparated">{gangster.experience}</p>
-
-                <h2>They recommend me</h2>
-                <p className="lineSeparated">{gangster.opinions}</p>
-
 
               </div>
             )

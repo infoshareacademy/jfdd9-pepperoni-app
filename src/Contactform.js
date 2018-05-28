@@ -43,7 +43,6 @@ class ContactForm extends Component {
   }
 
   handleTagChange = event => {
-    console.log(event.target.value)
     this.setState({
       selectedTag: event.target.value
     })

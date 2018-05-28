@@ -23,15 +23,18 @@ exports.countAverageRating = functions.database.ref('/gangsters/{gangsterId}/rat
   .onCreate((snapshot, context) => {
     // const rating = snapshot.val();
     const gangsterId = context.params.gangsterId;
-    console.log(gangsterId);
+    //console.log(gangsterId);
 
     return admin.database().ref('/gangsters/' + gangsterId + '/ratings').once('value').then((snapshot) => {
       const values = Object.values(snapshot.val() || {});
-      console.log(values);
-      return admin.database().ref('/gangsters/' + gangsterId + '/avgRating').set(
-        values.reduce((total, next) => total + next, 0) / values.length
+      //console.log(values);
+
+     return admin.database().ref('/gangsters/' + gangsterId + '/avgRating').set(
+         Math.round(values.reduce((total, next) => total + next, 0) / values.length)
       ).then(
         val => console.log(val)
+
       )
     })
+
 });

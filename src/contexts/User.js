@@ -23,20 +23,6 @@ export class UserProvider extends Component {
     signUp: (username, password) => {
       return firebase.auth().createUserWithEmailAndPassword(username, password).then(
         (data) => {
-          console.log(data.user.uid, data.user.email);
-          // firebase.database().ref('/gangsters/' + data.user.uid).set({
-          //   email: data.user.email,
-          //   availability: [],
-          //   description: '',
-          //   experience: '',
-          //   first_name: '',
-          //   gender: '',
-          //   hometown: '',
-          //   image: '',
-          //   opinions: '',
-          //   rating: 0,
-          //   tags: [],
-          // })
           return data
         }
       )

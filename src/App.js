@@ -31,9 +31,6 @@ class App extends Component {
             <Router>
               <div className="App">
                 <NavBar/>
-                {/*<p>*/}
-                  {/*logged in as: {this.props.user.email}) <button onClick={this.props.signOut}>Sign out</button>*/}
-                {/*</p>*/}
                 <Route exact path="/" component={MainSearchEngine}/>
                 <Route path="/search-results" component={SearchResults}/>
                 <Route path="/profile/:gangsterId" component={ProfilePage}/>
