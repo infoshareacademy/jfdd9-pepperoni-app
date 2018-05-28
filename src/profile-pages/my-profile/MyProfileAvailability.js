@@ -14,7 +14,7 @@ class MyProfileAvailability extends React.Component {
           src={editIcon}
           alt="Edit field"
           onClick={() => this.props.editField("availability")}/>
-        <h2 style={{display: 'inline-block'}}>Availability: </h2>
+        <h2 style={{display: 'inline-block'}}>Availability</h2>
         <p className="lineSeparated">{this.props.gangster.availability.join(', ')}</p>
       </div>
 
