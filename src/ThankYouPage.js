@@ -5,11 +5,10 @@ import { Link, withRouter } from 'react-router-dom'
 const Style = {
   width: '80%',
   fontSize: '1.2rem',
-  marginLeft: '100px',
+  margin: '2px auto'
 }
 
 class ThankYouPage extends React.Component {
-
 
   goBackToGangster = () => {
     this.props.history.go(-2)
@@ -19,13 +18,12 @@ class ThankYouPage extends React.Component {
     return (
       <div style={Style}>
         <div>
-        </div>
-      <h1>Thank You!</h1>
-      <h2>You have successfully submitted your order.</h2>
-        <div>
-          <button onClick={this.goBackToGangster}>Book this gangster again</button>
-          <Link to=""><button>See a summary of your orders</button></Link>
-        </div>
+          <br/>
+          <h2>You have successfully submitted your order.</h2>
+          <br/>
+          <button style={{maxWidth: '200px', marginRight: '3%'}} onClick={this.goBackToGangster}>Book this gangster again</button>
+          <Link to="/myorder"><button style={{maxWidth: '200px'}}>See a summary of your orders</button></Link>
+         </div>
       </div>
     )
   }
