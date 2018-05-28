@@ -80,7 +80,7 @@ class MyOrders extends React.Component {
               borderRadius: "2px"
             }}
           >
-            {moment(Date(row.value)).format()}
+            {moment(Date(row.value)).format("YYYY-MM-DD")}
           </div>
       )
       }
@@ -100,7 +100,7 @@ class MyOrders extends React.Component {
               borderRadius: "2px"
             }}
           >
-            {moment(Date(row.value)).format()}
+            {moment(Date(row.value)).format("YYYY-MM-DD")}
           </div>
         )
       }
@@ -129,6 +129,7 @@ class MyOrders extends React.Component {
         <h2>We're sorry, there are no job at the moment for you</h2>}
 
         {/*{jobsAfterFiltering && gangsters && ....}*/}
+        <h2>my orders </h2>
         <ReactTable
           data={myOrdersAfterFiltering}
           columns={columns}
