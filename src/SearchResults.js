@@ -1,7 +1,7 @@
 import React from 'react'
-import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 import {withGangsters} from "./contexts/Gangsters";
+import StarsRatingStatic from "./StarsRatingStatic";
 
 const listStyle = {
   fontSize: '25px',
@@ -99,7 +99,7 @@ class SearchResults extends React.Component {
                     <p style={listStyle}>
                       <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                       </Link>
-                      <StarsRating rating={gangster.rating}/>
+                      <StarsRatingStatic rating={gangster.rating}/>
                       <br/>{gangster.hometown}
                       <br/>
                       <span style={divTagStyle}>
