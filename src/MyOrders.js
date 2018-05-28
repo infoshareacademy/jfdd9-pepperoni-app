@@ -30,7 +30,8 @@ class MyOrders extends React.Component {
 
 
     const myOrdersAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email)
-    const myJobsAfterFiltering = jobs !== null && jobs.filter(job => job.gangster === this.props.user.email)
+    const myJobsAfterFiltering = jobs !== null && jobs.filter(job => (job.gangster === this.props.user.email) && (job.gangster !== job.employer))
+
 
     console.log('myjobs', myJobsAfterFiltering);
 
@@ -69,19 +70,19 @@ class MyOrders extends React.Component {
       Header: 'Date of job',
       accessor: 'dateOfJob',
       Cell: row => {
-        console.log(row)
-        return (
-          <div
+        // console.log(row)
+        // console.log(moment(Date(row.value)))
+          return (
+            <div
             style={{
               width: "100%",
               height: "100%",
-              backgroundColor: "#dadada",
               borderRadius: "2px"
             }}
           >
-            {moment(row.value).format()}
+            {moment(Date(row.value)).format()}
           </div>
-        )
+      )
       }
       //Cell: props => <span className='number'>{props.value}</span> // Custom cell components!
     }, {
@@ -89,6 +90,20 @@ class MyOrders extends React.Component {
       Header: 'Date of order',
       accessor: 'dateOfOrder',
       //accessor: d => d.friend.name // Custom value accessors!
+      Cell: row => {
+        console.log(row)
+        return (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "2px"
+            }}
+          >
+            {moment(Date(row.value)).format()}
+          </div>
+        )
+      }
     }, {
       //Header: props => <span>Friend Age</span>, // Custom header components!
       Header: 'Done',

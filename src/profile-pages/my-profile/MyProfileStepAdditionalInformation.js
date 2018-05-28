@@ -1,7 +1,9 @@
 import React from 'react'
 import {withGangsters} from "../../contexts/Gangsters";
 import '../profile.css'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import firebase from 'firebase'
+import {withUser} from "../../contexts/User";
 
 class MyProfileStepAdditionalInformation extends React.Component {
   state = {
@@ -9,6 +11,9 @@ class MyProfileStepAdditionalInformation extends React.Component {
     description: '',
     experienceFormError: null,
     descriptionFormError: null,
+    file: null,
+    imagePreviewUrl: '',
+    processingImage: false,
   }
 
   handleChange = event => {
@@ -28,6 +33,43 @@ class MyProfileStepAdditionalInformation extends React.Component {
         descriptionFormError: null
       })
     }
+  }
+
+  getPhoto = event => {
+    event.preventDefault()
+    let reader = new FileReader();
+    let file = event.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result,
+        processingImage: true,
+      });
+    }
+
+    reader.readAsDataURL(file);
+
+    this.uploadPhotoToFirebase(file)
+  }
+
+  uploadPhotoToFirebase = photo => {
+    const storageRef = firebase.storage().ref('/photos');
+    const email = this.props.user.email
+    const photoRef = storageRef.child(email)
+    const updateStateURL = this.props.updateStateURL
+    const that = this
+
+
+    photoRef.put(photo).then(function(){
+      const imageRef = firebase.storage().ref('/photos/' + email)
+      imageRef.getDownloadURL().then(function(url){
+        updateStateURL(url)
+        that.setState({
+          processingImage: false,
+        })
+      })
+    })
   }
 
   handleSubmit = event => {
@@ -62,15 +104,22 @@ class MyProfileStepAdditionalInformation extends React.Component {
   }
 
   render() {
+    let {imagePreviewUrl} = this.state
+    let imagePreview = null
+    if (imagePreviewUrl) {
+      imagePreview = (<img src={imagePreviewUrl} className="previewedImage"/>)
+    } else {
+      imagePreview = (<p className="imagePreviewText">Please upload your image</p>)
+    }
+
     return (
       <div>
         <h2>4. Additional information</h2>
         <form onSubmit={this.handleSubmit}>
-          <strong>Experience</strong>
+          <strong>Experience: {this.props.experience}</strong>
           <br/>
-          <input
+          <textarea
             className="textareaStyle"
-            type="textarea"
             name="experience"
             value={this.state.experience}
             onChange={this.handleChange}
@@ -78,22 +127,51 @@ class MyProfileStepAdditionalInformation extends React.Component {
           { this.state.experienceFormError && <p>{this.state.experienceFormError.message}</p>}
           <br/>
           <br/>
-          <strong>Description</strong>
+          <strong>Description: {this.props.description}</strong>
           <br/>
-          <input
+          <textarea
             className="textareaStyle"
-            type="textarea"
             name="description"
             value={this.state.description}
             onChange={this.handleChange}
           />
+          { this.state.descriptionFormError && <p>{this.state.descriptionFormError.message}</p>}
+          <br/>
+          <button style={{width: '150px'}}>Add</button>
+          <br/>
           <br/>
           <strong>Add your photo</strong>
+          <br/>
+          <br/>
           <input
             type="file"
             id="input"
             onChange={this.getPhoto}/>
+          <br/>
         </form>
+        <br/>
+        <div className="imgPreview">
+          {imagePreview}
+        </div>
+
+        <button onClick={() => this.props.history.goBack()}
+                className="myProfileBackButton"
+                style={{backgroundColor: '#4b5062'}}>
+          Go back
+        </button>
+        {
+          (this.props.experience === '' || this.state.processingImage === true)
+            ? (<button
+              className="myProfileNextButton"
+              style={{backgroundColor: '#4b5062'}}>
+              Update your profile
+            </button>)
+            : (<button onClick={this.props.sendDataToFirebase}
+              className="myProfileNextButton"
+              style={{backgroundColor: '#E2083C'}}>
+             Update your profile
+            </button>)
+        }
       </div>
     )
   }
@@ -101,4 +179,4 @@ class MyProfileStepAdditionalInformation extends React.Component {
 }
 
 
-export default withRouter(withGangsters(MyProfileStepAdditionalInformation))
+export default withRouter(withUser(withGangsters(MyProfileStepAdditionalInformation)))

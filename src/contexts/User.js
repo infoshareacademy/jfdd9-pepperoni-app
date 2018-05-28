@@ -26,7 +26,6 @@ export class UserProvider extends Component {
           console.log(data.user.uid, data.user.email);
           firebase.database().ref('/gangsters/' + data.user.uid).set({
             email: data.user.email,
-            tags: ['newbe']
           })
           return data
         }
