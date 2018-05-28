@@ -10,7 +10,7 @@ class StarsRating extends React.Component {
   gangsterRatings = firebase.database().ref('/gangsters/'+ this.props.gangsterId+'/ratings');
   onClickHandler(index, gangsterId) {
     const newRating = this.gangsterRatings.push()
-     newRating.set({value: index +1})
+     newRating.set(index +1)
 
     console.log(index, gangsterId)
   }
