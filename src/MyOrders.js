@@ -7,6 +7,22 @@ import ReactTable from "react-table"
 import moment from 'moment'
 import 'react-table/react-table.css'
 
+const formSectionLayer = {
+  maxWidth: '60rem',
+  margin: '0 auto',
+  padding: '1rem',
+  textAlign: 'center',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  lineHeight: '2rem',
+  border: 'solid 1px rgba(31, 31, 31, 0.83)',
+  borderRadius: '10px',
+  backgroundColor: 'rgba(15, 15, 15, 0.83)',
+  marginTop: '2rem',
+}
+
 class MyOrders extends React.Component {
 
   handleClick = (event,data) => {
@@ -80,7 +96,7 @@ class MyOrders extends React.Component {
               borderRadius: "2px"
             }}
           >
-            {moment(Date(row.value)).format()}
+            {moment(Date(row.value)).format("YYYY-MM-DD")}
           </div>
       )
       }
@@ -100,7 +116,7 @@ class MyOrders extends React.Component {
               borderRadius: "2px"
             }}
           >
-            {moment(Date(row.value)).format()}
+            {moment(Date(row.value)).format("YYYY-MM-DD")}
           </div>
         )
       }
@@ -129,13 +145,16 @@ class MyOrders extends React.Component {
         <h2>We're sorry, there are no job at the moment for you</h2>}
 
         {/*{jobsAfterFiltering && gangsters && ....}*/}
+        <h2>MY ORDERS </h2>
         <ReactTable
+          style={formSectionLayer}
           data={myOrdersAfterFiltering}
           columns={columns}
           pageSize = {5}
         />
-        <h2>my jobs </h2>
+        <h2>MY JOBS </h2>
         <ReactTable
+          style={formSectionLayer}
           data={myJobsAfterFiltering}
           columns={columns}
           pageSize = {5}
