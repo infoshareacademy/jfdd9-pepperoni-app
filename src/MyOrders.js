@@ -137,6 +137,10 @@ class MyOrders extends React.Component {
             </div>
           )
         }
+      },
+      {
+        Header: 'Message',
+        accessor: 'message',
       }
     ]
     const columns2 = [{
