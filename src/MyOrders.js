@@ -3,9 +3,11 @@ import firebase from 'firebase'
 import {withJobs} from "./contexts/Jobs";
 import {withGangsters} from "./contexts/Gangsters";
 import {withUser} from "./contexts/User";
-import ReactTable from "react-table"
-import moment from 'moment'
-import 'react-table/react-table.css'
+import ReactTable from "react-table";
+import moment from 'moment';
+import 'react-table/react-table.css';
+import './react-table-ND.css'
+
 
 const formSectionLayer = {
   maxWidth: '60rem',
@@ -124,6 +126,23 @@ class MyOrders extends React.Component {
       //Header: props => <span>Friend Age</span>, // Custom header components!
       Header: 'Done',
       accessor: 'done',
+      Cell: row => {
+        console.log('komórka', row, this.props)
+        if(this.props.user.email === row.original.employer) {
+          return (
+            <div>
+              {row.original.done ? 'Yes' : 'No'}
+            </div>
+          )
+        }
+
+
+        return (
+          <div>
+            <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event,row))} />
+          </div>
+        )
+      }
     },{
       Header: 'Employer',
       accessor: 'employer',
