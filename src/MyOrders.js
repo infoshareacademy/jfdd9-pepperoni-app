@@ -57,167 +57,171 @@ class MyOrders extends React.Component {
     console.log('myjobs', myJobsAfterFiltering);
 
     const columns1 = [{
-      Header: 'Accepted',
-      accessor: 'accepted',
-      Cell: row => {
-        console.log('komórka', row, this.props)
-        if (this.props.user.email === row.original.employer) {
-          return (
-            <div>
-              {row.original.accepted ? 'Yes' : 'No'}
-            </div>
-          )
-        }
-        return (
-          <div>
-            <input type="checkbox" checked={row.original.accepted} onClick={((event) => this.handleClick(event, row))}/>
-          </div>
-        )
-      }// String-based value accessors!
-    }, {
-      Header: 'Date of job',
-      accessor: 'dateOfJob',
-      Cell: row => {
-        // console.log(row)
-        // console.log(moment(Date(row.value)))
-        return (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "2px"
-            }}>
-            {moment(Date(row.value)).format("YYYY-MM-DD")}
-          </div>
-        )
-      }
-    }, {
-      Header: 'Date of order',
-      accessor: 'dateOfOrder',
-      Cell: row => {
-        console.log(row)
-        return (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "2px"
-            }}
-          >
-            {moment(Date(row.value)).format("YYYY-MM-DD")}
-          </div>
-        )
-      }
-    }, {
-      Header: 'Done',
-      accessor: 'done',
-      Cell: row => {
-        console.log('komórka', row, this.props)
-        if (this.props.user.email === row.original.employer) {
-          return (
-            <div>
-              {row.original.done ? 'Yes' : 'No'}
-            </div>
-          )
-        }
-        return (
-          <div>
-            <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event, row))}/>
-          </div>
-        )
-      }
-    }, {
-      Header: 'Employer',
-      accessor: 'employer',
-    }, {
-      Header: 'Gangster',
-      accessor: 'gangster',
-    }, {
       Header: 'Job type',
       accessor: 'jobType',
-    }]
-
+    },
+      {
+        Header: 'Gangster',
+        accessor: 'gangster',
+      },
+      {
+        Header: 'Date of job',
+        accessor: 'dateOfJob',
+        Cell: row => {
+          // console.log(row)
+          // console.log(moment(Date(row.value)))
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "2px"
+              }}>
+              {moment(Date(row.value)).format("YYYY-MM-DD")}
+            </div>
+          )
+        }
+      },
+      {
+        Header: 'Done',
+        accessor: 'done',
+        Cell: row => {
+          console.log('komórka', row, this.props)
+          if (this.props.user.email === row.original.employer) {
+            return (
+              <div>
+                {row.original.done ? 'Yes' : 'No'}
+              </div>
+            )
+          }
+          return (
+            <div>
+              <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event, row))}/>
+            </div>
+          )
+        }
+      },
+      {
+        Header: 'Accepted',
+        accessor: 'accepted',
+        Cell: row => {
+          console.log('komórka', row, this.props)
+          if (this.props.user.email === row.original.employer) {
+            return (
+              <div>
+                {row.original.accepted ? 'Yes' : 'No'}
+              </div>
+            )
+          }
+          return (
+            <div>
+              <input type="checkbox" checked={row.original.accepted}
+                     onClick={((event) => this.handleClick(event, row))}/>
+            </div>
+          )
+        }// String-based value accessors!
+      }, {
+        Header: 'Date of order',
+        accessor: 'dateOfOrder',
+        Cell: row => {
+          console.log(row)
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "2px"
+              }}
+            >
+              {moment(Date(row.value)).format("YYYY-MM-DD")}
+            </div>
+          )
+        }
+      }
+    ]
     const columns2 = [{
-      Header: 'Accepted',
-      accessor: 'accepted',
-      Cell: row => {
-        console.log('komórka', row, this.props)
-        if (this.props.user.email === row.original.employer) {
-          return (
-            <div>
-              {row.original.accepted ? 'Yes' : 'No'}
-            </div>
-          )
-        }
-        return (
-          <div>
-            <input type="checkbox" checked={row.original.accepted} onClick={((event) => this.handleClick(event, row))}/>
-          </div>
-        )
-      }// String-based value accessors!
-    }, {
-      Header: 'Date of job',
-      accessor: 'dateOfJob',
-      Cell: row => {
-        // console.log(row)
-        // console.log(moment(Date(row.value)))
-        return (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "2px"
-            }}>
-            {moment(Date(row.value)).format("YYYY-MM-DD")}
-          </div>
-        )
-      }
-    }, {
-      Header: 'Date of order',
-      accessor: 'dateOfOrder',
-      Cell: row => {
-        console.log(row)
-        return (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "2px"
-            }}
-          >
-            {moment(Date(row.value)).format("YYYY-MM-DD")}
-          </div>
-        )
-      }
-    }, {
-      Header: 'Done',
-      accessor: 'done',
-      Cell: row => {
-        console.log('komórka', row, this.props)
-        if (this.props.user.email === row.original.employer) {
-          return (
-            <div>
-              {row.original.done ? 'Yes' : 'No'}
-            </div>
-          )
-        }
-        return (
-          <div>
-            <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event, row))}/>
-          </div>
-        )
-      }
-    }, {
-      Header: 'Employer',
-      accessor: 'employer',
-    }, {
-      Header: 'Gangster',
-      accessor: 'gangster',
-    }, {
       Header: 'Job type',
       accessor: 'jobType',
-    }]
-
+    },
+      {
+        Header: 'Employer',
+        accessor: 'employer',
+      },
+      {
+        Header: 'Date of job',
+        accessor: 'dateOfJob',
+        Cell: row => {
+          // console.log(row)
+          // console.log(moment(Date(row.value)))
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "2px"
+              }}>
+              {moment(Date(row.value)).format("YYYY-MM-DD")}
+            </div>
+          )
+        }
+      },
+      {
+        Header: 'Done',
+        accessor: 'done',
+        Cell: row => {
+          console.log('komórka', row, this.props)
+          if (this.props.user.email === row.original.employer) {
+            return (
+              <div>
+                {row.original.done ? 'Yes' : 'No'}
+              </div>
+            )
+          }
+          return (
+            <div>
+              <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event, row))}/>
+            </div>
+          )
+        }
+      },
+      {
+        Header: 'Accepted',
+        accessor: 'accepted',
+        Cell: row => {
+          console.log('komórka', row, this.props)
+          if (this.props.user.email === row.original.employer) {
+            return (
+              <div>
+                {row.original.accepted ? 'Yes' : 'No'}
+              </div>
+            )
+          }
+          return (
+            <div>
+              <input type="checkbox" checked={row.original.accepted}
+                     onClick={((event) => this.handleClick(event, row))}/>
+            </div>
+          )
+        }// String-based value accessors!
+      }, {
+        Header: 'Date of order',
+        accessor: 'dateOfOrder',
+        Cell: row => {
+          console.log(row)
+          return (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "2px"
+              }}
+            >
+              {moment(Date(row.value)).format("YYYY-MM-DD")}
+            </div>
+          )
+        }
+      }
+    ]
     return (
       <div>
         {error && <p>{error.message}</p>}
@@ -231,14 +235,14 @@ class MyOrders extends React.Component {
         <ReactTable
           style={formSectionLayer}
           data={myOrdersAfterFiltering}
-          columns={columns}
+          columns={columns1}
           pageSize={5}
         />
         <h2 style={h2}>MY JOBS </h2>
         <ReactTable
           style={formSectionLayer}
           data={myJobsAfterFiltering}
-          columns={columns}
+          columns={columns2}
           pageSize={5}
         />
       </div>
