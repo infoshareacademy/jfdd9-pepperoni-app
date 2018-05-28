@@ -86,6 +86,7 @@ class MyProfileForm extends React.Component {
       image: this.state.image,
       tags: this.state.selectedTags,
       rating: 0,
+      avgRating: 0,
       email: this.props.user.email,
       opinions: '',
     }
