@@ -24,7 +24,7 @@ export class GangstersProvider extends Component {
     firebase.database().ref('/gangsters').once('value').then(
       snapshot => this.setState({
         data: Object.entries(snapshot.val() || {}).map(([id, other ]) => ({id, ...other})),
-        uniqueTags: Array.from(new Set(Object.entries(snapshot.val() || {}).map(([, {tags} ]) => tags).reduce((prev, next) => prev.concat(next)))),
+        uniqueTags: Array.from(new Set(Object.entries(snapshot.val() || {}).map(([, {tags} ]) => tags).reduce((prev, next) => prev.concat(next || [])))),
         fetching: false
       })
     ).catch(
