@@ -12,7 +12,6 @@ const orderPageStyle = {
 class OrderPage extends React.Component {
   state = {
     gangster: null,
-
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -26,8 +25,6 @@ class OrderPage extends React.Component {
   addNewJob = (jobType, dateOfOrder, message) => {
     const dateOfJob = Math.floor(this.props.match.params.selectedDate/1000)
     const jobsRef = firebase.database().ref('/jobs')
-
-    console.log(dateOfJob, dateOfOrder, this.props.user.email, this.state.gangster.email, jobType, message)
 
     const newJob = jobsRef.push()
     newJob.set({

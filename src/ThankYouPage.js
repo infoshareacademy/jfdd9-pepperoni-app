@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 
 const Style = {
   width: '80%',
@@ -8,20 +9,26 @@ const Style = {
 }
 
 class ThankYouPage extends React.Component {
+
+
+  goBackToGangster = () => {
+    this.props.history.go(-2)
+  }
+
   render() {
     return (
       <div style={Style}>
         <div>
-        </div>}
+        </div>
       <h1>Thank You!</h1>
       <h2>You have successfully submitted your order.</h2>
         <div>
-          <Link to=""><button>Book this gangster again</button></Link>
+          <button onClick={this.goBackToGangster}>Book this gangster again</button>
           <Link to=""><button>See a summary of your orders</button></Link>
-        </div>}
+        </div>
       </div>
     )
   }
 }
 
-export default ThankYouPage
+export default withRouter(ThankYouPage)
