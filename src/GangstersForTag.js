@@ -1,7 +1,7 @@
 import React from 'react'
-import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 import {withGangsters} from "./contexts/Gangsters";
+import StarsRatingStatic from "./StarsRatingStatic";
 
 const gangstersForTagStyle = {
   width: '80%',
@@ -82,7 +82,7 @@ class GangstersForTag extends React.Component {
 
 
     function compareRatings(a,b) {
-      return b.rating - a.rating
+      return b.avgRating - a.avgRating
     }
 
 
@@ -97,14 +97,13 @@ class GangstersForTag extends React.Component {
             gangster => gangster.tags.includes(this.props.match.params.tagName)
           ).sort(compareRatings).map(
             gangster =>
-
               <div style={contenerStyle} key={gangster.id}>
                 <div>
                   <img style={imageStyle} src={gangster.image} alt={'face'}/>
                   <p style={listStyle}>
                     <Link to={'/profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                     </Link>
-                    <StarsRating rating={gangster.rating}/>
+                    <StarsRatingStatic rating={gangster.avgRating}/>
                     <br/>{gangster.hometown}
                     <br/>
                     <span style={divTagStyle}>
