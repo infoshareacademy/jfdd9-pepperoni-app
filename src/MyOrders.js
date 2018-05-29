@@ -66,6 +66,14 @@ class MyOrders extends React.Component {
     const columns1 = [{
       Header: 'Job type',
       accessor: 'jobType',
+      Cell: row => {
+        return (
+          <div style={{textTransform:"capitalize"}}
+            >
+            {row.value}
+          </div>
+        )
+      }
     },
       {
         Header: 'Gangster',
@@ -148,6 +156,18 @@ class MyOrders extends React.Component {
       {
         Header: 'Message',
         accessor: 'message',
+        Cell: row => {
+          return (
+            <div style={{
+              // overflow: "hidden",
+              // textOverflow: "ellipsis",
+            whiteSpace: 'normal'
+            }}
+            >
+              {row.value}
+            </div>
+          )
+        }
       }
     ]
     const columns2 = [{
