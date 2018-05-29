@@ -2,8 +2,6 @@ import React from 'react'
 import firebase from 'firebase'
 import Popup from "reactjs-popup";
 
-const BLACK_STAR = '<span>★</span>'
-const WHITE_STAR = '☆'
 const stars = Array(5).fill('☆')
 
 
@@ -12,8 +10,6 @@ class StarsRating extends React.Component {
   onClickHandler(index, gangsterId) {
     const newRating = this.gangsterRatings.push()
      newRating.set(index +1)
-
-    console.log(index, gangsterId)
   }
 
   render() {
