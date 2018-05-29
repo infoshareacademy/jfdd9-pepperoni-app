@@ -114,7 +114,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
     let {imagePreviewUrl} = this.state
     let imagePreview = null
     if (imagePreviewUrl) {
-      imagePreview = (<img src={imagePreviewUrl} className="previewedImage"/>)
+      imagePreview = (<img src={imagePreviewUrl} alt="Preview" className="previewedImage"/>)
     } else {
       imagePreview = (<p className="imagePreviewText">Please upload your image</p>)
     }
