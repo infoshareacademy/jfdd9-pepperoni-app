@@ -37,13 +37,15 @@ const formSectionLayer = {
 
 class MyOrders extends React.Component {
 
-  handleClick = (event, data) => {
-    console.log(event, data);
-
+  handleAcceptedClick = (event, data) => {
     firebase.database().ref('/jobs/' + data.original.id).update({
-      accepted: true,
-      done:true,
+      accepted:true,
+    })
+  };
 
+  handleDoneClick = (event, data) => {
+    firebase.database().ref('/jobs/' + data.original.id).update({
+      done:true,
     })
   };
 
@@ -103,7 +105,7 @@ class MyOrders extends React.Component {
           }
           return (
             <div>
-              <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event, row))}/>
+              <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleDoneClick(event, row))}/>
             </div>
           )
         }
@@ -123,7 +125,7 @@ class MyOrders extends React.Component {
           return (
             <div>
               <input type="checkbox" checked={row.original.accepted}
-                     onClick={((event) => this.handleClick(event, row))}/>
+                     onClick={((event) => this.handleAcceptedClick(event, row))}/>
             </div>
           )
         }// String-based value accessors!
@@ -190,7 +192,7 @@ class MyOrders extends React.Component {
           }
           return (
             <div>
-              <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleClick(event, row))}/>
+              <input type="checkbox" checked={row.original.done} onClick={((event) => this.handleDoneClick(event, row))}/>
             </div>
           )
         }
@@ -210,7 +212,7 @@ class MyOrders extends React.Component {
           return (
             <div>
               <input type="checkbox" checked={row.original.accepted}
-                     onClick={((event) => this.handleClick(event, row))}/>
+                     onClick={((event) => this.handleAcceptedClick(event, row))}/>
             </div>
           )
         }// String-based value accessors!
