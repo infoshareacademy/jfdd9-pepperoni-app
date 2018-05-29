@@ -72,6 +72,13 @@ class MyProfileStepAdditionalInformation extends React.Component {
     })
   }
 
+  finishUpdatingProfile = () => {
+    this.props.sendDataToFirebase()
+    this.props.history.push('/myprofile/')
+  }
+
+
+
   handleSubmit = event => {
     event.preventDefault()
 
@@ -166,7 +173,7 @@ class MyProfileStepAdditionalInformation extends React.Component {
               style={{backgroundColor: '#4b5062'}}>
               Update your profile
             </button>)
-            : (<button onClick={this.props.sendDataToFirebase}
+            : (<button onClick={this.finishUpdatingProfile}
               className="myProfileNextButton"
               style={{backgroundColor: '#E2083C'}}>
              Update your profile

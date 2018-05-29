@@ -1,7 +1,7 @@
 import React from 'react'
-import StarsRating from "./StarsRating";
 import {Link} from "react-router-dom";
 import {withGangsters} from "./contexts/Gangsters";
+import StarsRatingStatic from "./StarsRatingStatic";
 
 const listStyle = {
   fontSize: '25px',
@@ -74,7 +74,7 @@ class SearchResults extends React.Component {
     const gangsters = allUsers.filter(user => user.tags && user.tags.length>0 && user.hometown)
 
     function compareRatings(a,b) {
-      return b.rating - a.rating
+      return b.avgRating - a.avgRating
     }
 
   const gangstersAfterFiltering = gangsters !== null && gangsters.filter(
@@ -99,7 +99,7 @@ class SearchResults extends React.Component {
                     <p style={listStyle}>
                       <Link to={'profile/' + gangster.id} style={name}><strong >{gangster.first_name} </strong>
                       </Link>
-                      <StarsRating rating={gangster.rating}/>
+                      <StarsRatingStatic rating={gangster.avgRating} gangsterId={gangster.id}/>
                       <br/>{gangster.hometown}
                       <br/>
                       <span style={divTagStyle}>

@@ -9,31 +9,64 @@ import MyProfileEdit from "./MyProfileEdit"
 
 class MyProfile extends React.Component {
   state = {
-    gangster: null,
+    gangster: {id: 0},
+    waitingToUpdate: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const gangsters = nextProps.gangsters.data
-    return {
-      gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid),
+    const currentGangster = gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid)
+    if (typeof (currentGangster) !== 'undefined') {
+      return {
+        gangster: gangsters.find(gangster => gangster.id.toString() === firebase.auth().currentUser.uid),
+        }
+      } else {
+      return {
+        gangster: {id: 0},
+      }
     }
+  }
+
+  waitingForFirebaseToSave = () => {
+    this.setState({
+      waitingToUpdate: true
+    })
+  }
+
+  markProfileAsCompleted = () => {
+    this.setState({
+      waitingToUpdate: false
+    })
+  }
+
+  updateGangster = (userId, gangsterData) => {
+    this.setState({
+      gangster: {id: userId, ...gangsterData}
+    })
   }
 
 
 render() {
-
     return (
       <div>
-        {typeof(this.state.gangster) === 'undefined' ?
-          <div>Fetching data...</div>
-          :
+        {this.props.gangsters.fetching
+          ? <div>Fetching data...</div>
 
-          (this.state.gangster.description !== '' || this.state.gangster.description !== undefined ?
-            <MyProfileEdit
-              gangster={this.state.gangster}/>
-            : <MyProfileForm
-              gangster={this.state.gangster}
-            />)
+          : (this.state.gangster.id === 0 ?
+            ( this.state.waitingToUpdate ?
+              <div>We're updating your profile data...</div>
+              :
+                <MyProfileForm
+                gangster={this.state.gangster}
+                waitingForFirebaseToSave={this.waitingForFirebaseToSave}
+                markProfileAsCompleted={this.markProfileAsCompleted}
+                updateGangster={this.updateGangster}
+              />)
+          :
+              <MyProfileEdit
+                gangster={this.state.gangster}
+              />
+            )
         }
       </div>
       )
