@@ -13,13 +13,19 @@ export class UserProvider extends Component {
     signIn: (username, password) => {
       firebase.auth().signInWithEmailAndPassword(username, password).then(user => {
         //firebase.database().ref('/gangsters/' + user.uid).once()
-      } ).catch(
+      }).catch(
         error => this.setState({
           signInError: error
         })
       )
     },
-    signOut: () => firebase.auth().signOut(),
+    signOut: () => {
+      firebase.auth().signOut()
+      this.setState({
+        signInError: null,
+      })
+    },
+
     signUp: (username, password) => {
       return firebase.auth().createUserWithEmailAndPassword(username, password).then(
         (data) => {
