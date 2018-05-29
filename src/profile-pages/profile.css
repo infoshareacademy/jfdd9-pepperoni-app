@@ -175,6 +175,14 @@
     clear: both;
 }
 
+.react-datepicker__navigation--next {
+    right: -14px;
+}
+
+.react-datepicker__navigation--previous {
+    left: -14px;
+}
+
 /* STYLES FOR CHECKBOXES */
 
 .container {

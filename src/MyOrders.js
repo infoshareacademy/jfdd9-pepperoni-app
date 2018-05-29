@@ -56,14 +56,10 @@ class MyOrders extends React.Component {
     const fetching = this.props.gangsters.fetching
     const jobs = this.props.jobs.data
     const gangsters = this.props.gangsters.data;
-    console.log(gangsters)
 
 
     const myOrdersAfterFiltering = jobs !== null && jobs.filter(job => job.employer === this.props.user.email.trim())
     const myJobsAfterFiltering = jobs !== null && jobs.filter(job => (job.gangster === this.props.user.email.trim()) && (job.gangster !== job.employer))
-
-
-    console.log('myjobs', myJobsAfterFiltering);
 
     const columns1 = [{
       Header: 'Job type',
@@ -85,8 +81,6 @@ class MyOrders extends React.Component {
         Header: 'Date of job',
         accessor: 'dateOfJob',
         Cell: row => {
-          // console.log(row)
-          // console.log(moment(Date(row.value)))
           return (
             <div
               style={{
@@ -94,7 +88,7 @@ class MyOrders extends React.Component {
                 height: "100%",
                 borderRadius: "2px"
               }}>
-              {moment(Date(row.value)).format("YYYY-MM-DD")}
+              {moment(Date(row.value)).format("DD/MM/YYYY")}
             </div>
           )
         }
@@ -103,7 +97,6 @@ class MyOrders extends React.Component {
         Header: 'Done',
         accessor: 'done',
         Cell: row => {
-          console.log('komórka', row, this.props)
           if (this.props.user.email === row.original.employer) {
             return (
               <div>
@@ -122,7 +115,6 @@ class MyOrders extends React.Component {
         Header: 'Accepted',
         accessor: 'accepted',
         Cell: row => {
-          console.log('komórka', row, this.props)
           if (this.props.user.email === row.original.employer) {
             return (
               <div>
@@ -141,7 +133,6 @@ class MyOrders extends React.Component {
         Header: 'Date of order',
         accessor: 'dateOfOrder',
         Cell: row => {
-          console.log(row)
           return (
             <div
               style={{
@@ -150,7 +141,7 @@ class MyOrders extends React.Component {
                 borderRadius: "2px"
               }}
             >
-              {moment(Date(row.value)).format("YYYY-MM-DD")}
+              {moment(Date(row.value)).format("DD/MM/YYYY")}
             </div>
           )
         }
@@ -161,8 +152,6 @@ class MyOrders extends React.Component {
         Cell: row => {
           return (
             <div style={{
-              // overflow: "hidden",
-              // textOverflow: "ellipsis",
             whiteSpace: 'normal'
             }}
             >
@@ -175,6 +164,14 @@ class MyOrders extends React.Component {
     const columns2 = [{
       Header: 'Job type',
       accessor: 'jobType',
+      Cell: row => {
+        return (
+          <div style={{textTransform:"capitalize"}}
+          >
+            {row.value}
+          </div>
+        )
+      }
     },
       {
         Header: 'Employer',
@@ -184,8 +181,6 @@ class MyOrders extends React.Component {
         Header: 'Date of job',
         accessor: 'dateOfJob',
         Cell: row => {
-          // console.log(row)
-          // console.log(moment(Date(row.value)))
           return (
             <div
               style={{
@@ -193,7 +188,7 @@ class MyOrders extends React.Component {
                 height: "100%",
                 borderRadius: "2px"
               }}>
-              {moment(Date(row.value)).format("YYYY-MM-DD")}
+              {moment(Date(row.value)).format("DD/MM/YYYY")}
             </div>
           )
         }
@@ -202,7 +197,6 @@ class MyOrders extends React.Component {
         Header: 'Done',
         accessor: 'done',
         Cell: row => {
-          console.log('komórka', row, this.props)
           if (this.props.user.email === row.original.employer) {
             return (
               <div>
@@ -221,7 +215,6 @@ class MyOrders extends React.Component {
         Header: 'Accepted',
         accessor: 'accepted',
         Cell: row => {
-          console.log('komórka', row, this.props)
           if (this.props.user.email === row.original.employer) {
             return (
               <div>
@@ -240,7 +233,6 @@ class MyOrders extends React.Component {
         Header: 'Date of order',
         accessor: 'dateOfOrder',
         Cell: row => {
-          console.log(row)
           return (
             <div
               style={{
@@ -249,7 +241,7 @@ class MyOrders extends React.Component {
                 borderRadius: "2px"
               }}
             >
-              {moment(Date(row.value)).format("YYYY-MM-DD")}
+              {moment(Date(row.value)).format("DD/MM/YYYY")}
             </div>
           )
         }
