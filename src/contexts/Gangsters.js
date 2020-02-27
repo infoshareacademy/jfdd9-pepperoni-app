@@ -47,7 +47,7 @@ export function withGangsters(Component) {
     );
   }
 
-  GangstersAwareComponent.displayName = `GangstersAware(${Component.displayName || Component.name || 'Component'})`
+  GangstersAwareComponent.displayName = `GangstersAware(${Component.displayName || Component.label || 'Component'})`
 
   return GangstersAwareComponent
 }
