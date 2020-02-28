@@ -32,10 +32,10 @@ class TagSearch extends React.Component {
       <div style={divTagStyle}>
         {tags.map(tag =>
           <button
-            label={tag}
+            name={tag}
             style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#E2083C' : tagStyle.backgroundColor }}
             key={tag}
-            onClick={(event) => this.props.selectTag(event.currentTarget.label)}>
+            onClick={(event) => this.props.selectTag(event.currentTarget.name)}>
             {tag}
             </button>)}
       </div>
