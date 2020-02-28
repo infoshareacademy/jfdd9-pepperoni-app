@@ -50,7 +50,7 @@ fontFamily: 'Quattrocento, serif',
 class SignInForm extends Component {
 
   state = {
-    userName: '',
+    username: '',
     password: '',
   }
 
@@ -62,7 +62,7 @@ class SignInForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.props.signIn(this.state.userName, this.state.password)
+    this.props.signIn(this.state.username, this.state.password)
   }
 
   render() {
@@ -73,8 +73,8 @@ class SignInForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             style={formEmail}
-            value={this.state.userName}
-            name="userName"
+            value={this.state.username}
+            name="username"
             type="text"
             placeholder="Your email"
             onChange={this.handleChange}
