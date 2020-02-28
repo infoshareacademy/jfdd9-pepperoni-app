@@ -73,7 +73,7 @@ class SignInForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             style={formEmail}
-            value={this.state.username}
+            value={this.state.userName}
             name="userName"
             type="text"
             placeholder="Your email"
