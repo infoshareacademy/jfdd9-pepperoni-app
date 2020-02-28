@@ -31,6 +31,7 @@ class TagSearch extends React.Component {
       <div style={divTagStyle}>
         {tags.map(tag =>
           <button
+            id={tag}
             name={tag}
             style={{...tagStyle, backgroundColor: this.props.selectedTags.includes(tag) ? '#E2083C' : tagStyle.backgroundColor, margin: tag=='robbery' ? '8px 8px 8px -140px' : '' }}
             key={tag}
