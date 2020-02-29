@@ -74,7 +74,7 @@ class SignInForm extends Component {
           <input
             style={formEmail}
             value={this.state.username}
-            name="userName"
+            name="username"
             type="text"
             placeholder="Your email"
             onChange={this.handleChange}
